@@ -52,3 +52,5 @@ C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\Player\obj\Debug\Player.MainForm.reso
 C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\Player\obj\Debug\Player.Properties.Resources.resources
 C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\Player\obj\Debug\Player.URLForm.resources
 C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\Player\obj\Debug\Player.csproj.GenerateResource.Cache
+C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\Player\obj\Debug\Player.exe
+C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\Player\obj\Debug\Player.pdb
