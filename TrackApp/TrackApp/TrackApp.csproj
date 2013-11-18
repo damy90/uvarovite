@@ -83,6 +83,9 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="VideoCompositor.cs" />
+    <Compile Include="Widget.cs" />
+    <Compile Include="WidgetDistanceMeter.cs" />
+    <Compile Include="WidgetSpeedMeter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

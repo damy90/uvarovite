@@ -28,5 +28,16 @@ namespace TrackApp
         {
             InitializeComponent();
         }
+
+        public void Enable_Distance_Widget(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
