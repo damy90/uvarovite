@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 class WidgetSpeedMeter:Widget
 {
-    public Bitmap Draw(TimeSpan time)
+    public void Draw(Graphics grfx, float time)
     {
-        return new Bitmap(3, 3);
     }
 }

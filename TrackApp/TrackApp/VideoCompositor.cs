@@ -33,21 +33,9 @@ public static class VideoCompositor
         {
             // get next frame
             Bitmap image = reader.GetNextFrame();
-            for (int t = 0; t < reader.Position - reader.Start; t++)
-            {
-                Bitmap widgets = new Bitmap(reader.Width, reader.Height);
-                foreach (var activeWidget in activeWidgets)
-                {
-                    using (Graphics grfx = Graphics.FromImage(widgets))
-                    {
-                       grfx.DrawImage(activeWidget.Draw(new TimeSpan(t/framerate)), 0, 0);
-                    }
-                }
-                using (Graphics grfx = Graphics.FromImage(image))
-                {
-                    grfx.DrawImage(widgets, 0, 0);
-                }
-            }
+            Graphics grfx = Graphics.FromImage(image);
+            foreach (var widget in activeWidgets)
+                widget.draw(grfx, ((float)(reader.Position - reader.Start)) / framerate);
             writer.AddFrame(image);
         }
         reader.Close();

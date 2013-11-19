@@ -39,13 +39,13 @@ namespace TrackApp
         }
         private void btnLoadGPXClick(object sender, RoutedEventArgs e)
         {
-            GPXFileLoader g = new GPXFileLoader();
+            /*GPXFileLoader g = new GPXFileLoader();
             g.LoadPoints("../../koprivshtica-dushanci.gpx");
             loadFileDialog.Filter = "GPX Files (.gpx)|*.gpx";
             loadFileDialog.FilterIndex = 1;
             loadFileDialog.Multiselect = false;
             loadFileDialog.ShowDialog();
-            inputVideoPath = loadFileDialog.FileName;
+            inputVideoPath = loadFileDialog.FileName;*/
         }
         #region hoverEffects
         private void btnLoadVideo_Enter(object sender, System.Windows.Input.MouseEventArgs e)
