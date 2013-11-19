@@ -21,7 +21,8 @@ public static class VideoCompositor
         AVIReader reader = new AVIReader();
         // open video file
         reader.Open(inputPath);
-        float framerate = reader.FrameRate;
+        //float framerate = reader.FrameRate;
+        short framerate = (short)reader.FrameRate; // за целите на нашата презентация ще го сложа short
         VideoWidth = reader.Width;
         VideoHeigth = reader.Height;
         // create new AVI file and open it
@@ -39,7 +40,7 @@ public static class VideoCompositor
                 {
                     using (Graphics grfx = Graphics.FromImage(widgets))
                     {
-                        grfx.DrawImage(activeWidget.Draw(new TimeSpan(t/framerate)), 0, 0);
+                       grfx.DrawImage(activeWidget.Draw(new TimeSpan(t/framerate)), 0, 0);
                     }
                 }
                 using (Graphics grfx = Graphics.FromImage(image))

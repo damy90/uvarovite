@@ -39,6 +39,8 @@ namespace TrackApp
         }
         private void btnLoadGPXClick(object sender, RoutedEventArgs e)
         {
+            GPXFileLoader g = new GPXFileLoader();
+            g.LoadPoints("../../koprivshtica-dushanci.gpx");
             loadFileDialog.Filter = "GPX Files (.gpx)|*.gpx";
             loadFileDialog.FilterIndex = 1;
             loadFileDialog.Multiselect = false;

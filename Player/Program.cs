@@ -5,6 +5,7 @@ using System.Drawing;
 
 using AForge.Video;
 using AForge.Video.VFW;
+using System.Net;
 
 namespace Player
 {
@@ -19,7 +20,13 @@ namespace Player
             reader.Open("test2.avi");
             // create new AVI file and open it
             writer.Open("testOut2.avi", reader.Width, reader.Height);
-            Bitmap flag = new Bitmap("en.png");
+
+            WebClient webClient = new WebClient();
+            webClient.DownloadFile("http://maps.googleapis.com/maps/api/staticmap?center=-15.800513,-47.91378&zoom=11&size=200x200&sensor=false", @"C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\TeamWork\test.png");
+
+
+
+            Bitmap flag = new Bitmap(@"C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\TeamWork\test.png");  //galia
             //Bitmap toFrame = new Bitmap(flag, new Size(reader.Width, reader.Height));
             //toFrame.MakeTransparent();
             // read the video file
@@ -31,7 +38,7 @@ namespace Player
                 {
                     using (Graphics grfx = Graphics.FromImage(image))
                     {
-                        grfx.DrawImage(flag, 0, 0);
+                     grfx.DrawImage(flag, 0, 0);
                     }
                     if (t >= reader.Width)
                         break;

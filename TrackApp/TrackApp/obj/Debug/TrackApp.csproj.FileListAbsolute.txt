@@ -1,87 +1,41 @@
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\TrackApp.exe.config
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\TrackApp.exe
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\TrackApp.pdb
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\MainWindow.baml
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\MainWindow.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\App.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp_MarkupCompile.cache
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp.g.resources
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp.Properties.Resources.resources
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp.csproj.GenerateResource.Cache
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp.exe
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp.pdb
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp_Content.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_enter.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_leave.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_enter.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_leave.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_enter.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_Leave.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\Settings.baml
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\Settings.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\obj\Debug\TrackApp.csprojResolveAssemblyReference.cache
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\TrackApp\TrackApp\bin\Debug\Resources\imgTrack.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\TrackApp.exe.config
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp.exe
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp.pdb
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_enter.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_Leave.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\Resources\imgTrack.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_enter.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_leave.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_enter.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_leave.png
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\TrackApp.exe
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\bin\Debug\TrackApp.pdb
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp.csprojResolveAssemblyReference.cache
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\MainWindow.baml
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\Settings.baml
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\MainWindow.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\Settings.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\App.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp_Content.g.cs
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp_MarkupCompile.cache
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp.g.resources
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp.Properties.Resources.resources
-C:\Users\Spiral\Documents\Visual Studio 2012\Projects\svnrepositorywc\TrackApp\TrackApp\obj\Debug\TrackApp.csproj.GenerateResource.Cache
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\TrackApp.exe.config
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.exe
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.pdb
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_enter.png
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_Leave.png
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\Resources\imgTrack.png
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_enter.png
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_leave.png
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_enter.png
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_leave.png
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\TrackApp.exe
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\TrackApp.pdb
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.csprojResolveAssemblyReference.cache
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\MainWindow.baml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\Settings.baml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\MainWindow.g.cs
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\Settings.g.cs
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\App.g.cs
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp_Content.g.cs
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp_MarkupCompile.cache
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.g.resources
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.Properties.Resources.resources
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.csproj.GenerateResource.Cache
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Controls.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.DirectShow.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.FFMPEG.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.VFW.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.Ximea.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Imaging.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Math.dll
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Controls.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.DirectShow.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.FFMPEG.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.VFW.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.Ximea.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Imaging.xml
-C:\Users\Dany\Dropbox\telerik\OOP\Teamwork\SVN2\New folder\TrackApp\TrackApp\bin\Debug\AForge.Math.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\TrackApp.exe.config
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_enter.png
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\Resources\iconSettings_Leave.png
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\Resources\imgTrack.png
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_enter.png
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\Resources\iconGPX_leave.png
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_enter.png
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\Resources\iconVideo_leave.png
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\TrackApp.exe
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\TrackApp.pdb
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Controls.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.DirectShow.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.FFMPEG.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.VFW.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.Ximea.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Imaging.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Math.dll
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Controls.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.DirectShow.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.FFMPEG.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.VFW.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Video.Ximea.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Imaging.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\bin\Debug\AForge.Math.xml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.csprojResolveAssemblyReference.cache
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\MainWindow.baml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\Settings.baml
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\MainWindow.g.cs
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\Settings.g.cs
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\App.g.cs
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp_Content.g.cs
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp_MarkupCompile.cache
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.g.resources
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.Properties.Resources.resources
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.csproj.GenerateResource.Cache
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.exe
+D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.pdb
