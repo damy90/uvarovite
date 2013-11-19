@@ -25,3 +25,5 @@ C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\SVN\Player\obj\Debug\Player.csproj
 C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\SVN\Player\obj\Debug\Player.exe
 C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\SVN\Player\obj\Debug\Player.pdb
 C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\SVN\Player\obj\Debug\Player.csprojResolveAssemblyReference.cache
+D:\Dropbox\Telerik_wf\OOP\SVN\Player\obj\Debug\Player.exe
+D:\Dropbox\Telerik_wf\OOP\SVN\Player\obj\Debug\Player.pdb
