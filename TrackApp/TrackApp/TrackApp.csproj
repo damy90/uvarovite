@@ -80,10 +80,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GPSUtil.cs" />
+    <Compile Include="ProjectSettings.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="VideoCompositor.cs" />
+    <Compile Include="VideoFormats.cs" />
     <Compile Include="Widget.cs" />
     <Compile Include="WidgetDistanceMeter.cs" />
     <Compile Include="WidgetSpeedMeter.cs" />
