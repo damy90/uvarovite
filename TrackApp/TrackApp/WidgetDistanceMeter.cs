@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 class WidgetDistanceMeter:Widget
 {
-    public void Draw(Graphics grfx,float time)
+    public override void Draw(Graphics grfx, float time)
     {
-        
     }
 }

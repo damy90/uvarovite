@@ -9,6 +9,7 @@
         <CheckBox Content="Enable distance meter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,83,0,0"
                   Checked="Enable_Distance_Widget"/>
         <CheckBox Content="Enable speed meter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,103,0,0"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="195,239,0,0" VerticalAlignment="Top" Width="75" Click="Start_Project"/>
 
     </Grid>
 </Window>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-abstract class Widget
+public abstract class Widget
 {
-    
+    public abstract void Draw(Graphics grfx, float time);
 }

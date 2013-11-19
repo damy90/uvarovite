@@ -29,6 +29,11 @@ namespace TrackApp
             InitializeComponent();
         }
 
+        public void Start_Project(object sender, RoutedEventArgs e)
+        {
+            VideoCompositor.RenderVideo();
+        }
+
         public void Enable_Distance_Widget(object sender, RoutedEventArgs e)
         {
             // TODO: Implement this method
