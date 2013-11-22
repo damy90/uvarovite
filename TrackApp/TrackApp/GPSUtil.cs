@@ -12,8 +12,8 @@ namespace TrackApp
         public double longitude;
         public double latitude;
         public double elevation;
-        public DateTime time;
-        public GPSPoint(double lon, double lat, double ele, DateTime dt) 
+        public int time;
+        public GPSPoint(double lon, double lat, double ele, int dt) 
         {
             this.longitude = lon;
             this.latitude = lat;
@@ -25,7 +25,7 @@ namespace TrackApp
     public class GPSData
     {
         List<GPSPoint> gpsPoint = new List<GPSPoint>();
-        
+
         public void AddPoint(GPSPoint p)
         {
             gpsPoint.Add(p);
@@ -40,9 +40,17 @@ namespace TrackApp
         {
             //
         }
+        /*public int Speed(float time)
+        {
+
+        }
+        private float Extrapolate(float time, float timeNextClosest, float reading)
+        {
+
+        }*/
     }
 
-
+    //TODO - leave only the abstract class (if we have class properties) or the interface (if we have only methods)
     public interface IGPSReader
     {
         int LoadPoints(string sFile);
@@ -73,22 +81,30 @@ namespace TrackApp
                             };            
 
             StringBuilder sb = new StringBuilder();
+            DateTime startTime = new DateTime();
+            bool isStart = true;
             foreach (var pt in points)
             {
+                if (isStart)
+                {
+                    startTime = System.Convert.ToDateTime(pt.Dt);
+                    isStart = false;
+                }
                 // This is where we'd instantiate data
                 // containers for the information retrieved.
                 sb.Append(
-                  string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n",
-                  pt.Latitude, pt.Longitude,
-                  pt.Elevation, pt.Dt));
-                
-                gpsData.AddPoint(new GPSPoint(System.Convert.ToDouble(pt.Latitude), 
-                                              System.Convert.ToDouble(pt.Longitude), 
-                                              System.Convert.ToDouble(pt.Elevation), 
-                                              System.Convert.ToDateTime(pt.Dt)
-                                              )); //new GPSPoint(20f, 30f, 40f, DateTime.Now)
+                    string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n",
+                    pt.Latitude, pt.Longitude,
+                    pt.Elevation, pt.Dt));
+                //int timeSpan=
+                gpsData.AddPoint(new GPSPoint(System.Convert.ToDouble(pt.Latitude),
+                                                System.Convert.ToDouble(pt.Longitude),
+                                                System.Convert.ToDouble(pt.Elevation),
+                                                //System.Convert.ToDateTime(pt.Dt)
+                                                (int)(System.Convert.ToDateTime(pt.Dt) - startTime).TotalSeconds
+                                                )); //new GPSPoint(20f, 30f, 40f, DateTime.Now)
 
-                MessageBox.Show(string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n",pt.Latitude, pt.Longitude,pt.Elevation, pt.Dt));
+                MessageBox.Show(string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n", pt.Latitude, pt.Longitude, pt.Elevation, pt.Dt));
             }
 
             MessageBox.Show(gpsData.GetPointCount().ToString());
