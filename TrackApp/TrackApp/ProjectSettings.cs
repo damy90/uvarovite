@@ -18,7 +18,7 @@ class ProjectSettings
     public float TrackStart = 0;//VideoStart and TrackStart is the only synchronization we need!!!
     public float VideoEnd = 0;//zero if video length is not trimmed
 
-    public bool ShowTrack=true;
+    public bool ShowTrack=false;//TO DO: Finish track widget and change to true
     public Point TrackCoordinates = new Point(0, 0);
     public int TrackHeight = 200;//the width is calculated from the track points 
     public Color TraveledTrackColor = Color.Red;
@@ -29,7 +29,7 @@ class ProjectSettings
     public bool ShowPositionMarker=false;
     public int PositionMarkerSize = 10;
     public Color PositionMarker = Color.DarkGreen;
-
+    //TODO add classes for the rest of the widgets
     public bool ShowOverlayImage=false;
     public string overlayImageFile="image.png";//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
     public Point overlayImagePosition=new Point(300,300);
@@ -43,10 +43,12 @@ class ProjectSettings
     public int MapHeight = 240;//should be bigger than the track height, width is bigger by the same value
     public float MapOpacity;
 
+    public bool ShowDistanceWidget = false;
     public Point DistanceWidgetPosition = new Point(0, 300);
     public Font DistanceWidgetFont = new Font("Ariel", 28);
     public Color DistanceWidgetColor = Color.White;
 
+    public bool ShowSpeedWidget = false;
     public Point SpeedWidgetPosition = new Point(0, 400);
     public Font SpeedWidgetFont = new Font("Ariel", 28);
     public Color SpeedWidgetColor = Color.White;
@@ -56,7 +58,6 @@ class ProjectSettings
     // Constructor is 'protected' - конструтора е защитен и не може да бъде извикан
     protected ProjectSettings()
     {
- 
     }
  
     //единтвения начин за инстанцииране е от тук

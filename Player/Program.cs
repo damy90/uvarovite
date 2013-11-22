@@ -21,12 +21,12 @@ namespace Player
             // create new AVI file and open it
             writer.Open("testOut2.avi", reader.Width, reader.Height);
 
-            WebClient webClient = new WebClient();
-            webClient.DownloadFile("http://maps.googleapis.com/maps/api/staticmap?center=-15.800513,-47.91378&zoom=11&size=200x200&sensor=false", @"C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\TeamWork\test.png");
+            //WebClient webClient = new WebClient();
+            //webClient.DownloadFile("http://maps.googleapis.com/maps/api/staticmap?center=-15.800513,-47.91378&zoom=11&size=200x200&sensor=false", @"C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\TeamWork\test.png");
 
 
 
-            Bitmap flag = new Bitmap(@"C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\TeamWork\test.png");  //galia
+            //Bitmap flag = new Bitmap(@"C:\Users\GaliaTodorova\Dropbox\Telerik_wf\OOP\TeamWork\test.png");  //galia
             //Bitmap toFrame = new Bitmap(flag, new Size(reader.Width, reader.Height));
             //toFrame.MakeTransparent();
             // read the video file
@@ -36,10 +36,10 @@ namespace Player
                 Bitmap image = reader.GetNextFrame();
                 for (int t = 0; t < reader.Position - reader.Start; t++)
                 {
-                    using (Graphics grfx = Graphics.FromImage(image))
+                    /*using (Graphics grfx = Graphics.FromImage(image))
                     {
                      grfx.DrawImage(flag, 0, 0);
-                    }
+                    }*/
                     if (t >= reader.Width)
                         break;
                     int y = (int)(reader.Height / 2 + Math.Sin(((float)t) / 50) * reader.Height / 3);

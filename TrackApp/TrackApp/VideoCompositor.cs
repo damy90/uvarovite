@@ -5,18 +5,15 @@ using AForge.Video.VFW;
 
 public static class VideoCompositor
 {
-    private static string inputPath="test2.avi";
-    private static string outputPath = "testWidgetTest.avi";
-    private static string encoding = "xvid";
-    private static List<Widget> activeWidgets=new List<Widget>();
-    //променливи необходими за инструментите (widgets)
-    public static int VideoWidth { get; private set; }
-    public static int VideoHeigth { get; private set; }
+    private static ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
+    private static string inputPath = settings.VideoInputPath;
+    private static string outputPath = settings.VideoOutputPath;
+    private static string encoding = settings.Format.ToString();//трябва да се тества
+    private static List<Widget> activeWidgets;
 
     public static void RenderVideo()
     {
-        //hardcoded tests
-        activeWidgets.Add(new WidgetTest());
+        UpdateActiveWidgets(ref activeWidgets);
         AVIWriter writer = new AVIWriter(encoding);
         // instantiate AVI reader
         AVIReader reader = new AVIReader();
@@ -24,13 +21,15 @@ public static class VideoCompositor
         reader.Open(inputPath);
         //float framerate = reader.FrameRate;
         float framerate = reader.FrameRate;
-        VideoWidth = reader.Width;
-        VideoHeigth = reader.Height;
         // create new AVI file and open it
         writer.Open(outputPath, reader.Width, reader.Height);
-        // read the video file
-        //TO DO: Implement videoStart and videoEnd (crop video)
-        while (reader.Position - reader.Start < reader.Length)
+        // read the video file and render output
+        //videoStart and videoEnd (crop video)
+        reader.Position = reader.Start + (int)(settings.VideoStart * reader.FrameRate);
+        int VideoEnd = reader.Start + (int)(settings.VideoEnd * reader.FrameRate);
+        if (VideoEnd == reader.Start)//settings.VideoEnd is not set (0 by default)
+            VideoEnd = reader.Length;
+        while (reader.Position - reader.Start < VideoEnd)
         {
             // get next frame
             Bitmap image = reader.GetNextFrame();
@@ -41,5 +40,20 @@ public static class VideoCompositor
         }
         reader.Close();
         writer.Close();
+    }
+
+    private static void UpdateActiveWidgets(ref List<Widget> activeWidgets)
+    {
+        activeWidgets = new List<Widget>();
+        //hardcoded tests
+        activeWidgets.Add(new WidgetTest());
+        if (settings.ShowTrack)
+            activeWidgets.Add(new WidgetTrack());
+        if (settings.ShowPositionMarker)
+            activeWidgets.Add(new WidgetPositionMarker());
+        if (settings.ShowDistanceWidget)
+            activeWidgets.Add(new WidgetDistanceMeter());
+        if (settings.ShowSpeedWidget)
+            activeWidgets.Add(new WidgetSpeedMeter());
     }
 }

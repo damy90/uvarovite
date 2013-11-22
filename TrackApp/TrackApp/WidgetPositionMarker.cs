@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class WidgetSpeedMeter:Widget
+
+public class WidgetPositionMarker:Widget
 {
     public override void Draw(Graphics grfx, float time)
     {

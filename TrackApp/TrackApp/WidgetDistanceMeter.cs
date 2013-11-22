@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-class WidgetDistanceMeter:Widget
+public class WidgetDistanceMeter:Widget
 {
     public override void Draw(Graphics grfx, float time)
     {
+        // TODO: Implement this method
+        throw new NotImplementedException();
     }
 }
