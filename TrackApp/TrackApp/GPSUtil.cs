@@ -5,15 +5,17 @@ using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace TrackApp
 {
-    public struct GPSPoint {
+    public struct GPSPoint
+    {
         public double longitude;
         public double latitude;
         public double elevation;
-        public int time;
-        public GPSPoint(double lon, double lat, double ele, int dt) 
+        public float time;
+        public GPSPoint(double lon, double lat, double ele, float dt) 
         {
             this.longitude = lon;
             this.latitude = lat;
@@ -21,19 +23,18 @@ namespace TrackApp
             this.time = dt;
         }
     }
-
     public class GPSData
     {
-        List<GPSPoint> gpsPoint = new List<GPSPoint>();
-
+        static List<GPSPoint> gpsPoints = new List<GPSPoint>();
+        
         public void AddPoint(GPSPoint p)
         {
-            gpsPoint.Add(p);
+            gpsPoints.Add(p);
         }
 
         public int GetPointCount()
         {
-            return gpsPoint.Count;
+            return gpsPoints.Count;
         }
 
         public void LoadGPXFile(string sFile)
@@ -42,12 +43,18 @@ namespace TrackApp
         }
         /*public int Speed(float time)
         {
-
-        }
-        private float Extrapolate(float time, float timeNextClosest, float reading)
-        {
-
+            int index=IndexThisOrPreviousReading(time);
         }*/
+        //In case some readings are made over greater time intervals (if you are in a tunel or loose signal, etc)
+        private int IndexThisOrPreviousReading(float time)
+        {
+            GPSPoint ThisOrPreviousReading = gpsPoints.TakeWhile(gpsPoint => gpsPoint.time <= time).Last();
+            return gpsPoints.IndexOf(ThisOrPreviousReading);
+        }
+        private double Interpolate(float time, double previousReading, double nextReading, float previousTime, float nextTime)
+        {
+            return previousReading + (nextReading - previousReading) * (time - previousTime) / (nextTime - previousTime);
+        }
     }
 
     //TODO - leave only the abstract class (if we have class properties) or the interface (if we have only methods)
@@ -60,7 +67,7 @@ namespace TrackApp
     {
         public abstract int LoadPoints(string sFile);
     }
-
+    //TO DO: Implement Track Start time
     class GPXFileLoader : GPSLoader
     {
         GPSData gpsData = new GPSData();
@@ -101,7 +108,7 @@ namespace TrackApp
                                                 System.Convert.ToDouble(pt.Longitude),
                                                 System.Convert.ToDouble(pt.Elevation),
                                                 //System.Convert.ToDateTime(pt.Dt)
-                                                (int)(System.Convert.ToDateTime(pt.Dt) - startTime).TotalSeconds
+                                                (float)(System.Convert.ToDateTime(pt.Dt) - startTime).TotalSeconds
                                                 )); //new GPSPoint(20f, 30f, 40f, DateTime.Now)
 
                 MessageBox.Show(string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n", pt.Latitude, pt.Longitude, pt.Elevation, pt.Dt));
