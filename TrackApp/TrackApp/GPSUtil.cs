@@ -41,10 +41,34 @@ namespace TrackApp
         {
             //
         }
-        /*public int Speed(float time)
+        public double Speed(float time)
         {
             int index=IndexThisOrPreviousReading(time);
-        }*/
+            double distance = DistanceBetweenPoints(gpsPoints[index], gpsPoints[index + 1]);
+            float timeSpan = gpsPoints[index + 1].time - gpsPoints[index].time;
+            return distance / timeSpan;
+        }
+        private double DistanceBetweenPoints(GPSPoint point1, GPSPoint point2)
+        {
+            var startLatitudeRadians = point1.latitude * (Math.PI / 180.0);
+            var startLongitudeRadians = point1.longitude * (Math.PI / 180.0);
+            var endLatitudeRadians = point2.latitude * (Math.PI / 180.0);
+            var endLongitudeRadians = point2.longitude * (Math.PI / 180.0);
+
+            var distanceLongitude = endLongitudeRadians - startLongitudeRadians;
+            var distanceLatitude = endLatitudeRadians - startLatitudeRadians;
+            var distanceElevation = Math.Abs(point1.elevation - point2.elevation);
+
+            var result1 = Math.Pow(Math.Sin(distanceLatitude / 2.0), 2.0) +
+                          Math.Cos(startLatitudeRadians) * Math.Cos(endLatitudeRadians) *
+                          Math.Pow(Math.Sin(distanceLongitude / 2.0), 2.0);
+
+            // Using 3956 as the number of miles around the earth
+            var result2 = 3956.0 * 2.0 *
+                          Math.Atan2(Math.Sqrt(result1), Math.Sqrt(1.0 - result1));
+
+            return Math.Sqrt(result2 * result2 + distanceElevation * distanceElevation);
+        }
         //In case some readings are made over greater time intervals (if you are in a tunel or loose signal, etc)
         private int IndexThisOrPreviousReading(float time)
         {
