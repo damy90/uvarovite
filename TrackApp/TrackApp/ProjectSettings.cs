@@ -28,7 +28,7 @@ class ProjectSettings
 
     public bool ShowPositionMarker=false;
     public int PositionMarkerSize = 10;
-    public Color PositionMarker = Color.DarkGreen;
+    public Color PositionMarkerColor = Color.DarkGreen;
     //TODO add classes for the rest of the widgets
     public bool ShowOverlayImage=false;
     public string overlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
