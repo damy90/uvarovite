@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 namespace TrackApp
 {
     /// <summary>
@@ -15,8 +14,11 @@ namespace TrackApp
     {
         //слагам ги глобални за по-лесен достъп из класа
         OpenFileDialog loadFileDialog;
+        Settings windowSettings;
         string inputVideoPath;
         string outputVideoPath;
+        double videoLength;
+        string inputGPXPath;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,19 +35,25 @@ namespace TrackApp
         }
         private void btnAdjustSettings_Click(object sender, RoutedEventArgs e)
         {
-            Settings windowSettings = new Settings();
-            windowSettings.Topmost = true;
-            windowSettings.Show();
+                windowSettings = new Settings();
+                windowSettings.Topmost = true;
+                foreach (var format in Enum.GetValues(typeof(VideoFormats)))
+                    windowSettings.cmbEncoding.Items.Add(format);
+                windowSettings.grdFont.Visibility = Visibility.Visible;
+                windowSettings.grdSync.Visibility = Visibility.Hidden;
+                windowSettings.grdAdvanced.Visibility = Visibility.Hidden;
+                windowSettings.grdVideo.Visibility = Visibility.Hidden;
+                windowSettings.Show();
         }
         private void btnLoadGPXClick(object sender, RoutedEventArgs e)
         {
-            /*GPXFileLoader g = new GPXFileLoader();
-            g.LoadPoints("../../koprivshtica-dushanci.gpx");
+            //GPXFileLoader g = new GPXFileLoader();
+            //g.LoadPoints("../../koprivshtica-dushanci.gpx");
             loadFileDialog.Filter = "GPX Files (.gpx)|*.gpx";
             loadFileDialog.FilterIndex = 1;
             loadFileDialog.Multiselect = false;
             loadFileDialog.ShowDialog();
-            inputVideoPath = loadFileDialog.FileName;*/
+            inputGPXPath = loadFileDialog.FileName;
         }
         #region hoverEffects
         private void btnLoadVideo_Enter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -98,10 +106,9 @@ namespace TrackApp
             btnLoadGpx.Background = imgBrush;
         }
         #endregion
-
         private void btnOKClick(object sender, RoutedEventArgs e)
         {
-            //тук може да извършваме проверка дали всичко ни е въведено, след което да инициализираме класове от бекенда, ако не да пращаме message box
+            //any object of type settings, videocompositor
         }
     }
         
