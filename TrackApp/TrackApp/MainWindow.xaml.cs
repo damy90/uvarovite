@@ -23,6 +23,7 @@ namespace TrackApp
         {
             InitializeComponent();
             loadFileDialog = new OpenFileDialog();
+            //VideoCompositor.RenderVideo();
         }
 
         private void btnLoadClick(object sender, RoutedEventArgs e)
