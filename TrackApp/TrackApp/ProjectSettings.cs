@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 class ProjectSettings
 {
-    public string VideoInputPath = "video.avi";
-    public string VideoOutputPath = "video-output.avi";
-    public string GPXPath = "track.gpx";
+    public string VideoInputPath;
+    public string VideoOutputPath;
+    public string GPXPath;
     public VideoFormats Format= VideoFormats.xvid;
 
     //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
@@ -31,7 +31,7 @@ class ProjectSettings
     public Color PositionMarker = Color.DarkGreen;
     //TODO add classes for the rest of the widgets
     public bool ShowOverlayImage=false;
-    public string overlayImageFile="image.png";//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
+    public string overlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
     public Point overlayImagePosition=new Point(300,300);
 
     public bool ShowElevationWidget=false;

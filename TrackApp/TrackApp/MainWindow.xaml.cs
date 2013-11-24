@@ -35,15 +35,7 @@ namespace TrackApp
         }
         private void btnAdjustSettings_Click(object sender, RoutedEventArgs e)
         {
-                windowSettings = new Settings();
-                windowSettings.Topmost = true;
-                foreach (var format in Enum.GetValues(typeof(VideoFormats)))
-                    windowSettings.cmbEncoding.Items.Add(format);
-                windowSettings.grdFont.Visibility = Visibility.Visible;
-                windowSettings.grdSync.Visibility = Visibility.Hidden;
-                windowSettings.grdAdvanced.Visibility = Visibility.Hidden;
-                windowSettings.grdVideo.Visibility = Visibility.Hidden;
-                windowSettings.Show();
+                
         }
         private void btnLoadGPXClick(object sender, RoutedEventArgs e)
         {
@@ -76,20 +68,20 @@ namespace TrackApp
         {
         }
 
-        private void btnAdjustSettings_Enter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            var imgBrush = new ImageBrush();
-            Uri uri = new Uri("Resources/iconSettings_enter.png", UriKind.Relative);
-            imgBrush.ImageSource = new BitmapImage(uri);
-            btnAdjustSettings.Background = imgBrush;
-        }
-        private void btnAdjustSettings_Leave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            var imgBrush = new ImageBrush();
-            Uri uri = new Uri("Resources/iconSettings_Leave.png", UriKind.Relative);
-            imgBrush.ImageSource = new BitmapImage(uri);
-            btnAdjustSettings.Background = imgBrush;
-        }
+        //private void btnAdjustSettings_Enter(object sender, System.Windows.Input.MouseEventArgs e)
+        //{
+        //    var imgBrush = new ImageBrush();
+        //    Uri uri = new Uri("Resources/iconSettings_enter.png", UriKind.Relative);
+        //    imgBrush.ImageSource = new BitmapImage(uri);
+        //    btnAdjustSettings.Background = imgBrush;
+        //}
+        //private void btnAdjustSettings_Leave(object sender, System.Windows.Input.MouseEventArgs e)
+        //{
+        //    var imgBrush = new ImageBrush();
+        //    Uri uri = new Uri("Resources/iconSettings_Leave.png", UriKind.Relative);
+        //    imgBrush.ImageSource = new BitmapImage(uri);
+        //    btnAdjustSettings.Background = imgBrush;
+        //}
 
         private void btnLoadGpx_Enter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -108,7 +100,26 @@ namespace TrackApp
         #endregion
         private void btnOKClick(object sender, RoutedEventArgs e)
         {
-            //any object of type settings, videocompositor
+            if (inputGPXPath == null || inputGPXPath == String.Empty)
+            {
+                MessageBoxResult noGPX = MessageBox.Show("No GPX file selected!"); 
+            }
+            else if (inputVideoPath == null || inputVideoPath == String.Empty)
+            {
+                MessageBoxResult noGPX = MessageBox.Show("No video file selected!");
+            }
+            else
+            {
+                windowSettings = new Settings();
+                windowSettings.Topmost = true;
+                foreach (var format in Enum.GetValues(typeof(VideoFormats)))
+                    windowSettings.cmbEncoding.Items.Add(format);
+                windowSettings.grdFont.Visibility = Visibility.Visible;
+                windowSettings.grdSync.Visibility = Visibility.Hidden;
+                windowSettings.grdAdvanced.Visibility = Visibility.Hidden;
+                windowSettings.grdVideo.Visibility = Visibility.Hidden;
+                windowSettings.Show();
+            }
         }
     }
         

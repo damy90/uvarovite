@@ -1,7 +1,8 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="Video_Composer" x:Class="TrackApp.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="Video_Composer" x:Class="TrackApp.MainWindow"
         Title="Video Composer" Height="362" Width="576" Loaded="MainWindowLoaded"
         ResizeMode="NoResize">
     <Window.Resources>
@@ -25,18 +26,18 @@
             </Style>
     </Window.Resources>
         <Grid Background="LightBlue" Margin="0,0,0,-19">
-        <Button x:Name="btnOK"
+        <Grid x:Name="gridSelections" HorizontalAlignment="Left" Height="295" Margin="389,26,0,0" VerticalAlignment="Top" Width="172">
+            <Button x:Name="btnOK"
         		Style="{StaticResource MyButtonStyle}" 
         		HorizontalAlignment="Left"
-        		Margin="404,232,0,32" 
-        		Width="136"
+        		Margin="10,200,0,7" 
+        		Width="152"
         		RenderTransformOrigin="0.5,0.5" Click="btnOKClick"
                 >
-            <Button.Background>
-                <ImageBrush ImageSource="/Resources/Proseed_white.png"/>
-            </Button.Background>
-        </Button>
-        <Grid x:Name="gridSelections" HorizontalAlignment="Left" Height="295" Margin="-1,21,0,0" VerticalAlignment="Top" Width="172">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Resources/Proseed_white.png"/>
+                </Button.Background>
+            </Button>
             <Button x:Name="btnLoadVideo"
         		Style="{StaticResource MyButtonStyle}" 
         		HorizontalAlignment="Left"
@@ -52,19 +53,19 @@
                 </Button.Background>
             </Button>
             <Button x:Name="btnLoadGpx"
-            	Style="{StaticResource MyButtonStyle}" 
-            	HorizontalAlignment="Left"
-            	Margin="10,3,0,196" 
-            	Width="153"
-            	RenderTransformOrigin="0.506,0.45"
-            	MouseEnter="btnLoadGpx_Enter"
-            	MouseLeave="btnLoadGpx_Leave" Click="btnLoadGPXClick"
+        		Style="{StaticResource MyButtonStyle}" 
+        		HorizontalAlignment="Left"
+        		Margin="10,3,0,196" 
+        		Width="153"
+        		RenderTransformOrigin="0.506,0.45"
+        		MouseEnter="btnLoadGpx_Enter"
+        		MouseLeave="btnLoadGpx_Leave" Click="btnLoadGPXClick"
                 >
                 <Button.Background>
                     <ImageBrush ImageSource="Resources/iconGPX_leave.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="btnAdjustSettings"
+            <!--<Button x:Name="btnAdjustSettings"
             	Style="{StaticResource MyButtonStyle}" 
             	HorizontalAlignment="Left"
             	Margin="10,197,0,2" 
@@ -76,9 +77,9 @@
                 <Button.Background>
                     <ImageBrush ImageSource="/Resources/iconSettings_Leave.png"/>
                 </Button.Background>
-            </Button>
+            </Button>-->
         </Grid>
-        <Grid x:Name="gridPreview" HorizontalAlignment="Left" Height="247" Margin="171,10,0,0" VerticalAlignment="Top" Width="390">
+        <Grid x:Name="gridPreview" HorizontalAlignment="Left" Height="247" Margin="-6,46,0,0" VerticalAlignment="Top" Width="390">
             <Image x:Name="imgPreview" Source="Resources/imgPreview.jpg" HorizontalAlignment="Left" Height="205" Margin="40,10,-18,0" VerticalAlignment="Top" Width="368"/>
             <Image x:Name="imgTrack" HorizontalAlignment="Left" Height="50" Margin="277,163,0,0" VerticalAlignment="Top" Width="83" Source="Resources/imgTrack.png"/>
             <TextBlock x:Name="tbSpeed" HorizontalAlignment="Left" Margin="50,189,0,0" TextWrapping="Wrap" Text=" 50 km/h" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Height="20" Width="49"/>
