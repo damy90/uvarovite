@@ -17,6 +17,7 @@ public class WidgetTrack:Widget
     GPSPoint[] trackData;
     GPSBox box;
     double ratio;
+    double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
     public override void Draw(Graphics grfx, float time)
     {
         widgetSize.Height = 100;
@@ -25,14 +26,14 @@ public class WidgetTrack:Widget
             trackData = GPSData.GetData().GetTrack();
             trackPoints=new Point[trackData.Length];
             box = GPSData.GetData().GetBox();
-            ratio = widgetSize.Height / box.Size.Longtitude;
+            ratio = widgetSize.Height / (box.Size.Lattitude);
             //track = new Bitmap(widgetSize.Width, widgetSize.Height);
             
         }
         for (int i = 0; i < trackData.Length; i++)
         {
-            trackPoints[i].X = position.X + (int)((trackData[i].latitude - box.Position.Lattitude) * ratio);
-            trackPoints[i].Y = position.Y + widgetSize.Height - (int)((trackData[i].longitude - box.Position.Longtitude) * ratio);
+            trackPoints[i].X = position.X + (int)((trackData[i].longitude - box.Position.Longtitude) * ratio * longtitudeCorrectionScale);
+            trackPoints[i].Y = position.Y + widgetSize.Height - (int)((trackData[i].latitude - box.Position.Lattitude) * ratio);
         }
         grfx.DrawLines(pen, trackPoints);
         //grfx.DrawImage(track, position);

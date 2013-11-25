@@ -87,6 +87,8 @@ public class GPSData
     private double minLat = double.MaxValue;
     private double minEle = double.MaxValue;
 
+    public static double longtitudeCorrectionScale = 1;
+
     private static GPSData _instance;
     private Vector lastOrientation = new Vector(0, 0);
 
@@ -121,7 +123,7 @@ public class GPSData
         foreach(GPSPoint point in pts)
         {
             gpsPoints[n] = point;
-            maxLong = Math.Max(gpsPoints[n].longitude, maxLong);
+            maxLong = (Math.Max(gpsPoints[n].longitude, maxLong));
             maxLat = Math.Max(gpsPoints[n].latitude, maxLat);
             maxEle = Math.Max(gpsPoints[n].elevation, maxEle);
 
@@ -131,6 +133,8 @@ public class GPSData
 
             n++;
         }
+
+        longtitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
 
         double distanceSum = 0;
         for (int i=1; i<gpsPoints.Length;i++)
@@ -259,15 +263,16 @@ public class GPXFileLoader : GPSLoader
                 pt.Latitude, pt.Longitude,
                 pt.Elevation, pt.Dt));
             //int timeSpan=
-            pts.Add(new GPSPoint(System.Convert.ToDouble(pt.Latitude),
+            pts.Add(new GPSPoint(
                                             System.Convert.ToDouble(pt.Longitude),
+                                            System.Convert.ToDouble(pt.Latitude),
                                             System.Convert.ToDouble(pt.Elevation),
                                             //System.Convert.ToDateTime(pt.Dt)
                                             (float)(System.Convert.ToDateTime(pt.Dt) - startTime).TotalSeconds,
                                             0
                                             )); //new GPSPoint(20f, 30f, 40f, DateTime.Now)
 
-            //MessageBox.Show(string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n", pt.Latitude, pt.Longitude, pt.Elevation, pt.Dt));
+            //MessageBox.Show(string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n", pt.Longitude, pt.Latitude, pt.Elevation, pt.Dt));
         }
 
         //MessageBox.Show(pts.Count.ToString());
