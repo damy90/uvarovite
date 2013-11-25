@@ -5,7 +5,6 @@ using System.Xml.Linq;
 using System.Text;
 using System.Windows;
 
-
 public struct GPSPoint : IComparable<GPSPoint>
 {
     public double longitude;
@@ -162,6 +161,14 @@ public class GPSData
         double lat = Interpolate(time,gpsPoints[index].longitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
         double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
         return new GPSCoord(Long, lat, ele);
+    }
+    public Vector GetOrientation(float time)
+    {
+        int index = IndexThisOrPreviousReading(time);
+        double longDirection=gpsPoints[index + 1].longitude - gpsPoints[index].longitude;
+        double latDirection=gpsPoints[index + 1].latitude - gpsPoints[index].latitude;
+        double length=Math.Sqrt(longDirection*longDirection+latDirection*latDirection);
+        return new Vector(longDirection / length, latDirection / length);
     }
     //In case some readings are made over greater time intervals (if you are in a tunel or loose signal, etc)
     private int IndexThisOrPreviousReading(float time)
