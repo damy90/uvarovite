@@ -143,7 +143,6 @@ public class GPSData
         GPSCoord size = new GPSCoord(maxLong - minLong, maxLat - minLat, maxEle - minEle);
         return new GPSBox(position, size);
     }
-    double test = GetBox().Position.Longtitude;
     //TODO average speed (gradually change speed)
     public double GetSpeed(float time)
     {
@@ -153,6 +152,16 @@ public class GPSData
         double distance = gpsPoints[index].DistanceFromPoint(gpsPoints[index + 1]);
         float timeSpan = gpsPoints[index + 1].time - gpsPoints[index].time;
         return distance / timeSpan;
+    }
+    public GPSCoord GetPosition(float time)
+    {
+        int index = IndexThisOrPreviousReading(time);
+        if (index >= gpsPoints.Length - 1)
+            return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].elevation);
+        double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
+        double lat = Interpolate(time,gpsPoints[index].longitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
+        double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
+        return new GPSCoord(Long, lat, ele);
     }
     //In case some readings are made over greater time intervals (if you are in a tunel or loose signal, etc)
     private int IndexThisOrPreviousReading(float time)
@@ -167,6 +176,8 @@ public class GPSData
     }
     private double Interpolate(float time, double previousReading, double nextReading, float previousTime, float nextTime)
     {
+        if (nextTime == previousTime)
+            throw new DivideByZeroException("Division by zero: Two readings were taken at the same time");
         return previousReading + (nextReading - previousReading) * (time - previousTime) / (nextTime - previousTime);
     }
 }

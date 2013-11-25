@@ -13,6 +13,8 @@ public static class VideoCompositor
 
     public static void RenderVideo()
     {
+        new GPXFileLoader().LoadPoints("koprivshtica-dushanci.gpx");
+        
         UpdateActiveWidgets(ref activeWidgets);
         AVIWriter writer = new AVIWriter(encoding);
         // instantiate AVI reader
