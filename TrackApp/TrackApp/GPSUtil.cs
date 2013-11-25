@@ -170,6 +170,14 @@ public class GPSData
         double length=Math.Sqrt(longDirection*longDirection+latDirection*latDirection);
         return new Vector(longDirection / length, latDirection / length);
     }
+    public double GetDistance(float time)
+    {
+        int index = IndexThisOrPreviousReading(time);
+        double distance=gpsPoints[index].Distance;
+        GPSCoord interpolatedPos = GetPosition(time);
+        GPSPoint interpolatedGPSPoint=new GPSPoint(interpolatedPos.Longtitude, interpolatedPos.Lattitude, interpolatedPos.Elevation, 0, 0);
+        return distance += interpolatedGPSPoint.DistanceFromPoint(gpsPoints[index]);
+    }
     //In case some readings are made over greater time intervals (if you are in a tunel or loose signal, etc)
     private int IndexThisOrPreviousReading(float time)
     {
