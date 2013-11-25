@@ -13,7 +13,7 @@ public static class VideoCompositor
 
     public static void RenderVideo()
     {
-        new GPXFileLoader().LoadPoints("koprivshtica-dushanci.gpx");
+        new GPXFileLoader().LoadPoints("workout.gpx");
         
         UpdateActiveWidgets(ref activeWidgets);
         AVIWriter writer = new AVIWriter(encoding);
@@ -34,8 +34,10 @@ public static class VideoCompositor
         while (reader.Position - reader.Start < VideoEnd)
         {
             // get next frame
+            //TODO Using graphics
             Bitmap image = reader.GetNextFrame();
             Graphics grfx = Graphics.FromImage(image);
+            grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             foreach (var widget in activeWidgets)
                 widget.Draw(grfx, ((float)(reader.Position - reader.Start)) / framerate);
             writer.AddFrame(image);
@@ -48,7 +50,7 @@ public static class VideoCompositor
     {
         activeWidgets = new List<Widget>();
         //hardcoded tests
-        activeWidgets.Add(new WidgetTest());
+        //activeWidgets.Add(new WidgetTest());
         if (settings.ShowTrack)
             activeWidgets.Add(new WidgetTrack());
         if (settings.ShowPositionMarker)

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 class ProjectSettings
 {
-    public string VideoInputPath;
-    public string VideoOutputPath;
-    public string GPXPath;
+    public string VideoInputPath="video.avi";
+    public string VideoOutputPath="video-out.avi";
+    public string GPXPath = "workout.gpx";
     public VideoFormats Format= VideoFormats.xvid;
 
     //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
@@ -18,7 +18,7 @@ class ProjectSettings
     public float TrackStart = 0;//VideoStart and TrackStart is the only synchronization we need!!!
     public float VideoEnd = 0;//zero if video length is not trimmed
 
-    public bool ShowTrack=false;//TO DO: Finish track widget and change to true
+    public bool ShowTrack=true;//TO DO: Finish track widget and change to true
     public Point TrackCoordinates = new Point(0, 0);
     public int TrackHeight = 200;//the width is calculated from the track points 
     public Color TraveledTrackColor = Color.Red;
