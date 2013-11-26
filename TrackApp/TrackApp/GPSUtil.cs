@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Text;
 using System.Windows;
+using System.Globalization;
 
 public struct GPSPoint : IComparable<GPSPoint>
 {
@@ -253,22 +254,18 @@ public class GPXFileLoader : GPSLoader
         {
             if (isStart)
             {
-                startTime = System.Convert.ToDateTime(pt.Dt);
+                startTime = System.Convert.ToDateTime(pt.Dt, CultureInfo.InvariantCulture);
                 isStart = false;
             }
             // This is where we'd instantiate data
             // containers for the information retrieved.
-            sb.Append(
-                string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n",
-                pt.Latitude, pt.Longitude,
-                pt.Elevation, pt.Dt));
             //int timeSpan=
             pts.Add(new GPSPoint(
-                                            System.Convert.ToDouble(pt.Longitude),
-                                            System.Convert.ToDouble(pt.Latitude),
-                                            System.Convert.ToDouble(pt.Elevation),
+                                            Convert.ToDouble(pt.Longitude, CultureInfo.InvariantCulture),
+                                            Convert.ToDouble(pt.Latitude, CultureInfo.InvariantCulture),
+                                            Convert.ToDouble(pt.Elevation, CultureInfo.InvariantCulture),
                                             //System.Convert.ToDateTime(pt.Dt)
-                                            (float)(System.Convert.ToDateTime(pt.Dt) - startTime).TotalSeconds,
+                                            (float)(Convert.ToDateTime(pt.Dt, CultureInfo.InvariantCulture) - startTime).TotalSeconds,
                                             0
                                             )); //new GPSPoint(20f, 30f, 40f, DateTime.Now)
 
