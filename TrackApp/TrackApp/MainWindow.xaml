@@ -75,7 +75,7 @@
             <xctk:IntegerUpDown x:Name="udVideoEndSeconds" Margin="234,6,19,0" FormatString="F1" Value="0" Increment="1"  Height="25" Width="30" Grid.Row="2"/>
             <Label Grid.Row="2" x:Name="lblVideoEnd" Content="Video End:" HorizontalAlignment="Left" Margin="11,6,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="92" FontFamily="Arial" FontSize="15" Height="25"/>
         </Grid>
-        <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" Margin="10,10,0,-143" VerticalAlignment="Top" Width="157">
+        <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" Margin="10,10,0,-143" VerticalAlignment="Top" Width="157" d:IsHidden="True">
             <Button x:Name="btnFiles" 
                     Style="{StaticResource PictureButton}" 
                     Margin="5,6,10,366"
@@ -106,7 +106,7 @@
                 <Button x:Name="btnTrack" Style="{StaticResource PictureButton}" Margin="6,4,4,39.333" Click="btnTrack_Click" Height="35" MouseEnter="btnTrack_MouseEnter" MouseLeave="btnTrack_MouseLeave" RenderTransformOrigin="0.487,1.898">
                     <Button.Background>
                         <ImageBrush ImageSource="Resources/SB_Track_white.png"/>
-                </Button.Background>
+                    </Button.Background>
                 </Button>
                 <Button x:Name="btnSpeed" Style="{StaticResource PictureButton}" Margin="6,39,4,3" Click="btnSpeed_Click" Height="35" MouseEnter="btnSpeed_MouseEnter" MouseLeave="btnSpeed_MouseLeave" RenderTransformOrigin="0.487,1.898">
                     <Button.Background>
@@ -153,7 +153,6 @@
                 <Label  x:Name="lblTrackWholeWidth" Content="Width:" HorizontalAlignment="Left" Margin="96,158,0,0" VerticalAlignment="Top" Width="57" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
                 <TextBox x:Name="txtTrackTravelledWidth" HorizontalAlignment="Left" Height="23" Margin="154,106,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="27"/>
                 <TextBox x:Name="txtTrackWholeWidth" HorizontalAlignment="Left" Height="23" Margin="154,158,0,0" TextWrapping="Wrap" Text="9" VerticalAlignment="Top" Width="27"/>
-                <xctk:IntegerUpDown x:Name="udSpeedFontSize" Minimum="28" Margin="170,69,12,119"/>
 
             </Grid>
         </Grid>
@@ -168,14 +167,15 @@
             <Grid x:Name="grdEnabledSpeed" HorizontalAlignment="Left" Height="197" Margin="10,10,0,-84" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263">
                 <ComboBox x:Name="cbSpeedFont" Margin="113,9,9,0" VerticalAlignment="Top" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" SelectedIndex="0" Height="25"/>
                 <Label  x:Name="lblSpeedFont" Content="Font:" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Width="52" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <Label  x:Name="lblSpeedCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="29,92,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtSpeedX" HorizontalAlignment="Left" Height="23" Margin="126,118,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblSpeedX" Content="X:" HorizontalAlignment="Left" Margin="97,118,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtSpeedY" HorizontalAlignment="Left" Height="23" Margin="204,119,0,0" TextWrapping="Wrap" Text="400" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5"/>
-                <Label  x:Name="lblSpeedY" Content="Y:" HorizontalAlignment="Left" Margin="175,118,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <Label  x:Name="lblSpeedCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="29,98,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtSpeedX" HorizontalAlignment="Left" Height="23" Margin="126,124,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblSpeedX" Content="X:" HorizontalAlignment="Left" Margin="97,124,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtSpeedY" HorizontalAlignment="Left" Height="23" Margin="204,125,0,0" TextWrapping="Wrap" Text="400" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5"/>
+                <Label  x:Name="lblSpeedY" Content="Y:" HorizontalAlignment="Left" Margin="175,123,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <xctk:ColorPicker x:Name="cpSpeedColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="170,39,10,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
                 <Label  x:Name="lblSpeedColor" Content="Color:" HorizontalAlignment="Left" Margin="29,40,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <Label  x:Name="lblSpeedFontSize" Content="Font size:" HorizontalAlignment="Left" Margin="29,69,0,0" VerticalAlignment="Top" Width="87" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15" RenderTransformOrigin="0.533,0.213"/>
+                <Label  x:Name="lblSpeedFontSize" Content="Font size:" HorizontalAlignment="Left" Margin="29,73,0,0" VerticalAlignment="Top" Width="87" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15" RenderTransformOrigin="0.533,0.213"/>
+                <xctk:IntegerUpDown x:Name="txtSpeedFontSize" Minimum="28" Value="28" Increment="1" Margin="170,74,10,97"/>
             </Grid>
         </Grid>
         <Grid x:Name="grdDistance" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
@@ -215,14 +215,14 @@
                 <Label  x:Name="lblPMSize" Content="Size:" HorizontalAlignment="Left" Margin="6,12,0,0" VerticalAlignment="Top" Width="87" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15" RenderTransformOrigin="0.533,0.213"/>
             </Grid>
         </Grid>
-        <Grid x:Name="grdOverlayImage" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
+        <Grid x:Name="grdOverlayImage" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="Font5" Height="40"/>
                 <RowDefinition x:Name="FontSize5" Height="40"/>
                 <RowDefinition x:Name="FontColor5" Height="40"/>
                 <RowDefinition x:Name="FontOutline5" Height="40"/>
             </Grid.RowDefinitions>
-            <CheckBox x:Name="cbEnableOverlayImage" Content="Enable Overlay Image" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="172" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableDistance_Checked" Unchecked="cbEnableDistance_Uncheck"/>
+            <CheckBox x:Name="cbEnableOverlayImage" Content="Enable Overlay Image" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="172" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableOI_Checked" Unchecked="cbEnableOI_Uncheck"/>
             <Grid x:Name="grdEnabledOI" HorizontalAlignment="Left" Height="176" Margin="10,10,0,-63" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263">
                 <Label  x:Name="lblOICoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="7,2,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <TextBox x:Name="txtOIX" HorizontalAlignment="Left" Height="23" Margin="47,29,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
@@ -244,7 +244,7 @@
                 <Label  x:Name="lblMapHeight" Content="Height:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
                 <TextBox x:Name="txtMapHeight" HorizontalAlignment="Left" Height="23" Margin="103,15,0,0" TextWrapping="Wrap" Text="240" VerticalAlignment="Top" Width="68"/>
                 <Label  x:Name="lblMapOpacity" Content="Opacity:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <xctk:DoubleUpDown x:Name="txtMapoOpacity" Minimum="0.1" Maximum="1" Value="0.5" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" Increment="0.1" VerticalAlignment="Top" Width="68"/>
+                <xctk:DoubleUpDown x:Name="dudMapOpacity" Minimum="0.1" Maximum="1" Value="0.5" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" Increment="0.1" VerticalAlignment="Top" Width="68"/>
             </Grid>
         </Grid>
         <Button x:Name="btnProceed" Style="{StaticResource PictureButton}" Margin="318,246,12,-133" Click="btnProceed_Click" >
