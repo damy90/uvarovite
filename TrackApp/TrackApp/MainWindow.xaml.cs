@@ -46,7 +46,7 @@ namespace TrackApp
             {
                 this.cmbEncoding.Items.Add(format);
             }
-            //VideoCompositor.RenderVideo();
+            VideoCompositor.RenderVideo();
         }
 
         #region Helping Methods     

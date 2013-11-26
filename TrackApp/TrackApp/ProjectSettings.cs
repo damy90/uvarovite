@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 class ProjectSettings
 {
-    public string VideoInputPath="video.avi";
+    public string VideoInputPath = @"video.avi";
     public string VideoOutputPath="video-out.avi";
     public string GPXPath = "workout.gpx";
     public VideoFormats Format= VideoFormats.xvid;
+    public int BitRate = 20000000;
 
     //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
     public float VideoStart = 0;//in seconds
@@ -19,12 +20,12 @@ class ProjectSettings
     public float VideoEnd = 0;//zero if video length is not trimmed
 
     public bool ShowTrack=true;//TO DO: Finish track widget and change to true
-    public Point TrackCoordinates = new Point(0, 0);
-    public int TrackHeight = 200;//the width is calculated from the track points 
+    public Point TrackPostion = new Point(100, 100);
+    public int TrackHeight = 250;//the width is calculated from the track points 
     public Color TraveledTrackColor = Color.Red;
     public int TraveledTrackLineWidth = 3;
     public Color WholeTrackColor = Color.White;
-    public int WholeTrackWidth = 9;
+    public int WholeTrackLineWidth = 7;
 
     public bool ShowPositionMarker=false;
     public int PositionMarkerSize = 10;

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using AForge.Video.VFW;
+//using AForge.Video.VFW;
+using AForge.Video.FFMPEG;
 
 public static class VideoCompositor
 {
@@ -16,31 +17,45 @@ public static class VideoCompositor
         new GPXFileLoader().LoadPoints("workout.gpx");
         
         UpdateActiveWidgets(ref activeWidgets);
-        AVIWriter writer = new AVIWriter(encoding);
+        //AVIWriter writer = new AVIWriter(encoding);
+        VideoFileWriter writer = new VideoFileWriter();
         // instantiate AVI reader
-        AVIReader reader = new AVIReader();
+        //AVIReader reader = new AVIReader();
+        VideoFileReader reader = new VideoFileReader();
+
         // open video file
         reader.Open(inputPath);
         //float framerate = reader.FrameRate;
         float framerate = reader.FrameRate;
         // create new AVI file and open it
-        writer.Open(outputPath, reader.Width, reader.Height);
+        writer.Open(outputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, 2000000 );//.MPEG4 );
         // read the video file and render output
         //videoStart and videoEnd (crop video)
-        reader.Position = reader.Start + (int)(settings.VideoStart * reader.FrameRate);
+        
+        /*reader.Position = reader.Start + (int)(settings.VideoStart * reader.FrameRate);
         int VideoEnd = reader.Start + (int)(settings.VideoEnd * reader.FrameRate);
         if (VideoEnd == reader.Start)//settings.VideoEnd is not set (0 by default)
-            VideoEnd = reader.Length;
-        while (reader.Position - reader.Start < VideoEnd)
+            VideoEnd = reader.Length;*/
+
+        long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
+        if (videoEnd == 0 || videoEnd > reader.FrameCount )
+            videoEnd = reader.FrameCount;    
+
+        //while (reader.Position - reader.Start < VideoEnd)
+        for (long n = 0; n < videoEnd; n++ )
         {
             // get next frame
             //TODO Using graphics
-            Bitmap image = reader.GetNextFrame();
-            Graphics grfx = Graphics.FromImage(image);
-            grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            foreach (var widget in activeWidgets)
-                widget.Draw(grfx, ((float)(reader.Position - reader.Start)) / framerate);
-            writer.AddFrame(image);
+            Bitmap videoFrame = reader.ReadVideoFrame();//reader.GetNextFrame();
+            using (Graphics grfx = Graphics.FromImage(videoFrame))
+            {
+                grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                foreach (var widget in activeWidgets)
+                    widget.Draw(grfx, n / framerate);
+            }
+            //writer.AddFrame(image);
+            writer.WriteVideoFrame(videoFrame);
+            videoFrame.Dispose();
         }
         reader.Close();
         writer.Close();
