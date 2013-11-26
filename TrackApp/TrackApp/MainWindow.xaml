@@ -28,7 +28,7 @@
     </Window.Resources>
 
     <Grid Margin="0,0,2,161">
-        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
+        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283">
             <Button x:Name="btnLoadVideo" Style="{StaticResource PictureButton}"
                     Click="btnLoadVideoClick" 
                     MouseEnter="btnLoadVideo_MouseEnter"
@@ -47,10 +47,9 @@
                     <ImageBrush ImageSource="Resources\iconGPX_leave.png"/>
                 </Button.Background>
             </Button>
-            <TextBox x:Name="txtOutputFileName" HorizontalAlignment="Left" Height="23" Margin="1,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282"/>
-            <Label x:Name="lblOutputFileName" Content="Output file name:" HorizontalAlignment="Left" Margin="0,97,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="141" FontFamily="Arial" FontSize="15" Height="30"/>
-            <Label x:Name="lblEncoding" Content="Encoding:" HorizontalAlignment="Left" Margin="0,154,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30"/>
-            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="163,154,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbEncoding_SelectionChanged"/>
+            <Button Style="{StaticResource PictureButton}" x:Name="btnOutputFile" HorizontalAlignment="Left" Height="39" Margin="1,111,0,0" Content="Output File:" VerticalAlignment="Top" Width="279" Click="btnOutputFileName_Click"/>
+            <Label x:Name="lblEncoding" Content="Encoding:" HorizontalAlignment="Left" Margin="0,182,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6"/>
+            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="163,183,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbEncoding_SelectionChanged"/>
         </Grid>
         <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" Margin="167,11,0,-71" VerticalAlignment="Top" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
@@ -215,7 +214,7 @@
                 <Label  x:Name="lblPMSize" Content="Size:" HorizontalAlignment="Left" Margin="6,12,0,0" VerticalAlignment="Top" Width="87" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15" RenderTransformOrigin="0.533,0.213"/>
             </Grid>
         </Grid>
-        <Grid x:Name="grdOverlayImage" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283">
+        <Grid x:Name="grdOverlayImage" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="Font5" Height="40"/>
                 <RowDefinition x:Name="FontSize5" Height="40"/>
