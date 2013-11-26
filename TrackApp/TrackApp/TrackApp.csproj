@@ -164,42 +164,49 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\imgPreview.jpg" />
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\iconGPX_enter.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\iconGPX_leave.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\iconSettings_enter.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\iconSettings_Leave.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\iconVideo_enter.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\iconVideo_leave.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\imgTrack.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="Resources\iconGPX_enter.png" />
+    <Resource Include="Resources\iconGPX_leave.png" />
+    <Resource Include="Resources\iconSettings_enter.png" />
+    <Resource Include="Resources\iconSettings_Leave.png" />
+    <Resource Include="Resources\iconVideo_enter.png" />
+    <Resource Include="Resources\iconVideo_leave.png" />
+    <Resource Include="Resources\imgTrack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\imgPreview.jpg" />
+    <Resource Include="Resources\Proseed_black.png" />
     <Resource Include="Resources\Proseed_white.png" />
+    <Resource Include="Resources\SB_Advanced_black.png" />
     <Resource Include="Resources\SB_Advanced_enter.png" />
     <Resource Include="Resources\SB_Advanced_leave.png" />
+    <Resource Include="Resources\SB_Advanced_white.png" />
+    <Resource Include="Resources\SB_Distance_black.png" />
+    <Resource Include="Resources\SB_Distance_white.png" />
+    <Resource Include="Resources\SB_Font_black.png" />
     <Resource Include="Resources\SB_Font_enter.png" />
     <Resource Include="Resources\SB_Font_leave.png" />
+    <Resource Include="Resources\SB_Font_white.png" />
+    <Resource Include="Resources\SB_Map_black.png" />
+    <Resource Include="Resources\SB_Map_white.png" />
+    <Resource Include="Resources\SB_Overlay_Image_black.png" />
+    <Resource Include="Resources\SB_Overlay_Image_white.png" />
+    <Resource Include="Resources\SB_Position-Marker_black.png" />
+    <Resource Include="Resources\SB_Position-Marker_white.png" />
+    <Resource Include="Resources\SB_Speed_black.png" />
+    <Resource Include="Resources\SB_Speed_white.png" />
+    <Resource Include="Resources\SB_Syncronization_black.png" />
     <Resource Include="Resources\SB_Syncronization_enter.png" />
     <Resource Include="Resources\SB_Syncronization_leave.png" />
+    <Resource Include="Resources\SB_Syncronization_white.png" />
+    <Resource Include="Resources\SB_Track_black.png" />
+    <Resource Include="Resources\SB_Track_white.png" />
+    <Resource Include="Resources\SB_Video_black.png" />
     <Resource Include="Resources\SB_Video_enter.png" />
     <Resource Include="Resources\SB_Video_leave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\" />
+    <Resource Include="Resources\SB_Video_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
