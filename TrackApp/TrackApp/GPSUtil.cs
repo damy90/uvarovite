@@ -80,18 +80,13 @@ public class GPSData
 {
     GPSPoint[] gpsPoints;
 
-    private double maxLong = double.MinValue;
-    private double maxLat = double.MinValue;
-    private double maxEle = double.MinValue;
-
-    private double minLong = double.MaxValue;
-    private double minLat = double.MaxValue;
-    private double minEle = double.MaxValue;
+    
 
     public static double longtitudeCorrectionScale = 1;
 
     private static GPSData _instance;
     private Vector lastOrientation = new Vector(0, 0);
+    GPSBox BoundingBox;
 
     //public event EventHandler UpdateGPSData;
 
@@ -119,21 +114,30 @@ public class GPSData
     {
         //TODO - trim, leave only the gpsPoints that we will need (using TrackStart and min((VideoEnd-VideoStart),TrackLength) )
 
+        double maxLong = double.MinValue;
+        double maxLat = double.MinValue;
+        double maxEle = double.MinValue;
+
+        double minLong = double.MaxValue;
+        double minLat = double.MaxValue;
+        double minEle = double.MaxValue;
         gpsPoints = new GPSPoint[pts.Count];//we need an array rather than list for faster access
         int n = 0;
         foreach(GPSPoint point in pts)
         {
             gpsPoints[n] = point;
-            maxLong = (Math.Max(gpsPoints[n].longitude, maxLong));
-            maxLat = Math.Max(gpsPoints[n].latitude, maxLat);
-            maxEle = Math.Max(gpsPoints[n].elevation, maxEle);
+            maxLong = Math.Max(point.longitude, maxLong);
+            maxLat = Math.Max(point.latitude, maxLat);
+            maxEle = Math.Max(point.elevation, maxEle);
 
-            minLong = Math.Min(gpsPoints[n].longitude, maxLong);
-            minLat = Math.Min(gpsPoints[n].latitude, maxLat);
-            minEle = Math.Min(gpsPoints[n].elevation, maxEle);
-
+            minLong = Math.Min(point.longitude, minLong);
+            minLat = Math.Min(point.latitude, minLat);
+            minEle = Math.Min(point.elevation, minEle);
             n++;
         }
+        GPSCoord position = new GPSCoord(minLong, minLat, minEle);
+        GPSCoord size = new GPSCoord(maxLong - minLong, maxLat - minLat, maxEle - minEle);
+        BoundingBox = new GPSBox(position, size);
 
         longtitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
 
@@ -151,9 +155,7 @@ public class GPSData
 
     public GPSBox GetBox()
     {
-        GPSCoord position = new GPSCoord(minLong, minLat, minEle);
-        GPSCoord size = new GPSCoord(maxLong - minLong, maxLat - minLat, maxEle - minEle);
-        return new GPSBox(position, size);
+        return BoundingBox;
     }
     //TODO average speed (gradually change speed)
     public double GetSpeed(float time)
