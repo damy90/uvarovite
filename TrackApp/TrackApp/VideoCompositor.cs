@@ -5,11 +5,11 @@ using AForge.Video.FFMPEG;
 
 public static class VideoCompositor
 {
-    private static ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
     private static List<Widget> activeWidgets;
 
     public static void RenderVideo()
     {
+        ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
         string encoding = settings.Format.ToString();//трябва да се тества
         new GPXFileLoader().LoadPoints(settings.GPXPath);
     
@@ -52,6 +52,7 @@ public static class VideoCompositor
 
     private static void UpdateActiveWidgets(ref List<Widget> activeWidgets)
     {
+        ProjectSettings settings = ProjectSettings.GetSettings();
         activeWidgets = new List<Widget>();
         //hardcoded tests
         //activeWidgets.Add(new WidgetTest());

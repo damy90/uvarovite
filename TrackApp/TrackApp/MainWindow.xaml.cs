@@ -17,14 +17,12 @@ namespace TrackApp
         const int spaceBetweenGrids = 5;
         const int rowHeight = 40;
         const int colWidth = 150;
-        ProjectSettings settings;
         SaveFileDialog saveFileDialog;
 
         public MainWindow()
         {
 
             InitializeComponent();
-            settings = ProjectSettings.GetSettings();
             loadFileDialog = new OpenFileDialog();
             this.grdControlButtons.Visibility = Visibility.Visible;
             this.grdFiles.Visibility = Visibility.Visible;
@@ -86,6 +84,7 @@ namespace TrackApp
         }
         private bool CheckFileGridInput()
         {
+            ProjectSettings settings = ProjectSettings.GetSettings();
             if (settings.VideoInputPath == null || settings.VideoInputPath == string.Empty)
             {
                 return false;
@@ -216,7 +215,7 @@ namespace TrackApp
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
-                settings.GPXPath = loadFileDialog.FileName;
+                ProjectSettings.GetSettings().GPXPath = loadFileDialog.FileName;
                 loadFileDialog.FileName = null;
             }
         }
@@ -228,7 +227,7 @@ namespace TrackApp
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
-                settings.VideoInputPath = loadFileDialog.FileName;
+                ProjectSettings.GetSettings().VideoInputPath = loadFileDialog.FileName;
                 loadFileDialog.FileName = null;
             }
         }
@@ -238,6 +237,10 @@ namespace TrackApp
             //if (CheckFileGridInput())
             //{
                 //Files
+                ProjectSettings settings = ProjectSettings.GetSettings();
+                //settings.Serialize();
+                //settings.VideoEnd = 300;
+                //settings = settings.Deserialize();
                 settings.VideoOutputPath = saveFileDialog.FileName + ".avi";
                 settings.TrackStart = Convert.ToInt32(udTrackHours.Value) * 3600f + Convert.ToInt32(udTrackMinutes.Value) * 60 + Convert.ToInt32(udTrackSeconds.Value);
                 settings.VideoStart = Convert.ToInt32(udVideoStHours.Value) * 3600f + Convert.ToInt32(udVideoStMinutes.Value) * 60 + Convert.ToInt32(udVideoStSeconds.Value);
@@ -393,7 +396,7 @@ namespace TrackApp
         private void cmbEncoding_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             VideoFormats format = (VideoFormats)cmbEncoding.SelectedIndex;
-            settings.Format = format;
+            ProjectSettings.GetSettings().Format = format;
         }
 
         private void cbEnableTrack_Checked(object sender, RoutedEventArgs e)
@@ -442,7 +445,7 @@ namespace TrackApp
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
-                settings.overlayImageFile = loadFileDialog.FileName;
+                ProjectSettings.GetSettings().overlayImageFile = loadFileDialog.FileName;
                 loadFileDialog.FileName = null;
             }
         }

@@ -116,7 +116,8 @@ public class WidgetTrack:Widget
                 drawTrack.DrawLines(wholeTrackPen, trackPoints);
             }
         }
-        //draw track (traveled
+        //draw track (traveled)
+        //TODO: use interpolation
         int index = gps.GetIndex(time);
         if (prevIndex != null && index!=prevIndex)
         {

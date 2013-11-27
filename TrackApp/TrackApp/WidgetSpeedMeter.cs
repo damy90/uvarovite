@@ -39,7 +39,7 @@ public class WidgetSpeedMeter:Widget
         }
 
         double speed = GPSData.GetData().GetAverageSpeed(time * index + minTrackTime);
-        string s = System.Convert.ToInt32(speed).ToString() + " km/h";
+        string s = string.Format("{0:0.0} {1}", speed, "km/h");
 
         Font font = ProjectSettings.GetSettings().SpeedWidgetFont;
         Brush brush = new SolidBrush(ProjectSettings.GetSettings().SpeedWidgetColor);
