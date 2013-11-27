@@ -8,28 +8,27 @@ using System.Threading.Tasks;
 
 public class WidgetTrack:Widget
 {
-    //private Point[] track;
     Bitmap trackBitmap;
     PointF[] trackPoints;
     int prevIndex = 0;
-    double ratio;
-    double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
     public override void Draw(Graphics grfx, float time)
     {
         ProjectSettings prj = ProjectSettings.GetSettings();
         GPSData gps = GPSData.GetData();
+        // draw whole track
         if (trackBitmap == null)
         {
             int wholeTrackLineWidth = prj.WholeTrackLineWidth;
             Pen wholeTrackPen = new Pen(prj.WholeTrackColor, wholeTrackLineWidth );
 
             GPSPoint[] trackData = gps.GetTrack();
-            trackPoints=new PointF[trackData.Length];
+            trackPoints = new PointF[trackData.Length];
             GPSBox box = gps.GetBox();
 
             Size widgetSize = new Size();
             widgetSize.Height = prj.TrackHeight;
-            ratio = (widgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
+            double ratio = (widgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
+            double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
             widgetSize.Width = (int)Math.Ceiling( ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth );
 
             trackBitmap = new Bitmap(widgetSize.Width, widgetSize.Height);
@@ -44,11 +43,12 @@ public class WidgetTrack:Widget
                 drawTrack.DrawLines(wholeTrackPen, trackPoints);
             }
         }
+        //draw track (traveled
         int index = gps.GetIndex(time);
         if (prevIndex != null && index!=prevIndex)
         {
-            PointF[] subTrackPoints = new PointF[index - prevIndex];
-            Array.Copy( trackPoints, prevIndex, subTrackPoints, 0, index - prevIndex);
+            PointF[] subTrackPoints = new PointF[index - prevIndex + 1];
+            Array.Copy(trackPoints, prevIndex, subTrackPoints, 0, index - prevIndex + 1);//index - prevIndex + 1 = 2
 
             int traveledTrackLineWidth = prj.TraveledTrackLineWidth;
             Pen traveledTrackPen = new Pen(prj.TraveledTrackColor, traveledTrackLineWidth);
@@ -58,6 +58,7 @@ public class WidgetTrack:Widget
                 if (subTrackPoints.Length>1)
                     drawTrack.DrawLines(traveledTrackPen, subTrackPoints);
             }
+            prevIndex = index;
         }
         grfx.DrawImage(trackBitmap, prj.TrackPostion);
     }

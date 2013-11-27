@@ -1,51 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-//using AForge.Video.VFW;
 using AForge.Video.FFMPEG;
 
 public static class VideoCompositor
 {
     private static ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
-    private static string inputPath = settings.VideoInputPath;
-    private static string outputPath = settings.VideoOutputPath;
-    private static string encoding = settings.Format.ToString();//трябва да се тества
     private static List<Widget> activeWidgets;
 
     public static void RenderVideo()
     {
-        new GPXFileLoader().LoadPoints("workout.gpx");
+        string encoding = settings.Format.ToString();//трябва да се тества
+        new GPXFileLoader().LoadPoints(settings.GPXPath);
         
         UpdateActiveWidgets(ref activeWidgets);
-        //AVIWriter writer = new AVIWriter(encoding);
         VideoFileWriter writer = new VideoFileWriter();
         // instantiate AVI reader
-        //AVIReader reader = new AVIReader();
         VideoFileReader reader = new VideoFileReader();
 
         // open video file
-        reader.Open(inputPath);
-        //float framerate = reader.FrameRate;
+        reader.Open(settings.VideoInputPath);
         float framerate = reader.FrameRate;
         // create new AVI file and open it
-        writer.Open(outputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, 4000000 );//.MPEG4 );
-        // read the video file and render output
-        //videoStart and videoEnd (crop video)
-        
-        /*reader.Position = reader.Start + (int)(settings.VideoStart * reader.FrameRate);
-        int VideoEnd = reader.Start + (int)(settings.VideoEnd * reader.FrameRate);
-        if (VideoEnd == reader.Start)//settings.VideoEnd is not set (0 by default)
-            VideoEnd = reader.Length;*/
+        writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, settings.VideoQuality*1000000 );
 
         long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
         if (videoEnd == 0 || videoEnd > reader.FrameCount )
             videoEnd = reader.FrameCount;    
 
-        //while (reader.Position - reader.Start < VideoEnd)
         for (long n = 0; n < videoEnd; n++ )
         {
+            int speed = settings.VideoSpeed;
             // get next frame
-            int speed = 8;
             Bitmap videoFrame = reader.ReadVideoFrame();
             if (n % speed == 0)
             {
@@ -55,7 +41,6 @@ public static class VideoCompositor
                     foreach (var widget in activeWidgets)
                         widget.Draw(grfx, n / framerate);
                 }
-                //writer.AddFrame(image);
                 writer.WriteVideoFrame(videoFrame);
             }
             videoFrame.Dispose();
