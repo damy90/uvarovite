@@ -12,6 +12,7 @@ public static class VideoCompositor
     {
         string encoding = settings.Format.ToString();//трябва да се тества
         new GPXFileLoader().LoadPoints(settings.GPXPath);
+    
         
         UpdateActiveWidgets(ref activeWidgets);
         VideoFileWriter writer = new VideoFileWriter();
