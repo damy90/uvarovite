@@ -160,7 +160,7 @@ public class GPSData
     //TODO average speed (gradually change speed)
     public double GetSpeed(float time)
     {
-        int index=IndexThisOrPreviousReading(time);
+        int index=GetIndex(time);
         if (index == gpsPoints.Length - 1)
             return 0;
         double distance = gpsPoints[index].DistanceFromPoint(gpsPoints[index + 1]);
@@ -169,7 +169,7 @@ public class GPSData
     }
     public GPSCoord GetPosition(float time)
     {
-        int index = IndexThisOrPreviousReading(time);
+        int index = GetIndex(time);
         if (index == gpsPoints.Length - 1)
             return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].elevation);
         double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
@@ -179,7 +179,7 @@ public class GPSData
     }
     public Vector GetOrientation(float time)
     {
-        int index = IndexThisOrPreviousReading(time);
+        int index = GetIndex(time);
         double longDirection=gpsPoints[index + 1].longitude - gpsPoints[index].longitude;
         double latDirection=gpsPoints[index + 1].latitude - gpsPoints[index].latitude;
         double length=Math.Sqrt(longDirection*longDirection+latDirection*latDirection);
@@ -189,7 +189,7 @@ public class GPSData
     }
     public double GetDistance(float time)
     {
-        int index = IndexThisOrPreviousReading(time);
+        int index = GetIndex(time);
         double distance=gpsPoints[index].Distance;
         GPSCoord interpolatedPos = GetPosition(time);
         GPSPoint interpolatedGPSPoint=new GPSPoint(interpolatedPos.Longtitude, interpolatedPos.Lattitude, interpolatedPos.Elevation, 0, 0);
@@ -200,7 +200,7 @@ public class GPSData
         return gpsPoints;
     }
     //In case some readings are made over greater time intervals (if you are in a tunel or loose signal, etc)
-    private int IndexThisOrPreviousReading(float time)
+    public int GetIndex(float time)
     {
         int index = Array.BinarySearch(gpsPoints, new GPSPoint(time));
         if (index < 0) // the value wasn't found

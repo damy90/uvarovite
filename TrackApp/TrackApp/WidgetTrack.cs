@@ -11,23 +11,24 @@ public class WidgetTrack:Widget
     //private Point[] track;
     Bitmap trackBitmap;
     PointF[] trackPoints;
+    int prevIndex = 0;
     double ratio;
     double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
     public override void Draw(Graphics grfx, float time)
     {
+        ProjectSettings prj = ProjectSettings.GetSettings();
+        GPSData gps = GPSData.GetData();
         if (trackBitmap == null)
         {
-            int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
-            int traveledTrackLineWidth = ProjectSettings.GetSettings().TraveledTrackLineWidth;
-            Pen wholeTrackPen = new Pen(ProjectSettings.GetSettings().WholeTrackColor, wholeTrackLineWidth );
-            Pen traveledTrackPen = new Pen(ProjectSettings.GetSettings().TraveledTrackColor, traveledTrackLineWidth);
+            int wholeTrackLineWidth = prj.WholeTrackLineWidth;
+            Pen wholeTrackPen = new Pen(prj.WholeTrackColor, wholeTrackLineWidth );
 
-            GPSPoint[] trackData = GPSData.GetData().GetTrack();
+            GPSPoint[] trackData = gps.GetTrack();
             trackPoints=new PointF[trackData.Length];
-            GPSBox box = GPSData.GetData().GetBox();
+            GPSBox box = gps.GetBox();
 
             Size widgetSize = new Size();
-            widgetSize.Height = ProjectSettings.GetSettings().TrackHeight;
+            widgetSize.Height = prj.TrackHeight;
             ratio = (widgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
             widgetSize.Width = (int)Math.Ceiling( ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth );
 
@@ -43,12 +44,21 @@ public class WidgetTrack:Widget
                 drawTrack.DrawLines(wholeTrackPen, trackPoints);
             }
         }
-        //for (int i = 0; i < trackData.Length; i++)
-        //{
-        //    trackPoints[i].X = position.X + (float)((trackData[i].longitude - box.Position.Longtitude) * ratio * longtitudeCorrectionScale);
-        //    trackPoints[i].Y = position.Y + widgetSize.Height - (float)((trackData[i].latitude - box.Position.Lattitude) * ratio);
-        //}
-        //grfx.DrawLines(pen, trackPoints);
-        grfx.DrawImage(trackBitmap, ProjectSettings.GetSettings().TrackPostion);
+        int index = gps.GetIndex(time);
+        if (prevIndex != null && index!=prevIndex)
+        {
+            PointF[] subTrackPoints = new PointF[index - prevIndex];
+            Array.Copy( trackPoints, prevIndex, subTrackPoints, 0, index - prevIndex);
+
+            int traveledTrackLineWidth = prj.TraveledTrackLineWidth;
+            Pen traveledTrackPen = new Pen(prj.TraveledTrackColor, traveledTrackLineWidth);
+
+            using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
+            {
+                if (subTrackPoints.Length>1)
+                    drawTrack.DrawLines(traveledTrackPen, subTrackPoints);
+            }
+        }
+        grfx.DrawImage(trackBitmap, prj.TrackPostion);
     }
 }

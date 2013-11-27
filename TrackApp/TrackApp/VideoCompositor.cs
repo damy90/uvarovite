@@ -28,7 +28,7 @@ public static class VideoCompositor
         //float framerate = reader.FrameRate;
         float framerate = reader.FrameRate;
         // create new AVI file and open it
-        writer.Open(outputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, 2000000 );//.MPEG4 );
+        writer.Open(outputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, 4000000 );//.MPEG4 );
         // read the video file and render output
         //videoStart and videoEnd (crop video)
         
@@ -45,16 +45,19 @@ public static class VideoCompositor
         for (long n = 0; n < videoEnd; n++ )
         {
             // get next frame
-            //TODO Using graphics
-            Bitmap videoFrame = reader.ReadVideoFrame();//reader.GetNextFrame();
-            using (Graphics grfx = Graphics.FromImage(videoFrame))
+            int speed = 8;
+            Bitmap videoFrame = reader.ReadVideoFrame();
+            if (n % speed == 0)
             {
-                grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                foreach (var widget in activeWidgets)
-                    widget.Draw(grfx, n / framerate);
+                using (Graphics grfx = Graphics.FromImage(videoFrame))
+                {
+                    grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    foreach (var widget in activeWidgets)
+                        widget.Draw(grfx, n / framerate);
+                }
+                //writer.AddFrame(image);
+                writer.WriteVideoFrame(videoFrame);
             }
-            //writer.AddFrame(image);
-            writer.WriteVideoFrame(videoFrame);
             videoFrame.Dispose();
         }
         reader.Close();
