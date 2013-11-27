@@ -147,11 +147,36 @@ public class GPSData
             distanceSum += gpsPoints[i].DistanceFromPoint(gpsPoints[i - 1]);
             gpsPoints[i].Distance = distanceSum;
         }
+    }
 
         //generate the UpdateGPSData event
         //UpdateGPSData(this, EventArgs.Empty);
 
+         public double GetAverageSpeed(float time)
+    {
+        int index = GetIndex(time);
+        if ((index == gpsPoints.Length - 1)||(gpsPoints.Length == 0))
+            return 0;
+        double distance = 0;
+
+        for (int i = 0; i < index; i++)
+        {
+            distance += gpsPoints[i].DistanceFromPoint(gpsPoints[i + 1]);       
+        }
+                   
+        float timeSpan = gpsPoints[index].time - gpsPoints[0].time;
+        return distance / timeSpan;
     }
+
+    public double GetCumulativeDistance(float time)
+    {
+        int index = GetIndex(time);
+        double distance = gpsPoints[index].Distance;
+
+        return distance;
+    }
+
+    
 
     public GPSBox GetBox()
     {
@@ -167,16 +192,28 @@ public class GPSData
         float timeSpan = gpsPoints[index + 1].time - gpsPoints[index].time;
         return distance / timeSpan;
     }
-    public GPSCoord GetPosition(float time)
+   /* public GPSCoord GetPosition(float time)
     {
-        int index = GetIndex(time);
+        
+         * int index = GetIndex(time);
         if (index == gpsPoints.Length - 1)
             return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].elevation);
         double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
         double lat = Interpolate(time,gpsPoints[index].longitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
         double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
         return new GPSCoord(Long, lat, ele);
+         * */
+    public GPSCoord GetPosition(float time)
+    {
+        int index = GetIndex(time);
+        if (index == gpsPoints.Length - 1)
+            return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].latitude, gpsPoints[gpsPoints.Length - 1].elevation);
+        double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
+        double lat = Interpolate(time, gpsPoints[index].latitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
+        double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
+        return new GPSCoord(Long, lat, ele);
     }
+    
     public Vector GetOrientation(float time)
     {
         int index = GetIndex(time);
@@ -219,6 +256,7 @@ public class GPSData
 }
 
 //TODO - leave only the abstract class (if we have class properties) or the interface (if we have only methods)
+
 public interface IGPSReader
 {
     int LoadPoints(string sFile);
