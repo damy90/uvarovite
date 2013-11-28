@@ -26,6 +26,7 @@ public static class VideoCompositor
         writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, settings.VideoQuality*1000000 );
 
         long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
+        long videoStart = (int)(settings.VideoStart * reader.FrameRate);
         if (videoEnd == 0 || videoEnd > reader.FrameCount )
             videoEnd = reader.FrameCount;    
 
@@ -34,7 +35,7 @@ public static class VideoCompositor
             int speed = settings.VideoSpeed;
             // get next frame
             Bitmap videoFrame = reader.ReadVideoFrame();
-            if (n % speed == 0)
+            if (n % speed == 0 || n > videoStart)
             {
                 using (Graphics grfx = Graphics.FromImage(videoFrame))
                 {
