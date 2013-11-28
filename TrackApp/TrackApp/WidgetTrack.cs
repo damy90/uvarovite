@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 public class WidgetTrack : Widget
 {
-    Bitmap trackBitmap;
     Bitmap map;
+    Bitmap trackBitmap;
+    PointF[] trackPoints;
+    int prevIndex = 0;
     public static Point Position;
 
     public override void Draw(Graphics grfx, float time)
@@ -22,34 +24,54 @@ public class WidgetTrack : Widget
         int wholeTrackLineWidth = settings.WholeTrackLineWidth;
         Pen wholeTrackPen = new Pen(settings.WholeTrackColor, wholeTrackLineWidth);
         
-
         if (trackBitmap == null)
         {
-            PointF[] trackPoints;
+            
             GPSPoint[] trackData = gps.GetTrack();
             trackPoints = new PointF[trackData.Length];
 
-            Size widgetSize = new Size();
-            widgetSize.Height = settings.TrackHeight;
-            
-            double ratio = (widgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
+            Size WidgetSize = new Size();
+            WidgetSize.Height = settings.TrackHeight;
+
+            double ratio = (WidgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
             double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
             Position = settings.TrackPostion;
-            widgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
+            WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
             //TODO if default is enabled set this position
-            Position.X = System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - widgetSize.Width - 20;
-            Position.Y = System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - widgetSize.Height - 20;
-            
-            trackBitmap = new Bitmap(widgetSize.Width, widgetSize.Height);
+            Position.X = System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - WidgetSize.Width - 20;
+            Position.Y = System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - WidgetSize.Height - 20;
+
+            trackBitmap = new Bitmap(WidgetSize.Width, WidgetSize.Height);
 
             using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
             {
                 for (int i = 0; i < trackData.Length; i++)
                 {
                     trackPoints[i].X = (float)((trackData[i].longitude - box.Position.Longtitude) * ratio * longtitudeCorrectionScale + ((float)wholeTrackLineWidth) / 2);
-                    trackPoints[i].Y = widgetSize.Height - (float)((trackData[i].latitude - box.Position.Lattitude) * ratio + ((float)wholeTrackLineWidth) / 2);
+                    trackPoints[i].Y = WidgetSize.Height - (float)((trackData[i].latitude - box.Position.Lattitude) * ratio + ((float)wholeTrackLineWidth) / 2);
                 }
                 drawTrack.DrawLines(wholeTrackPen, trackPoints);
+            }
+        }
+        //draw track (traveled)
+        //TODO: use interpolation
+        if (settings.ShowTraveledTrack)
+        {
+            int index = gps.GetIndex(time);
+            if (prevIndex != null && index != prevIndex)
+            {
+                PointF[] subTrackPoints = new PointF[index - prevIndex + 1];
+                Array.Copy(trackPoints, prevIndex, subTrackPoints, 0, index - prevIndex + 1);//index - prevIndex + 1 = 2
+
+                int traveledTrackLineWidth = settings.TraveledTrackLineWidth;
+                Pen traveledTrackPen = new Pen(settings.TraveledTrackColor, traveledTrackLineWidth);
+
+                using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
+                {
+                    if (subTrackPoints.Length > 1)
+                        drawTrack.DrawLines(traveledTrackPen, subTrackPoints);
+                }
+                prevIndex = index;
             }
         }
         //TODO leave some space between the map frame and the track points, the map has to resize according to the track size

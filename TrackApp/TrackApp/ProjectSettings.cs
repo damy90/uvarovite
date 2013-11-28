@@ -43,7 +43,7 @@ public class ProjectSettings
     public float TrackStart = 0;//VideoStart and TrackStart is the only synchronization we need!!!
     public float VideoEnd = 0;//zero if video length is not trimmed
     public float TrackEnd = 0;// TODO add in GUI
-    public int VideoSpeed = 1; //speed multiplier TODO add in GUI
+    public int VideoSpeed = 8; //speed multiplier TODO add in GUI
     public int VideoQuality = 5;//Bitrate = quality * 1 000 000 TODO add in GUI
 
     public bool ShowTrack=true;//TO DO: Finish track widget and change to true
@@ -53,6 +53,7 @@ public class ProjectSettings
     public int TraveledTrackLineWidth = 3;
     public Color WholeTrackColor = Color.White;
     public int WholeTrackLineWidth = 7;
+    public bool ShowTraveledTrack = true;//TODO add to GUI
 
     public bool ShowPositionMarker=false;
     public int PositionMarkerSize = 10;

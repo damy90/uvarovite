@@ -17,7 +17,7 @@ public class WidgetPositionMarker: Widget
 
     public override void Draw(Graphics grfx, float time)
     {
-        // TODO: Implement this method
+        // TODO: Add custom immage and orientation
         GPSData gpsData = GPSData.GetData();
         GPSBox box = GPSData.GetData().GetBox();
         double ratio = widgetSize.Height / (box.Size.Lattitude);
@@ -40,7 +40,7 @@ public class WidgetPositionMarker: Widget
             index = (maxTrackTime - minTrackTime) / clipSeconds;
         }*/
 
-        GPSCoord coord = gpsData.GetPosition(time * index + minTrackTime);
+        GPSCoord coord = gpsData.GetPosition(time);
         Point marker = new Point(0, 0);
         marker.X = position.X + (int)((coord.Longtitude - box.Position.Longtitude) * ratio * GPSData.longtitudeCorrectionScale);
         marker.Y = position.Y + widgetSize.Height - (int)((coord.Lattitude - box.Position.Lattitude) * ratio);
