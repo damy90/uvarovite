@@ -121,11 +121,28 @@ public class GPSData
         double minLong = double.MaxValue;
         double minLat = double.MaxValue;
         double minEle = double.MaxValue;
+        var settigs = ProjectSettings.GetSettings();
+        //trim track
+        if (settigs.TrackEnd == 0)
+            settigs.TrackEnd = pts[pts.Count - 1].time;
+        int trackStartPos = pts.FindIndex(0, p => p.time >= settigs.TrackStart);
+        //todo - handle trackStartPos==-1 - we have no coords that overlap the movie
+        if (trackStartPos == -1)
+            trackStartPos = 0;
+        int trackEndPos = pts.FindLastIndex(trackStartPos, p => p.time > settigs.TrackEnd);
+        if (trackEndPos == -1)
+            trackEndPos = pts.Count;
+        pts.RemoveRange(0, trackStartPos );
+        pts.RemoveRange(trackEndPos, trackEndPos-trackStartPos);
+        
         gpsPoints = new GPSPoint[pts.Count];//we need an array rather than list for faster access
         int n = 0;
         foreach(GPSPoint point in pts)
         {
+            //coppy to array
             gpsPoints[n] = point;
+            n++;
+            //find BoundingBox valuse
             maxLong = Math.Max(point.longitude, maxLong);
             maxLat = Math.Max(point.latitude, maxLat);
             maxEle = Math.Max(point.elevation, maxEle);
@@ -133,14 +150,13 @@ public class GPSData
             minLong = Math.Min(point.longitude, minLong);
             minLat = Math.Min(point.latitude, minLat);
             minEle = Math.Min(point.elevation, minEle);
-            n++;
         }
         GPSCoord position = new GPSCoord(minLong, minLat, minEle);
         GPSCoord size = new GPSCoord(maxLong - minLong, maxLat - minLat, maxEle - minEle);
         BoundingBox = new GPSBox(position, size);
-
+        //for drawing maps
         longtitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
-
+        //distances from start point
         double distanceSum = 0;
         for (int i=1; i<gpsPoints.Length;i++)
         {
@@ -152,7 +168,7 @@ public class GPSData
         //generate the UpdateGPSData event
         //UpdateGPSData(this, EventArgs.Empty);
 
-         public double GetAverageSpeed(float time)
+    public double GetAverageSpeed(float time)
     {
         int index = GetIndex(time);
         if ((index == gpsPoints.Length - 1)||(gpsPoints.Length == 0))
@@ -167,7 +183,16 @@ public class GPSData
         float timeSpan = gpsPoints[index].time - gpsPoints[0].time;
         return distance / timeSpan;
     }
-
+    //TODO average speed (gradually change speed)
+    public double GetSpeed(float time)
+    {
+        int index = GetIndex(time);
+        if ((index == gpsPoints.Length - 1)||(gpsPoints.Length == 0))
+            return 0;
+        double distance = gpsPoints[index].DistanceFromPoint(gpsPoints[index + 1]);
+        float timeSpan = gpsPoints[index + 1].time - gpsPoints[index].time;
+        return distance / timeSpan;
+    }
     public double GetCumulativeDistance(float time)
     {
         int index = GetIndex(time);
@@ -182,16 +207,7 @@ public class GPSData
     {
         return BoundingBox;
     }
-    //TODO average speed (gradually change speed)
-    public double GetSpeed(float time)
-    {
-        int index=GetIndex(time);
-        if (index == gpsPoints.Length - 1)
-            return 0;
-        double distance = gpsPoints[index].DistanceFromPoint(gpsPoints[index + 1]);
-        float timeSpan = gpsPoints[index + 1].time - gpsPoints[index].time;
-        return distance / timeSpan;
-    }
+    
    /* public GPSCoord GetPosition(float time)
     {
         
