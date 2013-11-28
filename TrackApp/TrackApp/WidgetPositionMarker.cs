@@ -21,9 +21,9 @@ public class WidgetPositionMarker: Widget
         GPSData gpsData = GPSData.GetData();
         GPSBox box = GPSData.GetData().GetBox();
         double ratio = widgetSize.Height / (box.Size.Lattitude);
-        Point position = new Point(System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - widgetSize.Width, System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - widgetSize.Height);
+        Point position = WidgetTrack.Position;//new Point(System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - widgetSize.Width, System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - widgetSize.Height);
 
-        int n = 0;
+        /*int n = 0;
         if (maxTrackTime == 0)
         {
             foreach (GPSPoint point in gpsData.GetTrack())
@@ -38,7 +38,7 @@ public class WidgetPositionMarker: Widget
                 n++;
             }
             index = (maxTrackTime - minTrackTime) / clipSeconds;
-        }
+        }*/
 
         GPSCoord coord = gpsData.GetPosition(time * index + minTrackTime);
         Point marker = new Point(0, 0);

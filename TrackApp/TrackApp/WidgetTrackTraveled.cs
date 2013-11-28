@@ -35,7 +35,7 @@ namespace TrackApp
                 }
                 prevIndex = index;
             }
-            grfx.DrawImage(trackBitmap, prj.TrackPostion);
+            grfx.DrawImage(trackBitmap, WidgetTrack.Position);
         }
     }
 }

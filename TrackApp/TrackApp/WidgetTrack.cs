@@ -12,7 +12,7 @@ public class WidgetTrack : Widget
 {
     Bitmap trackBitmap;
     Bitmap map;
-    Point position;
+    public static Point Position;
 
     public override void Draw(Graphics grfx, float time)
     {
@@ -34,11 +34,11 @@ public class WidgetTrack : Widget
             
             double ratio = (widgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
             double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
-            position = settings.TrackPostion;
+            Position = settings.TrackPostion;
             widgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
             //TODO if default is enabled set this position
-            position.X = System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - widgetSize.Width - 20;
-            position.Y = System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - widgetSize.Height - 20;
+            Position.X = System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - widgetSize.Width - 20;
+            Position.Y = System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - widgetSize.Height - 20;
             
             trackBitmap = new Bitmap(widgetSize.Width, widgetSize.Height);
 
@@ -75,8 +75,8 @@ public class WidgetTrack : Widget
 
         //MessageBox.Show(h.ToString()+" "+w.ToString());
 
-        grfx.DrawImage(map, position);
-        grfx.DrawImage(trackBitmap, position);
+        grfx.DrawImage(map, Position);
+        grfx.DrawImage(trackBitmap, Position);
     }
 }
 
