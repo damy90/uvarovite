@@ -129,14 +129,16 @@ public class GPSData
         //todo - handle trackStartPos==-1 || trackEndPos==0 we have no coords that overlap the movie
         if (trackStartPos == -1)
             trackStartPos = 0;
-        int trackEndPos = pts.FindLastIndex(trackStartPos, p => p.time > settigs.TrackEnd);
+        int trackEndPos = pts.FindIndex(trackStartPos, p => p.time > settigs.TrackEnd);
         if (trackEndPos == -1)
             trackEndPos = pts.Count-1;
+
         pts.RemoveRange(0, trackStartPos );
         trackEndPos = trackEndPos - trackStartPos;
         pts.RemoveRange(trackEndPos, pts.Count - trackEndPos);
         
         gpsPoints = new GPSPoint[pts.Count];//we need an array rather than list for faster access
+        //TODO throw exeption if track is empty
         int n = 0;
         foreach(GPSPoint point in pts)
         {
