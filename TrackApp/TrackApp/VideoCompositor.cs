@@ -35,7 +35,7 @@ public static class VideoCompositor
             int speed = settings.VideoSpeed;
             // get next frame
             Bitmap videoFrame = reader.ReadVideoFrame();
-            if (n % speed == 0 || n > videoStart)
+            if (n % speed == 0 && n > videoStart)
             {
                 using (Graphics grfx = Graphics.FromImage(videoFrame))
                 {

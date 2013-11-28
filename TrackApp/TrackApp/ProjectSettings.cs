@@ -43,7 +43,7 @@ public class ProjectSettings
     public float TrackStart = 0;//VideoStart and TrackStart is the only synchronization we need!!!
     public float VideoEnd = 0;//zero if video length is not trimmed
     public float TrackEnd = 0;
-    public int VideoSpeed = 8; //speed multiplier
+    public int VideoSpeed = 1; //speed multiplier
     public int VideoQuality = 5;//Bitrate = quality * 1 000 000
 
     public bool ShowTrack=true;//TO DO: Finish track widget and change to true
