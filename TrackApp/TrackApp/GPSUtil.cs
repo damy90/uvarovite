@@ -126,14 +126,15 @@ public class GPSData
         if (settigs.TrackEnd == 0)
             settigs.TrackEnd = pts[pts.Count - 1].time;
         int trackStartPos = pts.FindIndex(0, p => p.time >= settigs.TrackStart);
-        //todo - handle trackStartPos==-1 - we have no coords that overlap the movie
+        //todo - handle trackStartPos==-1 || trackEndPos==0 we have no coords that overlap the movie
         if (trackStartPos == -1)
             trackStartPos = 0;
         int trackEndPos = pts.FindLastIndex(trackStartPos, p => p.time > settigs.TrackEnd);
         if (trackEndPos == -1)
-            trackEndPos = pts.Count;
+            trackEndPos = pts.Count-1;
         pts.RemoveRange(0, trackStartPos );
-        pts.RemoveRange(trackEndPos, trackEndPos-trackStartPos);
+        trackEndPos = trackEndPos - trackStartPos;
+        pts.RemoveRange(trackEndPos, pts.Count - trackEndPos);
         
         gpsPoints = new GPSPoint[pts.Count];//we need an array rather than list for faster access
         int n = 0;

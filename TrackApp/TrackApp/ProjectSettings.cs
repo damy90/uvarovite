@@ -36,12 +36,13 @@ public class ProjectSettings
     public string VideoOutputPath="video-out.avi";
     public string GPXPath = "workout.gpx";
     public VideoFormats Format= VideoFormats.xvid;
-    public int BitRate = 20000000;//2 Mbit/s
+    public int BitRate = 50000000;//2 Mbit/s
 
     //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
     public float VideoStart = 0;//in seconds
     public float TrackStart = 0;//VideoStart and TrackStart is the only synchronization we need!!!
     public float VideoEnd = 0;//zero if video length is not trimmed
+    public float TrackEnd = 0;
     public int VideoSpeed = 8; //speed multiplier
     public int VideoQuality = 5;//Bitrate = quality * 1 000 000
 
