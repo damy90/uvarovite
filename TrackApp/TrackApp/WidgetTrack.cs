@@ -10,39 +10,49 @@ using System.Windows.Forms;
 
 public class WidgetTrack : Widget
 {
-    //private Point[] track;
-    //Bitmap track;
-
-    Size widgetSize = new Size();
-    Point position = new Point(100, 100);
-    Pen pen = new Pen(Color.Red, 4);
-    Point[] trackPoints;
-    GPSPoint[] trackData;
+    Bitmap trackBitmap;
     Bitmap map;
-    GPSBox box;
-    double ratio;
-    double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
+    Point position;
+
     public override void Draw(Graphics grfx, float time)
     {
-        position.X = System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - 200;
-        position.Y = System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - 200;
-        widgetSize.Height = 200;
+        GPSData gps = GPSData.GetData();
+        GPSBox box = gps.GetBox();
+        ProjectSettings settings = ProjectSettings.GetSettings();
+        int wholeTrackLineWidth = settings.WholeTrackLineWidth;
+        Pen wholeTrackPen = new Pen(settings.WholeTrackColor, wholeTrackLineWidth);
+        
 
-        if (trackPoints == null)
+        if (trackBitmap == null)
         {
-            trackData = GPSData.GetData().GetTrack();
-            trackPoints = new Point[trackData.Length];
-            box = GPSData.GetData().GetBox();
-            ratio = widgetSize.Height / (box.Size.Lattitude);
-            //track = new Bitmap(widgetSize.Width, widgetSize.Height);            
-        }
-        for (int i = 0; i < trackData.Length; i++)
-        {
-            trackPoints[i].X = position.X + (int)((trackData[i].longitude - box.Position.Longtitude) * ratio * longtitudeCorrectionScale);
-            trackPoints[i].Y = position.Y + widgetSize.Height - (int)((trackData[i].latitude - box.Position.Lattitude) * ratio);
-        }
-        //grfx.DrawLines(pen, trackPoints);
+            PointF[] trackPoints;
+            GPSPoint[] trackData = gps.GetTrack();
+            trackPoints = new PointF[trackData.Length];
 
+            Size widgetSize = new Size();
+            widgetSize.Height = settings.TrackHeight;
+            
+            double ratio = (widgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
+            double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
+            position = settings.TrackPostion;
+            widgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
+            //TODO if default is enabled set this position
+            position.X = System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - widgetSize.Width - 20;
+            position.Y = System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - widgetSize.Height - 20;
+            
+            trackBitmap = new Bitmap(widgetSize.Width, widgetSize.Height);
+
+            using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
+            {
+                for (int i = 0; i < trackData.Length; i++)
+                {
+                    trackPoints[i].X = (float)((trackData[i].longitude - box.Position.Longtitude) * ratio * longtitudeCorrectionScale + ((float)wholeTrackLineWidth) / 2);
+                    trackPoints[i].Y = widgetSize.Height - (float)((trackData[i].latitude - box.Position.Lattitude) * ratio + ((float)wholeTrackLineWidth) / 2);
+                }
+                drawTrack.DrawLines(wholeTrackPen, trackPoints);
+            }
+        }
+        //TODO leave some space between the map frame and the track points, the map has to resize according to the track size
         //image for track
         if (map == null)
         {
@@ -66,7 +76,7 @@ public class WidgetTrack : Widget
         //MessageBox.Show(h.ToString()+" "+w.ToString());
 
         grfx.DrawImage(map, position);
-        grfx.DrawLines(pen, trackPoints);
+        grfx.DrawImage(trackBitmap, position);
     }
 }
 
