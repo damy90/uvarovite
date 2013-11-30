@@ -275,7 +275,7 @@ namespace TrackApp
             }
             try
             {
-                VideoCompositor.RenderVideo();
+                //VideoCompositor.RenderVideo();
                 MessageBoxResult error = MessageBox.Show("Success!");
                 //comment this if you don't want to start the video immediately after the rendering
                 Process.Start(saveFileDialog.FileName);
