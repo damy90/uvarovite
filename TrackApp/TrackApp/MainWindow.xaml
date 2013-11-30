@@ -28,12 +28,12 @@
     </Window.Resources>
 
     <Grid Margin="0,0,2,161">
-        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283">
+        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Margin="163,18,0,-88" Width="283">
             <Button x:Name="btnLoadVideo" Style="{StaticResource PictureButton}"
                     Click="btnLoadVideoClick" 
                     MouseEnter="btnLoadVideo_MouseEnter"
                     MouseLeave="btnLoadVideo_MouseLeave"
-                    Margin="143,0,3,166">
+                    Margin="186,0,0,201">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources\iconVideo_leave.png"/>
                 </Button.Background>
@@ -42,14 +42,20 @@
                     Click="btnLoadGPXClick" 
                     MouseEnter="btnLoadGPX_MouseEnter"
                     MouseLeave="btnLoadGPX_MouseLeave"
-                    Margin="0,0,142,166">
+                    Margin="186,71,0,127">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources\iconGPX_leave.png"/>
                 </Button.Background>
             </Button>
-            <Button Style="{StaticResource PictureButton}" x:Name="btnOutputFile" HorizontalAlignment="Left" Height="39" Margin="1,111,0,0" Content="Output File:" VerticalAlignment="Top" Width="279" Click="btnOutputFileName_Click"/>
-            <Label x:Name="lblEncoding" Content="Encoding:" HorizontalAlignment="Left" Margin="0,182,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6"/>
-            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="163,183,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbEncoding_SelectionChanged"/>
+            <Button Style="{StaticResource PictureButton}" x:Name="btnOutputFile" HorizontalAlignment="Left" Height="70" Margin="186,145,0,0" Content="Browse" VerticalAlignment="Top" Width="97" Click="btnOutputFileName_Click"/>
+            <Label x:Name="lblEncoding" Content="Encoding:" HorizontalAlignment="Left" Margin="0,218,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6"/>
+            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="163,221,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbEncoding_SelectionChanged"/>
+            <TextBox x:Name="tbOutputFile" HorizontalAlignment="Left" Height="25" Margin="0,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+            <TextBox x:Name="tbTrack" HorizontalAlignment="Left" Height="25" Margin="0,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+            <TextBox x:Name="tbLoadVideo" HorizontalAlignment="Left" Height="25" Margin="0,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+            <Label x:Name="lblInputVideo" Content="Input video:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="166"/>
+            <Label x:Name="lblTrack" Content="Track:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" Width="166"/>
+            <Label x:Name="lblInputVideo_Copy" Content="Output video:" HorizontalAlignment="Left" Margin="0,164,0,0" VerticalAlignment="Top" Width="166"/>
         </Grid>
         <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" Margin="167,11,0,-71" VerticalAlignment="Top" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
@@ -82,9 +88,9 @@
                     Height="35" 
                     MouseEnter="btnFiles_MouseEnter"
                     MouseLeave="btnFiles_MouseLeave">
-                <!--<Button.Background>                   
-                </Button.Background>-->
-                Files
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/SB_Files_white.png"/>
+                </Button.Background>
             </Button>
             <Button x:Name="btnSync" Style="{StaticResource PictureButton}" Margin="5,42,10,330" Click="btnSync_Click" Height="35" MouseEnter="btnSync_MouseEnter" MouseLeave="btnSync_MouseLeave">
                 <Button.Background>
@@ -92,9 +98,9 @@
                 </Button.Background>
             </Button>
             <Button x:Name="btnWidgets" Style="{StaticResource PictureButton}" Margin="5,78,11,294" Click="btnWidgets_Click" Height="35" MouseEnter="btnWidgets_MouseEnter" MouseLeave="btnWidgets_MouseLeave" RenderTransformOrigin="0.487,1.898">
-                <!--<Button.Background>
-                </Button.Background>-->
-                Widgets
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/SB_Widgets_white.png"/>
+                </Button.Background>
             </Button>
             <Grid x:Name="grdWidgets" HorizontalAlignment="Left" Height="222" Margin="17,113,-7,0" VerticalAlignment="Top" Width="147">
                 <Grid.RowDefinitions>
@@ -201,10 +207,10 @@
         </Grid>
         <Grid x:Name="grdPositionMarker" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
-                <RowDefinition x:Name="Font4" Height="40"/>
-                <RowDefinition x:Name="FontSize4" Height="40"/>
-                <RowDefinition x:Name="FontColor4" Height="40"/>
-                <RowDefinition x:Name="FontOutline4" Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnablePM" Content="Enable Position Marker" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="179" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnablePM_Checked" Unchecked="cbEnablePM_Uncheck"/>
             <Grid x:Name="grdEnabledPM" HorizontalAlignment="Left" Height="168" Margin="18,10,0,-55" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="255">
@@ -216,10 +222,10 @@
         </Grid>
         <Grid x:Name="grdOverlayImage" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
-                <RowDefinition x:Name="Font5" Height="40"/>
-                <RowDefinition x:Name="FontSize5" Height="40"/>
-                <RowDefinition x:Name="FontColor5" Height="40"/>
-                <RowDefinition x:Name="FontOutline5" Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnableOverlayImage" Content="Enable Overlay Image" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="172" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableOI_Checked" Unchecked="cbEnableOI_Uncheck"/>
             <Grid x:Name="grdEnabledOI" HorizontalAlignment="Left" Height="176" Margin="10,10,0,-63" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263">
@@ -233,10 +239,10 @@
         </Grid>
         <Grid x:Name="grdMap" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
-                <RowDefinition x:Name="Font6" Height="40"/>
-                <RowDefinition x:Name="FontSize6" Height="40"/>
-                <RowDefinition x:Name="FontColor6" Height="40"/>
-                <RowDefinition x:Name="FontOutline6" Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnableMap" Content="Enable Map" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="133" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableMap_Checked" Unchecked="cbEnableMap_Uncheck"/>
             <Grid x:Name="grdEnabledMap" HorizontalAlignment="Left" Height="174" Margin="10,10,0,-61" VerticalAlignment="Top" Width="265" Grid.Row="1" Grid.RowSpan="3">
@@ -246,7 +252,7 @@
                 <xctk:DoubleUpDown x:Name="dudMapOpacity" Minimum="0.1" Maximum="1" Value="0.5" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" Increment="0.1" VerticalAlignment="Top" Width="68"/>
             </Grid>
         </Grid>
-        <Button x:Name="btnProceed" Style="{StaticResource PictureButton}" Margin="318,246,12,-133" Click="btnProceed_Click" >
+        <Button x:Name="btnProceed" Style="{StaticResource PictureButton}" Margin="318,265,12,-152" Click="btnProceed_Click" >
             <Button.Background>
                 <ImageBrush ImageSource="Resources/Proseed_white.png"/>
             </Button.Background>
