@@ -5,40 +5,49 @@ using System.Xml.Linq;
 using System.Text;
 using System.Windows;
 using System.Globalization;
+using System.Drawing;
 
-public struct GPSPoint : IComparable<GPSPoint>
+
+public class GPSCoord
 {
-    public double longitude;
-    public double latitude;
-    public double elevation;
-    public float time;
-    public double Distance;//in meters
-    public GPSPoint(double lon, double lat, double ele, float dt, double distance) 
+    public double Longitude;
+    public double Latitude;
+    public double Elevation;
+    public GPSCoord(double longitude, double latitude, double elevation)
     {
-        this.longitude = lon;
-        this.latitude = lat;
-        this.elevation = ele;
-        this.time = dt;
+        this.Longitude = longitude;
+        this.Latitude = latitude;
+        this.Elevation = elevation;
+    }
+}
+
+public class GPSPoint : GPSCoord, IComparable<GPSPoint>
+{
+    public float Time;
+    public double Distance;//in meters
+    public GPSPoint(double lon, double lat, double ele, float dt, double distance=0) : base(lon,lat,ele)
+    {
+        this.Time = dt;
         this.Distance = distance;
     }
-    public GPSPoint(float dt){
-        this.time = dt;
-        this.longitude = this.latitude = this.elevation = this.Distance = 0;
+    public GPSPoint(float dt) : base(0,0,0){
+        this.Time = dt;
+        this.Distance = 0;
     }
     public int CompareTo(GPSPoint other)
     {
-        return time.CompareTo(other.time);
+        return Time.CompareTo(other.Time);
     }
     public double DistanceFromPoint(GPSPoint point2)
     {
-        var startLatitudeRadians = latitude * (Math.PI / 180.0);
-        var startLongitudeRadians = longitude * (Math.PI / 180.0);
-        var endLatitudeRadians = point2.latitude * (Math.PI / 180.0);
-        var endLongitudeRadians = point2.longitude * (Math.PI / 180.0);
+        var startLatitudeRadians = Latitude * (Math.PI / 180.0);
+        var startLongitudeRadians = Longitude * (Math.PI / 180.0);
+        var endLatitudeRadians = point2.Latitude * (Math.PI / 180.0);
+        var endLongitudeRadians = point2.Longitude * (Math.PI / 180.0);
 
         var distanceLongitude = endLongitudeRadians - startLongitudeRadians;
         var distanceLatitude = endLatitudeRadians - startLatitudeRadians;
-        var distanceElevation = Math.Abs(elevation - point2.elevation);
+        var distanceElevation = Math.Abs(Elevation - point2.Elevation);
 
         var result1 = Math.Sin(distanceLatitude / 2.0) * Math.Sin(distanceLatitude / 2.0) +
                         Math.Cos(startLatitudeRadians) * Math.Cos(endLatitudeRadians) *
@@ -49,19 +58,6 @@ public struct GPSPoint : IComparable<GPSPoint>
                         Math.Atan2(Math.Sqrt(result1), Math.Sqrt(1.0 - result1));
 
         return result2;//Math.Sqrt(result2 * result2 + distanceElevation * distanceElevation);
-    }
-}
-
-public struct GPSCoord
-{
-    public double Longtitude;
-    public double Lattitude;
-    public double Elevation;
-    public GPSCoord(double longtitude, double lattitude, double elevation)
-    {
-        this.Longtitude = longtitude;
-        this.Lattitude = lattitude;
-        this.Elevation = elevation;
     }
 }
 
@@ -124,12 +120,12 @@ public sealed class GPSData
         var settigs = ProjectSettings.GetSettings();
         //trim track
         if (settigs.TrackEnd == 0)
-            settigs.TrackEnd = pts[pts.Count - 1].time;
-        int trackStartPos = pts.FindIndex(0, p => p.time >= settigs.TrackStart);
+            settigs.TrackEnd = pts[pts.Count - 1].Time;
+        int trackStartPos = pts.FindIndex(0, p => p.Time >= settigs.TrackStart);
         //todo - handle trackStartPos==-1 || trackEndPos==0 we have no coords that overlap the movie
         if (trackStartPos == -1)
             trackStartPos = 0;
-        int trackEndPos = pts.FindIndex(trackStartPos, p => p.time > settigs.TrackEnd);
+        int trackEndPos = pts.FindIndex(trackStartPos, p => p.Time > settigs.TrackEnd);
         if (trackEndPos == -1)
             trackEndPos = pts.Count-1;
 
@@ -146,13 +142,13 @@ public sealed class GPSData
             gpsPoints[n] = point;
             n++;
             //find BoundingBox valuse
-            maxLong = Math.Max(point.longitude, maxLong);
-            maxLat = Math.Max(point.latitude, maxLat);
-            maxEle = Math.Max(point.elevation, maxEle);
+            maxLong = Math.Max(point.Longitude, maxLong);
+            maxLat = Math.Max(point.Latitude, maxLat);
+            maxEle = Math.Max(point.Elevation, maxEle);
 
-            minLong = Math.Min(point.longitude, minLong);
-            minLat = Math.Min(point.latitude, minLat);
-            minEle = Math.Min(point.elevation, minEle);
+            minLong = Math.Min(point.Longitude, minLong);
+            minLat = Math.Min(point.Latitude, minLat);
+            minEle = Math.Min(point.Elevation, minEle);
         }
         GPSCoord position = new GPSCoord(minLong, minLat, minEle);
         GPSCoord size = new GPSCoord(maxLong - minLong, maxLat - minLat, maxEle - minEle);
@@ -183,7 +179,7 @@ public sealed class GPSData
             distance += gpsPoints[i].DistanceFromPoint(gpsPoints[i + 1]);       
         }
                    
-        float timeSpan = gpsPoints[index].time - gpsPoints[0].time;
+        float timeSpan = gpsPoints[index].Time - gpsPoints[0].Time;
         return distance / timeSpan;
     }
     //TODO average speed (gradually change speed)
@@ -193,7 +189,7 @@ public sealed class GPSData
         if ((index == gpsPoints.Length - 1)||(gpsPoints.Length == 0))
             return 0;
         double distance = gpsPoints[index].DistanceFromPoint(gpsPoints[index + 1]);
-        float timeSpan = gpsPoints[index + 1].time - gpsPoints[index].time;
+        float timeSpan = gpsPoints[index + 1].Time - gpsPoints[index].Time;
         return distance / timeSpan;
     }
     //TODO Use GetDistance (with interpolation) instead
@@ -227,18 +223,18 @@ public sealed class GPSData
     {
         int index = GetIndex(time);
         if (index == gpsPoints.Length - 1)
-            return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].latitude, gpsPoints[gpsPoints.Length - 1].elevation);
-        double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
-        double lat = Interpolate(time, gpsPoints[index].latitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
-        double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
+            return new GPSCoord(gpsPoints[gpsPoints.Length - 1].Longitude, gpsPoints[gpsPoints.Length - 1].Latitude, gpsPoints[gpsPoints.Length - 1].Elevation);
+        double Long = Interpolate(time, gpsPoints[index].Longitude, gpsPoints[index + 1].Longitude, gpsPoints[index].Time, gpsPoints[index + 1].Time);
+        double lat = Interpolate(time, gpsPoints[index].Latitude, gpsPoints[index + 1].Latitude, gpsPoints[index].Time, gpsPoints[index + 1].Time);
+        double ele = Interpolate(time, gpsPoints[index].Elevation, gpsPoints[index + 1].Elevation, gpsPoints[index].Time, gpsPoints[index + 1].Time);
         return new GPSCoord(Long, lat, ele);
     }
     
     public Vector GetOrientation(float time)
     {
         int index = GetIndex(time);
-        double longDirection=gpsPoints[index + 1].longitude - gpsPoints[index].longitude;
-        double latDirection=gpsPoints[index + 1].latitude - gpsPoints[index].latitude;
+        double longDirection=gpsPoints[index + 1].Longitude - gpsPoints[index].Longitude;
+        double latDirection=gpsPoints[index + 1].Latitude - gpsPoints[index].Latitude;
         double length=Math.Sqrt(longDirection*longDirection+latDirection*latDirection);
         if (length != 0)
             lastOrientation = new Vector(longDirection / length, latDirection / length);
@@ -249,7 +245,7 @@ public sealed class GPSData
         int index = GetIndex(time);
         double distance=gpsPoints[index].Distance;
         GPSCoord lastPosition = GetPosition(time);
-        GPSPoint interpolatedPos=new GPSPoint(lastPosition.Longtitude, lastPosition.Lattitude, lastPosition.Elevation, 0, 0);
+        GPSPoint interpolatedPos=new GPSPoint(lastPosition.Longitude, lastPosition.Latitude, lastPosition.Elevation, 0, 0);
         return distance += interpolatedPos.DistanceFromPoint(gpsPoints[index]);
     }
     public GPSPoint[] GetTrack()
@@ -266,6 +262,19 @@ public sealed class GPSData
             index -= 1;
         }
         return index;
+    }
+    //WidgetSize.Width = (int)Math.Ceiling(ratio * (BoundingBox.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
+
+    //size.x = WidgetSize.Width - wholeTrackLineWidth
+    //position.x = settings.TrackPostion + wholeTrackLineWidth
+
+    //converts a GPS coordinate to pixel coordinate
+    //size and return value are in pixels
+    public PointF ToPixelCoordinate(GPSCoord pt, SizeF size)
+    {
+        double ratio = size.Height / (BoundingBox.Size.Latitude);
+        return new PointF((float)((pt.Longitude - BoundingBox.Position.Longitude) * ratio * longtitudeCorrectionScale),
+                           size.Height - (float)((pt.Latitude - BoundingBox.Position.Latitude) * ratio));
     }
     private double Interpolate(float time, double previousReading, double nextReading, float previousTime, float nextTime)
     {

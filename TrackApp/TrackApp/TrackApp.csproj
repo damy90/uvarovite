@@ -177,6 +177,7 @@
     <Compile Include="VideoFormats.cs" />
     <Compile Include="Widget.cs" />
     <Compile Include="WidgetDistanceMeter.cs" />
+    <Compile Include="WidgetDrawOnMap.cs" />
     <Compile Include="WidgetPositionMarker.cs" />
     <Compile Include="WidgetSpeedMeter.cs" />
     <Compile Include="WidgetTest.cs" />

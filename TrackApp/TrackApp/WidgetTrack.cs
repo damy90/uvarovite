@@ -8,47 +8,37 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-public class WidgetTrack : Widget
+public class WidgetTrack : WidgetDrawOnMap
 {
     Bitmap map;
     Bitmap trackBitmap;
     PointF[] trackPoints;
     int prevIndex = 0;
-    public static Point Position;
-
+    //public static PointF TrackPosition;
+    //public static SizeF TrackSize;
     public override void Draw(Graphics grfx, float time)
-    {
-        GPSData gps = GPSData.GetData();
-        GPSBox box = gps.GetBox();
-        ProjectSettings settings = ProjectSettings.GetSettings();
+    {   
+        //travelet track
         int wholeTrackLineWidth = settings.WholeTrackLineWidth;
         Pen wholeTrackPen = new Pen(settings.WholeTrackColor, wholeTrackLineWidth);
         
         if (trackBitmap == null)
         {
-            
             GPSPoint[] trackData = gps.GetTrack();
             trackPoints = new PointF[trackData.Length];
+            
+            SizeF widgetSize = GetBoundSize();
+            trackBitmap = new Bitmap((int)Math.Ceiling(widgetSize.Width), (int)Math.Ceiling(widgetSize.Height));
 
-            Size WidgetSize = new Size();
-            WidgetSize.Height = settings.TrackHeight;
-
-            double ratio = (WidgetSize.Height - wholeTrackLineWidth) / (box.Size.Lattitude);//avaiable size is slighly smaller due to line width
-            double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
-            Position = settings.TrackPostion;
-            WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
-            //TODO if default is enabled set this position
-            Position.X = (int)grfx.VisibleClipBounds.Width - WidgetSize.Width - 20;
-            Position.Y = (int)grfx.VisibleClipBounds.Height - WidgetSize.Height - 20;
-
-            trackBitmap = new Bitmap(WidgetSize.Width, WidgetSize.Height);
-
+            SizeF trackSize = GetSize();
             using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
             {
                 for (int i = 0; i < trackData.Length; i++)
                 {
-                    trackPoints[i].X = (float)((trackData[i].longitude - box.Position.Longtitude) * ratio * longtitudeCorrectionScale + ((float)wholeTrackLineWidth) / 2);
-                    trackPoints[i].Y = WidgetSize.Height - (float)((trackData[i].latitude - box.Position.Lattitude) * ratio + ((float)wholeTrackLineWidth) / 2);
+                    trackPoints[i] = gps.ToPixelCoordinate(trackData[i], trackSize);
+                    trackPoints[i].X += ((float)wholeTrackLineWidth) / 2;
+                    trackPoints[i].Y += ((float)wholeTrackLineWidth) / 2;
+                    //trackPoints[i].Y = widgetSize.Height - (float)((trackData[i].Latitude - box.Position.Latitude) * ratio + ((float)wholeTrackLineWidth) / 2);
                 }
                 drawTrack.DrawLines(wholeTrackPen, trackPoints);
             }
@@ -78,13 +68,13 @@ public class WidgetTrack : Widget
         //image for track
         if (map == null)
         {
-
+            GPSBox box = gps.GetBox();
             WebClient webClient = new WebClient();
             string path = @"http://maps.googleapis.com/maps/api/staticmap?size=200x200&path=color:0x00000000|weight:5|"
-                           + (box.Position.Lattitude - 0.00).ToString() + ","
-                           + (box.Position.Longtitude - 0.00).ToString() + "|"
-                           + (box.Position.Lattitude + 0.00 + box.Size.Lattitude).ToString() + ','
-                           + (box.Position.Longtitude + 0.00 + box.Size.Longtitude).ToString()
+                           + (box.Position.Latitude - 0.00).ToString() + ","
+                           + (box.Position.Longitude - 0.00).ToString() + "|"
+                           + (box.Position.Latitude + 0.00 + box.Size.Latitude).ToString() + ','
+                           + (box.Position.Longitude + 0.00 + box.Size.Longitude).ToString()
                            + "+%20&sensor=false";
             //MessageBox.Show(path);
             webClient.DownloadFile(path, "test.png");
@@ -97,8 +87,8 @@ public class WidgetTrack : Widget
 
         //MessageBox.Show(h.ToString()+" "+w.ToString());
 
-        grfx.DrawImage(map, Position);
-        grfx.DrawImage(trackBitmap, Position);
+        grfx.DrawImage(map, GetBoundPosition());
+        grfx.DrawImage(trackBitmap, GetPosition());
     }
 }
 
