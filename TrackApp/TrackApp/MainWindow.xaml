@@ -28,12 +28,12 @@
     </Window.Resources>
 
     <Grid Margin="0,0,2,161">
-        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Margin="163,18,0,-88" Width="283">
+        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Margin="163,11,0,-89" Width="283">
             <Button x:Name="btnLoadVideo" Style="{StaticResource PictureButton}"
                     Click="btnLoadVideoClick" 
                     MouseEnter="btnLoadVideo_MouseEnter"
                     MouseLeave="btnLoadVideo_MouseLeave"
-                    Margin="186,0,0,201">
+                    Margin="186,9,0,200">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources\iconVideo_leave.png"/>
                 </Button.Background>
@@ -42,20 +42,32 @@
                     Click="btnLoadGPXClick" 
                     MouseEnter="btnLoadGPX_MouseEnter"
                     MouseLeave="btnLoadGPX_MouseLeave"
-                    Margin="186,71,0,127">
+                    Margin="186,86,0,124">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources\iconGPX_leave.png"/>
                 </Button.Background>
             </Button>
-            <Button Style="{StaticResource PictureButton}" x:Name="btnOutputFile" HorizontalAlignment="Left" Height="70" Margin="186,145,0,0" Content="Browse" VerticalAlignment="Top" Width="97" Click="btnOutputFileName_Click"/>
-            <Label x:Name="lblEncoding" Content="Encoding:" HorizontalAlignment="Left" Margin="0,218,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6"/>
-            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="163,221,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbEncoding_SelectionChanged"/>
-            <TextBox x:Name="tbOutputFile" HorizontalAlignment="Left" Height="25" Margin="0,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
-            <TextBox x:Name="tbTrack" HorizontalAlignment="Left" Height="25" Margin="0,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
-            <TextBox x:Name="tbLoadVideo" HorizontalAlignment="Left" Height="25" Margin="0,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
-            <Label x:Name="lblInputVideo" Content="Input video:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="166"/>
-            <Label x:Name="lblTrack" Content="Track:" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" Width="166"/>
-            <Label x:Name="lblInputVideo_Copy" Content="Output video:" HorizontalAlignment="Left" Margin="0,164,0,0" VerticalAlignment="Top" Width="166"/>
+            <Button Style="{StaticResource PictureButton}" x:Name="btnOutputFile" HorizontalAlignment="Left" Height="70" Margin="186,157,0,0" Content="Browse" VerticalAlignment="Top" Width="97" Click="btnOutputFileName_Click"/>
+            <Label x:Name="lblEncoding" Content="Encoding:" HorizontalAlignment="Left" Margin="0,223,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6"/>
+            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="163,225,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbEncoding_SelectionChanged"/>
+            <Label x:Name="lblOutputDir" HorizontalAlignment="Left" Height="47" Margin="0,171,0,0"  VerticalAlignment="Top" Width="181">
+                <ScrollViewer x:Name="svOutputDir" Visibility="Hidden" >
+                    <TextBlock x:Name="txtOutputDir" TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Label>
+            <Label x:Name="lblTrackDir" HorizontalAlignment="Left" Height="40" Margin="0,101,0,0" VerticalAlignment="Top" Width="181">
+                <ScrollViewer x:Name="svTrackDir" Visibility="Hidden" >
+                    <TextBlock x:Name="txtTrackDir" TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Label>
+            <Label x:Name="lblInputVideoDir" HorizontalAlignment="Left" Height="40" Margin="0,26,0,0" VerticalAlignment="Top" Width="181">
+                 <ScrollViewer x:Name="svInputVideoDir" Visibility="Hidden" >    
+                            <TextBlock x:Name="txtInputVideoDir" TextWrapping="Wrap"/>
+                 </ScrollViewer>
+            </Label>
+            <Label x:Name="lblInputVideo" Content="Input video:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166"/>
+            <Label x:Name="lblTrack" Content="Track:" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" Width="166"/>
+            <Label x:Name="lblOutputVideo" Content="Output video:" HorizontalAlignment="Left" Margin="0,149,0,0" VerticalAlignment="Top" Width="166"/>
         </Grid>
         <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" Margin="167,11,0,-71" VerticalAlignment="Top" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
@@ -163,10 +175,10 @@
         </Grid>
         <Grid x:Name="grdSpeed" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
-                <RowDefinition x:Name="Font2" Height="40"/>
-                <RowDefinition x:Name="FontSize2" Height="40"/>
-                <RowDefinition x:Name="FontColor2" Height="40"/>
-                <RowDefinition x:Name="FontOutline2" Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnableSpeed" Content="Enable Speed" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="122" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableSpeed_Checked" Unchecked="cbEnableSpeed_Uncheck"/>
             <Grid x:Name="grdEnabledSpeed" HorizontalAlignment="Left" Height="197" Margin="10,10,0,-84" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263">
@@ -185,10 +197,10 @@
         </Grid>
         <Grid x:Name="grdDistance" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
-                <RowDefinition x:Name="Font3" Height="40"/>
-                <RowDefinition x:Name="FontSize3" Height="40"/>
-                <RowDefinition x:Name="FontColor3" Height="40"/>
-                <RowDefinition x:Name="FontOutline3" Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnableDistance" Content="Enable Distance" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="133" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableDistance_Checked" Unchecked="cbEnableDistance_Uncheck"/>
             <Grid x:Name="grdEnabledDistance" HorizontalAlignment="Left" Height="175" Margin="10,10,0,-62" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263">
@@ -258,6 +270,4 @@
             </Button.Background>
         </Button>
     </Grid>
-
-
 </Window>

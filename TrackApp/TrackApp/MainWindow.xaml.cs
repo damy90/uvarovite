@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using System.Diagnostics;
 namespace TrackApp
 {
     //render video-commented out-->will be in main window
@@ -14,16 +15,19 @@ namespace TrackApp
     public partial class MainWindow : Window
     {
         OpenFileDialog loadFileDialog;
-        const int spaceBetweenGrids = 5;
-        const int rowHeight = 40;
-        const int colWidth = 150;
         SaveFileDialog saveFileDialog;
 
         public MainWindow()
         {
-
             InitializeComponent();
             loadFileDialog = new OpenFileDialog();
+            IniializeContent();
+        }
+  
+       
+        #region Helping Methods
+        private void IniializeContent()
+        {
             this.grdControlButtons.Visibility = Visibility.Visible;
             this.grdFiles.Visibility = Visibility.Visible;
             this.grdSync.Visibility = Visibility.Hidden;
@@ -44,36 +48,6 @@ namespace TrackApp
             {
                 this.cmbEncoding.Items.Add(format);
             }
-        }
-
-        #region Helping Methods
-        private void ResizeGrid(Grid grid)
-        {
-            if (grid.Height == rowHeight)
-            {
-                grid.Height = grid.RowDefinitions.Count * rowHeight;
-            }
-            else
-            {
-                grid.Height = rowHeight;
-            }
-        }
-
-        private void AnimationDown(Grid grd)
-        {
-            ThicknessAnimation ta = new ThicknessAnimation();
-            ta.From = grd.Margin;
-            ta.To = new Thickness(grd.Margin.Left, (3 * rowHeight + spaceBetweenGrids), 0, 0);
-            ta.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            grd.BeginAnimation(Grid.MarginProperty, ta);
-        }
-        private void AnimationUp(Grid grid)
-        {
-            ThicknessAnimation ta = new ThicknessAnimation();
-            ta.From = grid.Margin;
-            ta.To = new Thickness(grid.Margin.Left, rowHeight + spaceBetweenGrids, 0, 0);
-            ta.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            grid.BeginAnimation(Grid.MarginProperty, ta);
         }
         private void ChangeIconBackground(string path, System.Windows.Controls.Button btn)
         {
@@ -215,7 +189,9 @@ namespace TrackApp
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
+                txtTrackDir.Text = loadFileDialog.FileName;
                 ProjectSettings.GetSettings().GPXPath = loadFileDialog.FileName;
+                svTrackDir.Visibility = Visibility.Visible;
                 loadFileDialog.FileName = null;
             }
         }
@@ -227,21 +203,20 @@ namespace TrackApp
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
+                txtInputVideoDir.Text = loadFileDialog.FileName;
                 ProjectSettings.GetSettings().VideoInputPath = loadFileDialog.FileName;
+                svInputVideoDir.Visibility = Visibility.Visible;
                 loadFileDialog.FileName = null;
             }
         }
         private void btnProceed_Click(object sender, RoutedEventArgs e)
         {
             //TODO:add validations
-            //if (CheckFileGridInput())
-            //{
-            //Files
             ProjectSettings settings = ProjectSettings.GetSettings();
             //settings.Serialize();
             //settings.VideoEnd = 300;
             //settings = settings.Deserialize();
-            settings.VideoOutputPath = saveFileDialog.FileName + ".avi";
+            settings.VideoOutputPath = this.txtOutputDir.Text;
             settings.TrackStart = Convert.ToInt32(udTrackHours.Value) * 3600f + Convert.ToInt32(udTrackMinutes.Value) * 60 + Convert.ToInt32(udTrackSeconds.Value);
             settings.VideoStart = Convert.ToInt32(udVideoStHours.Value) * 3600f + Convert.ToInt32(udVideoStMinutes.Value) * 60 + Convert.ToInt32(udVideoStSeconds.Value);
             settings.VideoEnd = Convert.ToInt32(udVideoEndHours.Value) * 3600f + Convert.ToInt32(udVideoEndMinutes.Value) * 60 + Convert.ToInt32(udVideoEndSeconds.Value);
@@ -298,12 +273,17 @@ namespace TrackApp
                 settings.SpeedWidgetFont = new System.Drawing.Font(this.cbSpeedFont.SelectedValue.ToString(), Convert.ToInt32(this.txtSpeedFontSize.Text));
                 settings.SpeedWidgetColor = System.Drawing.Color.FromArgb(this.cpSpeedColor.SelectedColor.A, this.cpSpeedColor.SelectedColor.R, this.cpSpeedColor.SelectedColor.G, this.cpSpeedColor.SelectedColor.B);
             }
-            VideoCompositor.RenderVideo();
-            //}
-            //else
-            //{
-            //    MessageBoxResult error = MessageBox.Show("Not all required fields filled!");
-            //}
+            try
+            {
+                VideoCompositor.RenderVideo();
+                MessageBoxResult error = MessageBox.Show("Success!");
+                //comment this if you don't want to start the video immediately after the rendering
+                Process.Start(saveFileDialog.FileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult error = MessageBox.Show(ex.Message);
+            }
         }
         #endregion
         #region HoverEffects
@@ -449,7 +429,6 @@ namespace TrackApp
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
-                ProjectSettings.GetSettings().overlayImageFile = loadFileDialog.FileName;
                 loadFileDialog.FileName = null;
             }
         }
@@ -477,7 +456,14 @@ namespace TrackApp
         private void btnOutputFileName_Click(object sender, RoutedEventArgs e)
         {
             saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "AVI Files (.avi)|*.avi";
+            saveFileDialog.FilterIndex = 1;
             saveFileDialog.ShowDialog();
+            if (saveFileDialog != null)
+            {
+                svOutputDir.Visibility = Visibility.Visible;
+                txtOutputDir.Text = saveFileDialog.FileName;
+            }
         }
     }
         #endregion
