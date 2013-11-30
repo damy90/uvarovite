@@ -26,7 +26,7 @@ public static class VideoCompositor
         writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, settings.VideoQuality*1000000 );
 
         long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
-        videoEnd = 6000;
+        //videoEnd = 6000;
         long videoStart = (int)(settings.VideoStart * reader.FrameRate);
         if (videoEnd == 0 || videoEnd > reader.FrameCount )
             videoEnd = reader.FrameCount;    

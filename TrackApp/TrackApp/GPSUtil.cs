@@ -40,15 +40,15 @@ public struct GPSPoint : IComparable<GPSPoint>
         var distanceLatitude = endLatitudeRadians - startLatitudeRadians;
         var distanceElevation = Math.Abs(elevation - point2.elevation);
 
-        var result1 = Math.Pow(Math.Sin(distanceLatitude / 2.0), 2.0) +
+        var result1 = Math.Sin(distanceLatitude / 2.0) * Math.Sin(distanceLatitude / 2.0) +
                         Math.Cos(startLatitudeRadians) * Math.Cos(endLatitudeRadians) *
                         Math.Pow(Math.Sin(distanceLongitude / 2.0), 2.0);
 
-        // Using 40075040 as the number of meters around the earth
-        var result2 = 40075040 * 2.0 *
+        // Using 6367500 - radius 40075040 as the number of meters around the earth
+        var result2 = 6367500 * 2.0 *
                         Math.Atan2(Math.Sqrt(result1), Math.Sqrt(1.0 - result1));
 
-        return Math.Sqrt(result2 * result2 + distanceElevation * distanceElevation);
+        return result2;//Math.Sqrt(result2 * result2 + distanceElevation * distanceElevation);
     }
 }
 
@@ -76,7 +76,7 @@ public struct GPSBox
     }
 }
 
-public class GPSData
+public sealed class GPSData
 {
     GPSPoint[] gpsPoints;
 
@@ -170,7 +170,7 @@ public class GPSData
 
         //generate the UpdateGPSData event
         //UpdateGPSData(this, EventArgs.Empty);
-
+    //TODO Remoove weird method
     public double GetAverageSpeed(float time)
     {
         int index = GetIndex(time);
@@ -196,6 +196,7 @@ public class GPSData
         float timeSpan = gpsPoints[index + 1].time - gpsPoints[index].time;
         return distance / timeSpan;
     }
+    //TODO Use GetDistance (with interpolation) instead
     public double GetCumulativeDistance(float time)
     {
         int index = GetIndex(time);
@@ -247,9 +248,9 @@ public class GPSData
     {
         int index = GetIndex(time);
         double distance=gpsPoints[index].Distance;
-        GPSCoord interpolatedPos = GetPosition(time);
-        GPSPoint interpolatedGPSPoint=new GPSPoint(interpolatedPos.Longtitude, interpolatedPos.Lattitude, interpolatedPos.Elevation, 0, 0);
-        return distance += interpolatedGPSPoint.DistanceFromPoint(gpsPoints[index]);
+        GPSCoord lastPosition = GetPosition(time);
+        GPSPoint interpolatedPos=new GPSPoint(lastPosition.Longtitude, lastPosition.Lattitude, lastPosition.Elevation, 0, 0);
+        return distance += interpolatedPos.DistanceFromPoint(gpsPoints[index]);
     }
     public GPSPoint[] GetTrack()
     {

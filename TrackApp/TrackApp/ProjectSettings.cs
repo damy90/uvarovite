@@ -30,7 +30,7 @@ public class SerializableFont
     }
 }
 
-public class ProjectSettings
+public sealed class ProjectSettings
 {
     public string VideoInputPath = @"video.avi";
     public string VideoOutputPath="video-out.avi";

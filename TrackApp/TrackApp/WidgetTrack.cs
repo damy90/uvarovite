@@ -38,8 +38,8 @@ public class WidgetTrack : Widget
             Position = settings.TrackPostion;
             WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
             //TODO if default is enabled set this position
-            Position.X = System.Convert.ToInt32(grfx.VisibleClipBounds.Width) - WidgetSize.Width - 20;
-            Position.Y = System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - WidgetSize.Height - 20;
+            Position.X = (int)grfx.VisibleClipBounds.Width - WidgetSize.Width - 20;
+            Position.Y = (int)grfx.VisibleClipBounds.Height - WidgetSize.Height - 20;
 
             trackBitmap = new Bitmap(WidgetSize.Width, WidgetSize.Height);
 
