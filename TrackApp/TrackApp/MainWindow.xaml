@@ -77,19 +77,19 @@
                 <RowDefinition x:Name="Timezone" Height="30"/>
             </Grid.RowDefinitions>
             <xctk:IntegerUpDown x:Name="udVideoStHours" Margin="105,6,134,0" FormatString="F0" Minimum="0" Value="0" Increment="1"  Height="25" Grid.Row="1" />
-            <xctk:IntegerUpDown x:Name="udVideoStMinutes" Margin="164,6,72,0" FormatString="F0" Minimum="0" Value="0" Increment="1"   Height="25" Grid.Row="1" />
-            <xctk:IntegerUpDown x:Name="udVideoStSeconds" Margin="234,6,10,0" FormatString="F0" Minimum="0" Value="0" Increment="1"  Height="25" Grid.Row="1" VerticalAlignment="Top"/>
+            <xctk:IntegerUpDown x:Name="udVideoStMinutes" Margin="169,6,72,0" FormatString="F0" Minimum="0" Maximum="59" Value="0" Increment="1"   Height="25" Grid.Row="1" />
+            <xctk:IntegerUpDown x:Name="udVideoStSeconds" Margin="234,6,10,0" FormatString="F0" Minimum="0" Maximum="59"  Value="0" Increment="1"  Height="25" Grid.Row="1" VerticalAlignment="Top"/>
             <Label Grid.Row="1" x:Name="lblVideoStart" Content="Video Start:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="92" FontFamily="Arial" FontSize="15" Height="25"/>
             <xctk:IntegerUpDown x:Name="udTrackHours" Margin="105,6,134,0" FormatString="F0" Minimum="0" Value="0" Increment="1"  Height="25" Grid.Row="3"/>
-            <xctk:IntegerUpDown x:Name="udTrackMinutes" Margin="169,6,72,0" FormatString="F0" Minimum="0" Value="0" Increment="1"   Height="25" Grid.Row="3" />
-            <xctk:IntegerUpDown x:Name="udTrackSeconds" Margin="234,6,10,0" FormatString="F0" Minimum="0" Value="0" Increment="1"  Height="25" Grid.Row="3"/>
+            <xctk:IntegerUpDown x:Name="udTrackMinutes" Margin="169,6,72,0" FormatString="F0" Minimum="0" Maximum="59" Value="0" Increment="1"   Height="25" Grid.Row="3" />
+            <xctk:IntegerUpDown x:Name="udTrackSeconds" Margin="234,6,10,0" FormatString="F0" Minimum="0" Maximum="59" Value="0" Increment="1"  Height="25" Grid.Row="3"/>
             <Label Grid.Row="3" x:Name="lbTrack" Content="Track Start:" HorizontalAlignment="Left" Margin="11,6,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="91" FontFamily="Arial" FontSize="15" Height="25"/>
             <Label Grid.Row="0" x:Name="lblHours" Content="Hours" HorizontalAlignment="Left" Margin="95,5,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="54" FontFamily="Arial" FontSize="15" Height="26"/>
             <Label Grid.Row="0" x:Name="lblMinutes" Content="Minutes" HorizontalAlignment="Left" Margin="151,5,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="65" FontFamily="Arial" FontSize="15" Height="25"/>
             <Label Grid.Row="0" x:Name="lblSeconds" Content="Seconds" HorizontalAlignment="Left" Margin="214,5,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="68" FontFamily="Arial" FontSize="15" Height="25"/>
             <xctk:IntegerUpDown x:Name="udVideoEndHours" Margin="105,6,134,0" FormatString="F0" Minimum="0" Value="0" Increment="1"  Height="25" Grid.Row="2" />
-            <xctk:IntegerUpDown x:Name="udVideoEndMinutes" Margin="169,6,72,0" FormatString="F0" Minimum="0" Value="0" Increment="1"   Height="25" Grid.Row="2" />
-            <xctk:IntegerUpDown x:Name="udVideoEndSeconds" Margin="234,6,10,0" FormatString="F0" Minimum="0" Value="0" Increment="1"  Height="25" Grid.Row="2"/>
+            <xctk:IntegerUpDown x:Name="udVideoEndMinutes" Margin="169,6,72,0" FormatString="F0" Minimum="0" Maximum="59" Value="0" Increment="1"   Height="25" Grid.Row="2" />
+            <xctk:IntegerUpDown x:Name="udVideoEndSeconds" Margin="234,6,10,0" FormatString="F0" Minimum="0" Maximum="59" Value="0" Increment="1"  Height="25" Grid.Row="2"/>
             <Label Grid.Row="2" x:Name="lblVideoEnd" Content="Video End:" HorizontalAlignment="Left" Margin="11,6,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="92" FontFamily="Arial" FontSize="15" Height="25"/>
         </Grid>
         <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" Margin="10,10,0,-143" VerticalAlignment="Top" Width="157" d:IsHidden="True">
