@@ -4,29 +4,29 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using System.Diagnostics;
 namespace TrackApp
 {
-    //render video-commented out-->will be in main window
     //TODO collect data from user
     public partial class MainWindow : Window
     {
         OpenFileDialog loadFileDialog;
         SaveFileDialog saveFileDialog;
-
+        ProjectSettings settings;
         public MainWindow()
         {
             InitializeComponent();
             loadFileDialog = new OpenFileDialog();
-            IniializeContent();
+            settings = ProjectSettings.GetSettings();
+            IniializeVisibilities();
+            InitializeContent();
         }
   
        
         #region Helping Methods
-        private void IniializeContent()
+        private void IniializeVisibilities()
         {
             this.grdControlButtons.Visibility = Visibility.Visible;
             this.grdFiles.Visibility = Visibility.Visible;
@@ -49,6 +49,37 @@ namespace TrackApp
                 this.cmbEncoding.Items.Add(format);
             }
         }
+        private void InitializeContent()
+        {
+            //Track
+            this.txtTrackX.Text = settings.TrackPostion.X.ToString();
+            this.txtTrackY.Text = settings.TrackPostion.Y.ToString();
+            this.txtTrackHeight.Text = settings.TrackHeight.ToString();
+            this.cpTrackTravelledColor.SelectedColor = Color.FromArgb(settings.TraveledTrackColor.A, settings.TraveledTrackColor.R, settings.TraveledTrackColor.G, settings.TraveledTrackColor.B);
+            this.txtTrackTravelledWidth.Text = settings.TraveledTrackLineWidth.ToString();
+            this.cpTrackWholeColor.SelectedColor = Color.FromArgb(settings.WholeTrackColor.A, settings.WholeTrackColor.R, settings.WholeTrackColor.G, settings.WholeTrackColor.B);
+            this.txtTrackWholeWidth.Text = settings.WholeTrackLineWidth.ToString();
+            //Position marker
+            this.txtPMSize.Text = settings.PositionMarkerSize.ToString();
+            this.cpPMColor.SelectedColor = Color.FromArgb(settings.PositionMarkerColor.A, settings.PositionMarkerColor.R, settings.PositionMarkerColor.G, settings.PositionMarkerColor.B);
+            //Overlay Image
+            this.txtOIX.Text = settings.overlayImagePosition.X.ToString();
+            this.txtOIY.Text = settings.overlayImagePosition.Y.ToString();
+            //Map
+            this.txtMapHeight.Text = settings.MapHeight.ToString();
+            this.dudMapOpacity.Value = settings.MapOpacity;
+            //Distance
+            this.txtDistanceX.Text = settings.DistanceWidgetPosition.X.ToString();
+            this.txtDistanceY.Text = settings.DistanceWidgetPosition.Y.ToString();
+            this.cbDistanceFont.SelectedValue = new FontFamily(settings.PDistanceWidgetFont.FontFamily);
+            this.txtDistanceFontSize.Value = settings.PDistanceWidgetFont.Size;
+            this.cpDistanceColor.SelectedColor = Color.FromArgb(settings.DistanceWidgetColor.A, settings.DistanceWidgetColor.R, settings.DistanceWidgetColor.G, settings.DistanceWidgetColor.B);
+            //Speed
+            this.txtSpeedX.Text = settings.SpeedWidgetPosition.X.ToString();
+            this.txtSpeedY.Text = settings.SpeedWidgetPosition.Y.ToString();
+            this.cbSpeedFont.SelectedValue = new FontFamily(settings.PSpeedWidgetFont.FontFamily);
+            this.cpSpeedColor.SelectedColor = Color.FromArgb(settings.SpeedWidgetColor.A, settings.SpeedWidgetColor.R, settings.SpeedWidgetColor.G, settings.SpeedWidgetColor.B);
+        } 
         private void ChangeIconBackground(string path, System.Windows.Controls.Button btn)
         {
             var imgBrush = new ImageBrush();
@@ -58,7 +89,7 @@ namespace TrackApp
         }
         private bool CheckFileGridInput()
         {
-            ProjectSettings settings = ProjectSettings.GetSettings();
+            
             if (settings.VideoInputPath == null || settings.VideoInputPath == string.Empty)
             {
                 return false;
@@ -212,7 +243,6 @@ namespace TrackApp
         private void btnProceed_Click(object sender, RoutedEventArgs e)
         {
             //TODO:add validations
-            ProjectSettings settings = ProjectSettings.GetSettings();
             //settings.Serialize();
             //settings.VideoEnd = 300;
             //settings = settings.Deserialize();

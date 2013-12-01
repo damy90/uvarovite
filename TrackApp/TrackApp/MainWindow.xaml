@@ -69,7 +69,7 @@
             <Label x:Name="lblTrack" Content="Track:" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" Width="166"/>
             <Label x:Name="lblOutputVideo" Content="Output video:" HorizontalAlignment="Left" Margin="0,149,0,0" VerticalAlignment="Top" Width="166"/>
         </Grid>
-        <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" Margin="167,11,0,-71" VerticalAlignment="Top" Width="283">
+        <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" Margin="167,11,0,-71" VerticalAlignment="Top" Width="283" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="Markings" Height="30"/>
                 <RowDefinition x:Name="TrackStart" Height="30"/>
@@ -158,18 +158,18 @@
                 <Label  x:Name="lblTrackCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <TextBox x:Name="txtTrackX" HorizontalAlignment="Left" Height="23" Margin="40,27,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
                 <Label  x:Name="lblTrackX" Content="X:" HorizontalAlignment="Left" Margin="6,26,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtTrackY" HorizontalAlignment="Left" Height="23" Margin="130,27,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblTrackY" Content="Y:" HorizontalAlignment="Left" Margin="96,25,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <xctk:ColorPicker x:Name="cpTrackTravelledColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="6,106,176,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
+                <TextBox x:Name="txtTrackY" HorizontalAlignment="Left" Height="23" Margin="140,27,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblTrackY" Content="Y:" HorizontalAlignment="Left" Margin="106,25,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <xctk:ColorPicker x:Name="cpTrackTravelledColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="6,106,165,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
                 <Label  x:Name="lblTrackHeight" Content="Height:" HorizontalAlignment="Left" Margin="0,56,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <TextBox x:Name="txtTrackHeight" HorizontalAlignment="Left" Height="23" Margin="111,56,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="txtTrackHeight" HorizontalAlignment="Left" Height="23" Margin="121,56,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="68"/>
                 <Label  x:Name="lblTrackTravelled" Content="Travelled track:" HorizontalAlignment="Left" Margin="0,82,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <xctk:ColorPicker x:Name="cpTrackWholeColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="6,158,180,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
+                <xctk:ColorPicker x:Name="cpTrackWholeColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="6,158,164,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
                 <Label  x:Name="lblTrackWhole" Content="Whole track:" HorizontalAlignment="Left" Margin="0,134,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <Label  x:Name="lblTrackTravelledWidth" Content="Width:" HorizontalAlignment="Left" Margin="96,106,0,0" VerticalAlignment="Top" Width="59" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <Label  x:Name="lblTrackWholeWidth" Content="Width:" HorizontalAlignment="Left" Margin="96,158,0,0" VerticalAlignment="Top" Width="57" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <TextBox x:Name="txtTrackTravelledWidth" HorizontalAlignment="Left" Height="23" Margin="154,106,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="27"/>
-                <TextBox x:Name="txtTrackWholeWidth" HorizontalAlignment="Left" Height="23" Margin="154,158,0,0" TextWrapping="Wrap" Text="9" VerticalAlignment="Top" Width="27"/>
+                <Label  x:Name="lblTrackTravelledWidth" Content="Width:" HorizontalAlignment="Left" Margin="105,106,0,0" VerticalAlignment="Top" Width="59" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
+                <Label  x:Name="lblTrackWholeWidth" Content="Width:" HorizontalAlignment="Left" Margin="106,158,0,0" VerticalAlignment="Top" Width="57" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
+                <TextBox x:Name="txtTrackTravelledWidth" HorizontalAlignment="Left" Height="23" Margin="163,106,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="27"/>
+                <TextBox x:Name="txtTrackWholeWidth" HorizontalAlignment="Left" Height="23" Margin="164,158,0,0" TextWrapping="Wrap" Text="9" VerticalAlignment="Top" Width="27"/>
 
             </Grid>
         </Grid>
@@ -195,7 +195,7 @@
                 <xctk:IntegerUpDown x:Name="txtSpeedFontSize" Minimum="28" Value="28" Increment="1" Margin="170,74,10,97"/>
             </Grid>
         </Grid>
-        <Grid x:Name="grdDistance" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
+        <Grid x:Name="grdDistance" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
@@ -211,13 +211,13 @@
                 <Label  x:Name="lblDistanceY" Content="Y:" HorizontalAlignment="Left" Margin="101,120,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <ComboBox x:Name="cbDistanceFont" Margin="90,9,32,0" VerticalAlignment="Top" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" SelectedIndex="0" Height="25"/>
                 <Label  x:Name="lblDistanceFont" Content="Font:" HorizontalAlignment="Left" Margin="6,7,0,0" VerticalAlignment="Top" Width="52" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <xctk:ColorPicker x:Name="cpDistanceColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="146,69,34,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
+                <xctk:ColorPicker x:Name="cpDistanceColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="135,69,34,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
                 <Label  x:Name="lblDistanceColor" Content="Color:" HorizontalAlignment="Left" Margin="5,69,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <xctk:IntegerUpDown x:Name="txtDistanceFontSize" Minimum="28" Margin="147,38,33,111"/>
+                <xctk:DoubleUpDown x:Name="txtDistanceFontSize" Minimum="28" Margin="135,38,33,111"/>
                 <Label  x:Name="lblDistanceFontSize" Content="Font size:" HorizontalAlignment="Left" Margin="6,38,0,0" VerticalAlignment="Top" Width="87" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15" RenderTransformOrigin="0.533,0.213"/>
             </Grid>
         </Grid>
-        <Grid x:Name="grdPositionMarker" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283" d:IsHidden="True">
+        <Grid x:Name="grdPositionMarker" HorizontalAlignment="Left" Margin="163,13,0,-79" Width="283">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
@@ -226,9 +226,9 @@
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnablePM" Content="Enable Position Marker" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="179" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnablePM_Checked" Unchecked="cbEnablePM_Uncheck"/>
             <Grid x:Name="grdEnabledPM" HorizontalAlignment="Left" Height="168" Margin="18,10,0,-55" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="255">
-                <xctk:ColorPicker x:Name="cpPMColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="146,43,26,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
+                <xctk:ColorPicker x:Name="cpPMColor" ShowAdvancedButton="True" DisplayColorAndName="True" AvailableColorsHeader="Standard Colors" Margin="115,43,26,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" />
                 <Label  x:Name="lblPMColor" Content="Color:" HorizontalAlignment="Left" Margin="5,43,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <xctk:IntegerUpDown x:Name="txtPMSize" Minimum="28" Margin="147,12,25,130"/>
+                <xctk:IntegerUpDown x:Name="txtPMSize" Margin="115,12,25,130"/>
                 <Label  x:Name="lblPMSize" Content="Size:" HorizontalAlignment="Left" Margin="6,12,0,0" VerticalAlignment="Top" Width="87" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15" RenderTransformOrigin="0.533,0.213"/>
             </Grid>
         </Grid>
@@ -261,7 +261,7 @@
                 <Label  x:Name="lblMapHeight" Content="Height:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
                 <TextBox x:Name="txtMapHeight" HorizontalAlignment="Left" Height="23" Margin="103,15,0,0" TextWrapping="Wrap" Text="240" VerticalAlignment="Top" Width="68"/>
                 <Label  x:Name="lblMapOpacity" Content="Opacity:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <xctk:DoubleUpDown x:Name="dudMapOpacity" Minimum="0.1" Maximum="1" Value="0.5" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" Increment="0.1" VerticalAlignment="Top" Width="68"/>
+                <xctk:DoubleUpDown x:Name="dudMapOpacity" Minimum="0" Maximum="1" Value="0.5" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" Increment="0.1" VerticalAlignment="Top" Width="68"/>
             </Grid>
         </Grid>
         <Button x:Name="btnProceed" Style="{StaticResource PictureButton}" Margin="318,265,12,-152" Click="btnProceed_Click" >
