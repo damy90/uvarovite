@@ -217,6 +217,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="koprivshtica-dushanci.gpx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -272,6 +273,12 @@
     <Resource Include="Resources\SB_Video_enter.png" />
     <Resource Include="Resources\SB_Video_leave.png" />
     <Resource Include="Resources\SB_Video_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SB_Files_black.png" />
+    <Resource Include="Resources\SB_Files_white.png" />
+    <Resource Include="Resources\SB_Widgets_black.png" />
+    <Resource Include="Resources\SB_Widgets_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
