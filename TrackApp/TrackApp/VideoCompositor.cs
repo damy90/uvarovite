@@ -26,7 +26,7 @@ public static class VideoCompositor
         writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, settings.VideoQuality*1000000 );
 
         long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
-        videoEnd = 6000;
+        //videoEnd = 6000;
         long videoStart = (int)(settings.VideoStart * reader.FrameRate);
         if (videoEnd == 0 || videoEnd > reader.FrameCount )
             videoEnd = reader.FrameCount;    
@@ -45,8 +45,10 @@ public static class VideoCompositor
                         widget.Draw(grfx, n / framerate);
                 }
                 writer.WriteVideoFrame(videoFrame);
+                videoFrame.Dispose();
             }
             videoFrame.Dispose();
+            string progress = string.Format("{0} {1}", (int)(100 * n / videoEnd), '%');
         }
         reader.Close();
         writer.Close();
@@ -56,8 +58,8 @@ public static class VideoCompositor
     {
         ProjectSettings settings = ProjectSettings.GetSettings();
         activeWidgets = new List<Widget>();
-        //hardcoded tests
-        //activeWidgets.Add(new WidgetTest());
+        if (settings.ShowMap)
+            activeWidgets.Add(new WidgetMap());
         if (settings.ShowTrack)
             activeWidgets.Add(new WidgetTrack());
         if (settings.ShowPositionMarker)

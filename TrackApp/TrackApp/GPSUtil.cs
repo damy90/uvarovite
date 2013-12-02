@@ -270,11 +270,11 @@ public sealed class GPSData
 
     //converts a GPS coordinate to pixel coordinate
     //size and return value are in pixels
-    public PointF ToPixelCoordinate(GPSCoord pt, SizeF size)
+    public PointF ToPixelCoordinate(GPSCoord pt, SizeF size, int border=0)
     {
         double ratio = size.Height / (BoundingBox.Size.Latitude);
-        return new PointF((float)((pt.Longitude - BoundingBox.Position.Longitude) * ratio * longtitudeCorrectionScale),
-                           size.Height - (float)((pt.Latitude - BoundingBox.Position.Latitude) * ratio));
+        return new PointF((float)((pt.Longitude - BoundingBox.Position.Longitude) * ratio * longtitudeCorrectionScale) + ((float)border) / 2,
+                           size.Height - (float)((pt.Latitude - BoundingBox.Position.Latitude) * ratio) + ((float)border) / 2);
     }
     private double Interpolate(float time, double previousReading, double nextReading, float previousTime, float nextTime)
     {

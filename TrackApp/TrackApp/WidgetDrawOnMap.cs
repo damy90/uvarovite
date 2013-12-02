@@ -10,17 +10,17 @@ public abstract class WidgetDrawOnMap:Widget
 {
     
     protected static Size WidgetSize;
-    protected static ProjectSettings settings = ProjectSettings.GetSettings();
-    protected static GPSData gps = GPSData.GetData();
+    protected static ProjectSettings Settings = ProjectSettings.GetSettings();
+    protected static GPSData Gps = GPSData.GetData();
 
     protected static Point GetBoundPosition()
     {
-        return settings.TrackPostion;
+        return Settings.TrackPostion;
     }
 
-    public static PointF GetPosition()
+    protected static PointF GetPosition()
     {
-        int wholeTrackLineWidth = settings.WholeTrackLineWidth;
+        int wholeTrackLineWidth = Settings.WholeTrackLineWidth;
         PointF pos = GetBoundPosition();
         return new PointF(pos.X - ((float)wholeTrackLineWidth) / 2, pos.Y - ((float)wholeTrackLineWidth) / 2);
     }
@@ -28,9 +28,9 @@ public abstract class WidgetDrawOnMap:Widget
     {
         if (WidgetSize == new Size(0, 0))
         {
-            GPSBox box = gps.GetBox();
-            WidgetSize.Height = settings.TrackHeight;
-            int wholeTrackLineWidth = settings.WholeTrackLineWidth;
+            GPSBox box = Gps.GetBox();
+            WidgetSize.Height = Settings.TrackHeight;
+            int wholeTrackLineWidth = Settings.WholeTrackLineWidth;
             double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
             double ratio = (WidgetSize.Height - wholeTrackLineWidth) / (box.Size.Latitude);//avaiable size is slighly smaller due to line width
             WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
@@ -40,7 +40,7 @@ public abstract class WidgetDrawOnMap:Widget
     protected static SizeF GetSize()
     {
         SizeF pos = GetBoundSize();
-        int maxLineWidth = Math.Max(settings.WholeTrackLineWidth, settings.TraveledTrackLineWidth);
+        int maxLineWidth = Math.Max(Settings.WholeTrackLineWidth, Settings.TraveledTrackLineWidth);
         return new SizeF(pos.Width - maxLineWidth, pos.Height - maxLineWidth);
     }
 }

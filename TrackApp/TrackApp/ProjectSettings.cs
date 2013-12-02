@@ -32,11 +32,11 @@ public class SerializableFont
 
 public sealed class ProjectSettings
 {
-    public string VideoInputPath = @"video.avi";
-    public string VideoOutputPath="video-out.avi";
-    public string GPXPath = "workout.gpx";
+    public string VideoInputPath = @"C:\Users\Dany\Desktop\GOPR2340.avi";
+    public string VideoOutputPath = @"C:\Users\Dany\Desktop\video-out.avi";
+    public string GPXPath = @"C:\Users\Dany\Desktop\Debug\workout.gpx";
     public VideoFormats Format= VideoFormats.xvid;
-    public int BitRate = 50000000;//2 Mbit/s
+    //public int BitRate = 50000000;//2 Mbit/s
 
     //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
     public float VideoStart = 0;//in seconds
@@ -44,15 +44,15 @@ public sealed class ProjectSettings
     public float VideoEnd = 0;//zero if video length is not trimmed
     public float TrackEnd = 0;// TODO add in GUI
     public int VideoSpeed = 8; //speed multiplier TODO add in GUI
-    public int VideoQuality = 5;//Bitrate = quality * 1 000 000 TODO add in GUI
+    public int VideoQuality = 7;//Bitrate = quality * 1 000 000 TODO add in GUI
 
     public bool ShowTrack=true;//TO DO: Finish track widget and change to true
     public Point TrackPostion = new Point(100, 0);
     public int TrackHeight = 250;//the width is calculated from the track points 
     public Color TraveledTrackColor = Color.Red;
-    public int TraveledTrackLineWidth = 3;
+    public int TraveledTrackLineWidth = 2;
     public Color WholeTrackColor = Color.White;
-    public int WholeTrackLineWidth = 7;
+    public int WholeTrackLineWidth = 6;
     public bool ShowTraveledTrack = true;//TODO add to GUI
 
     public bool ShowPositionMarker=false;
