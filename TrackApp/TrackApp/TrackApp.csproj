@@ -281,9 +281,6 @@
     <Resource Include="Resources\SB_Widgets_black.png" />
     <Resource Include="Resources\SB_Widgets_white.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="SB_Files_white.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

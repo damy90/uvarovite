@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public abstract class WidgetDrawOnMap:Widget
+public abstract class WidgetDrawOnMap : Widget
 {
-    
+
     protected static Size WidgetSize;
     protected static ProjectSettings Settings = ProjectSettings.GetSettings();
     protected static GPSData Gps = GPSData.GetData();
@@ -44,3 +44,4 @@ public abstract class WidgetDrawOnMap:Widget
         return new SizeF(pos.Width - maxLineWidth, pos.Height - maxLineWidth);
     }
 }
+

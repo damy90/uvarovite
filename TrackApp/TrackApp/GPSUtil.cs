@@ -25,12 +25,15 @@ public class GPSPoint : GPSCoord, IComparable<GPSPoint>
 {
     public float Time;
     public double Distance;//in meters
-    public GPSPoint(double lon, double lat, double ele, float dt, double distance=0) : base(lon,lat,ele)
+    public GPSPoint(double lon, double lat, double ele, float dt, double distance = 0)
+        : base(lon, lat, ele)
     {
         this.Time = dt;
         this.Distance = distance;
     }
-    public GPSPoint(float dt) : base(0,0,0){
+    public GPSPoint(float dt)
+        : base(0, 0, 0)
+    {
         this.Time = dt;
         this.Distance = 0;
     }
@@ -76,7 +79,7 @@ public sealed class GPSData
 {
     GPSPoint[] gpsPoints;
 
-    
+
 
     public static double longtitudeCorrectionScale = 1;
 
@@ -90,7 +93,7 @@ public sealed class GPSData
 
     public static GPSData GetData()
     {
-        if( _instance==null )
+        if (_instance == null)
             _instance = new GPSData();
         return _instance;
     }
@@ -106,7 +109,7 @@ public sealed class GPSData
         //
     }
 
-    public void Update(List<GPSPoint> pts )
+    public void Update(List<GPSPoint> pts)
     {
         //TODO - trim, leave only the gpsPoints that we will need (using TrackStart and min((VideoEnd-VideoStart),TrackLength) )
 
@@ -127,16 +130,16 @@ public sealed class GPSData
             trackStartPos = 0;
         int trackEndPos = pts.FindIndex(trackStartPos, p => p.Time > settigs.TrackEnd);
         if (trackEndPos == -1)
-            trackEndPos = pts.Count-1;
+            trackEndPos = pts.Count - 1;
 
-        pts.RemoveRange(0, trackStartPos );
+        pts.RemoveRange(0, trackStartPos);
         trackEndPos = trackEndPos - trackStartPos;
         pts.RemoveRange(trackEndPos, pts.Count - trackEndPos);
-        
+
         gpsPoints = new GPSPoint[pts.Count];//we need an array rather than list for faster access
         //TODO throw exeption if track is empty
         int n = 0;
-        foreach(GPSPoint point in pts)
+        foreach (GPSPoint point in pts)
         {
             //coppy to array
             gpsPoints[n] = point;
@@ -157,28 +160,28 @@ public sealed class GPSData
         longtitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
         //distances from start point
         double distanceSum = 0;
-        for (int i=1; i<gpsPoints.Length;i++)
+        for (int i = 1; i < gpsPoints.Length; i++)
         {
             distanceSum += gpsPoints[i].DistanceFromPoint(gpsPoints[i - 1]);
             gpsPoints[i].Distance = distanceSum;
         }
     }
 
-        //generate the UpdateGPSData event
-        //UpdateGPSData(this, EventArgs.Empty);
+    //generate the UpdateGPSData event
+    //UpdateGPSData(this, EventArgs.Empty);
     //TODO Remoove weird method
     public double GetAverageSpeed(float time)
     {
         int index = GetIndex(time);
-        if ((index == gpsPoints.Length - 1)||(gpsPoints.Length == 0))
+        if ((index == gpsPoints.Length - 1) || (gpsPoints.Length == 0))
             return 0;
         double distance = 0;
 
         for (int i = 0; i < index; i++)
         {
-            distance += gpsPoints[i].DistanceFromPoint(gpsPoints[i + 1]);       
+            distance += gpsPoints[i].DistanceFromPoint(gpsPoints[i + 1]);
         }
-                   
+
         float timeSpan = gpsPoints[index].Time - gpsPoints[0].Time;
         return distance / timeSpan;
     }
@@ -186,7 +189,7 @@ public sealed class GPSData
     public double GetSpeed(float time)
     {
         int index = GetIndex(time);
-        if ((index == gpsPoints.Length - 1)||(gpsPoints.Length == 0))
+        if ((index == gpsPoints.Length - 1) || (gpsPoints.Length == 0))
             return 0;
         double distance = gpsPoints[index].DistanceFromPoint(gpsPoints[index + 1]);
         float timeSpan = gpsPoints[index + 1].Time - gpsPoints[index].Time;
@@ -201,24 +204,24 @@ public sealed class GPSData
         return distance;
     }
 
-    
+
 
     public GPSBox GetBox()
     {
         return BoundingBox;
     }
-    
-   /* public GPSCoord GetPosition(float time)
-    {
-        
-         * int index = GetIndex(time);
-        if (index == gpsPoints.Length - 1)
-            return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].elevation);
-        double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
-        double lat = Interpolate(time,gpsPoints[index].longitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
-        double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
-        return new GPSCoord(Long, lat, ele);
-         * */
+
+    /* public GPSCoord GetPosition(float time)
+     {
+       
+          * int index = GetIndex(time);
+         if (index == gpsPoints.Length - 1)
+             return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].elevation);
+         double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
+         double lat = Interpolate(time,gpsPoints[index].longitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
+         double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
+         return new GPSCoord(Long, lat, ele);
+          * */
     public GPSCoord GetPosition(float time)
     {
         int index = GetIndex(time);
@@ -229,13 +232,13 @@ public sealed class GPSData
         double ele = Interpolate(time, gpsPoints[index].Elevation, gpsPoints[index + 1].Elevation, gpsPoints[index].Time, gpsPoints[index + 1].Time);
         return new GPSCoord(Long, lat, ele);
     }
-    
+
     public Vector GetOrientation(float time)
     {
         int index = GetIndex(time);
-        double longDirection=gpsPoints[index + 1].Longitude - gpsPoints[index].Longitude;
-        double latDirection=gpsPoints[index + 1].Latitude - gpsPoints[index].Latitude;
-        double length=Math.Sqrt(longDirection*longDirection+latDirection*latDirection);
+        double longDirection = gpsPoints[index + 1].Longitude - gpsPoints[index].Longitude;
+        double latDirection = gpsPoints[index + 1].Latitude - gpsPoints[index].Latitude;
+        double length = Math.Sqrt(longDirection * longDirection + latDirection * latDirection);
         if (length != 0)
             lastOrientation = new Vector(longDirection / length, latDirection / length);
         return lastOrientation;
@@ -243,9 +246,9 @@ public sealed class GPSData
     public double GetDistance(float time)
     {
         int index = GetIndex(time);
-        double distance=gpsPoints[index].Distance;
+        double distance = gpsPoints[index].Distance;
         GPSCoord lastPosition = GetPosition(time);
-        GPSPoint interpolatedPos=new GPSPoint(lastPosition.Longitude, lastPosition.Latitude, lastPosition.Elevation, 0, 0);
+        GPSPoint interpolatedPos = new GPSPoint(lastPosition.Longitude, lastPosition.Latitude, lastPosition.Elevation, 0, 0);
         return distance += interpolatedPos.DistanceFromPoint(gpsPoints[index]);
     }
     public GPSPoint[] GetTrack()
@@ -270,7 +273,7 @@ public sealed class GPSData
 
     //converts a GPS coordinate to pixel coordinate
     //size and return value are in pixels
-    public PointF ToPixelCoordinate(GPSCoord pt, SizeF size, int border=0)
+    public PointF ToPixelCoordinate(GPSCoord pt, SizeF size, int border = 0)
     {
         double ratio = size.Height / (BoundingBox.Size.Latitude);
         return new PointF((float)((pt.Longitude - BoundingBox.Position.Longitude) * ratio * longtitudeCorrectionScale) + ((float)border) / 2,
@@ -301,20 +304,20 @@ public class GPXFileLoader : GPSLoader
     //GPSData gpsData = new GPSData();
     List<GPSPoint> pts = new List<GPSPoint>();
     public override int LoadPoints(string sFile)
-    {            
+    {
         XDocument gpxDoc = XDocument.Load(sFile);
         XNamespace gpxNamespace = XNamespace.Get("http://www.topografix.com/GPX/1/1");
-            
+
         var points = from point in gpxDoc.Descendants(gpxNamespace + "trkpt")  //trk/trkseg/trkpt
-                        select new
-                        {
-                            Latitude  = point.Attribute("lat").Value,
-                            Longitude = point.Attribute("lon").Value,
-                            Elevation = point.Element(gpxNamespace + "ele") != null ?
-                                        point.Element(gpxNamespace + "ele").Value : null,
-                            Dt        = point.Element(gpxNamespace + "time") != null ?
-                                        point.Element(gpxNamespace + "time").Value : null
-                        };            
+                     select new
+                     {
+                         Latitude = point.Attribute("lat").Value,
+                         Longitude = point.Attribute("lon").Value,
+                         Elevation = point.Element(gpxNamespace + "ele") != null ?
+                                     point.Element(gpxNamespace + "ele").Value : null,
+                         Dt = point.Element(gpxNamespace + "time") != null ?
+                                     point.Element(gpxNamespace + "time").Value : null
+                     };
 
         StringBuilder sb = new StringBuilder();
         DateTime startTime = new DateTime();
@@ -333,7 +336,7 @@ public class GPXFileLoader : GPSLoader
                                             Convert.ToDouble(pt.Longitude, CultureInfo.InvariantCulture),
                                             Convert.ToDouble(pt.Latitude, CultureInfo.InvariantCulture),
                                             Convert.ToDouble(pt.Elevation, CultureInfo.InvariantCulture),
-                                            //System.Convert.ToDateTime(pt.Dt)
+                //System.Convert.ToDateTime(pt.Dt)
                                             (float)(Convert.ToDateTime(pt.Dt, CultureInfo.InvariantCulture) - startTime).TotalSeconds,
                                             0
                                             )); //new GPSPoint(20f, 30f, 40f, DateTime.Now)
@@ -344,5 +347,5 @@ public class GPXFileLoader : GPSLoader
         //MessageBox.Show(pts.Count.ToString());
         GPSData.GetData().Update(pts);
         return GPSData.GetData().GetPointCount();
-    } 
+    }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-public class WidgetPositionMarker: WidgetDrawOnMap
-{   
+public class WidgetPositionMarker : WidgetDrawOnMap
+{
     public override void Draw(Graphics grfx, float time)
     {
         GPSData gps = GPSData.GetData();
@@ -22,7 +22,7 @@ public class WidgetPositionMarker: WidgetDrawOnMap
         Brush brush = new SolidBrush(ProjectSettings.GetSettings().PositionMarkerColor);
         grfx.FillRectangle(brush, trackPoint.X, trackPoint.Y, ProjectSettings.GetSettings().PositionMarkerSize, ProjectSettings.GetSettings().PositionMarkerSize);
         grfx.DrawRectangle(pen, trackPoint.X, trackPoint.Y, ProjectSettings.GetSettings().PositionMarkerSize, ProjectSettings.GetSettings().PositionMarkerSize);
-        
+
         // TODO: Add custom immage and orientation
     }
 }

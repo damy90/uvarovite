@@ -250,7 +250,7 @@ namespace TrackApp
             settings.TrackStart = Convert.ToInt32(udTrackHours.Value) * 3600f + Convert.ToInt32(udTrackMinutes.Value) * 60 + Convert.ToInt32(udTrackSeconds.Value);
             settings.VideoStart = Convert.ToInt32(udVideoStHours.Value) * 3600f + Convert.ToInt32(udVideoStMinutes.Value) * 60 + Convert.ToInt32(udVideoStSeconds.Value);
             settings.VideoEnd = Convert.ToInt32(udVideoEndHours.Value) * 3600f + Convert.ToInt32(udVideoEndMinutes.Value) * 60 + Convert.ToInt32(udVideoEndSeconds.Value);
-            settings.BitRate = 20000000;
+            //settings.BitRate = 20000000;
             //Track
             settings.ShowTrack = (bool)this.cbEnableTrack.IsChecked;
             if ((bool)this.cbEnableTrack.IsChecked)

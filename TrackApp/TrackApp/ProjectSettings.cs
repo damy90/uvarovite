@@ -35,7 +35,7 @@ public sealed class ProjectSettings
     public string VideoInputPath = @"C:\Users\Dany\Desktop\GOPR2340.avi";
     public string VideoOutputPath = @"C:\Users\Dany\Desktop\video-out.avi";
     public string GPXPath = @"C:\Users\Dany\Desktop\Debug\workout.gpx";
-    public VideoFormats Format= VideoFormats.xvid;
+    public VideoFormats Format = VideoFormats.xvid;
     //public int BitRate = 50000000;//2 Mbit/s
 
     //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
@@ -46,30 +46,30 @@ public sealed class ProjectSettings
     public int VideoSpeed = 8; //speed multiplier TODO add in GUI
     public int VideoQuality = 7;//Bitrate = quality * 1 000 000 TODO add in GUI
 
-    public bool ShowTrack=true;//TO DO: Finish track widget and change to true
+    public bool ShowTrack = true;//TO DO: Finish track widget and change to true
     public Point TrackPostion = new Point(100, 0);
-    public int TrackHeight = 250;//the width is calculated from the track points 
+    public int TrackHeight = 250;//the width is calculated from the track points
     public Color TraveledTrackColor = Color.Red;
     public int TraveledTrackLineWidth = 2;
     public Color WholeTrackColor = Color.White;
     public int WholeTrackLineWidth = 6;
     public bool ShowTraveledTrack = true;//TODO add to GUI
 
-    public bool ShowPositionMarker=false;
+    public bool ShowPositionMarker = false;
     public int PositionMarkerSize = 10;
     public Color PositionMarkerColor = Color.DarkGreen;
     //TODO add classes for the rest of the widgets
-    public bool ShowOverlayImage=false;
+    public bool ShowOverlayImage = false;
     public string overlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
-    public Point overlayImagePosition=new Point(300,300);
+    public Point overlayImagePosition = new Point(300, 300);
 
-    public bool ShowElevationWidget=false;
+    public bool ShowElevationWidget = false;
     [XmlIgnoreAttribute]
     public Font ElevationWidgetFont = new Font("Ariel", 28);
-    public Point ElevationWidgetPosition=new Point(300,0);
-    public Color ElevationWidgetColor=Color.White;
+    public Point ElevationWidgetPosition = new Point(300, 0);
+    public Color ElevationWidgetColor = Color.White;
 
-    public bool ShowMap=false;
+    public bool ShowMap = false;
     public int MapHeight = 240;//should be bigger than the track height, width is bigger by the same value
     public float MapOpacity;
 
@@ -131,11 +131,11 @@ public sealed class ProjectSettings
     //единтвения начин за инстанцииране е от тук
     public static ProjectSettings GetSettings()
     {
-      if (_instance == null)
-      {
-        _instance = new ProjectSettings();
-      }
-      return _instance;
+        if (_instance == null)
+        {
+            _instance = new ProjectSettings();
+        }
+        return _instance;
     }
 
     public void Serialize()
@@ -153,4 +153,4 @@ public sealed class ProjectSettings
         file.Close();
         return _instance;
     }
-  }
+}

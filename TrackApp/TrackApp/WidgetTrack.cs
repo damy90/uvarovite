@@ -9,16 +9,16 @@ public class WidgetTrack : WidgetDrawOnMap
     PointF[] trackPoints;
     int prevIndex = 0;
     public override void Draw(Graphics grfx, float time)
-    {   
+    {
         //whole track
         int wholeTrackLineWidth = Settings.WholeTrackLineWidth;
         Pen wholeTrackPen = new Pen(Settings.WholeTrackColor, wholeTrackLineWidth);
-        
+
         if (trackBitmap == null)
         {
             GPSPoint[] trackData = Gps.GetTrack();
             trackPoints = new PointF[trackData.Length];
-            
+
             SizeF widgetSize = GetBoundSize();
             trackBitmap = new Bitmap((int)Math.Ceiling(widgetSize.Width), (int)Math.Ceiling(widgetSize.Height));
 
@@ -55,3 +55,4 @@ public class WidgetTrack : WidgetDrawOnMap
         grfx.DrawImage(trackBitmap, GetPosition());
     }
 }
+
