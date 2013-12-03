@@ -27,7 +27,7 @@ public class WidgetTrack : WidgetDrawOnMap
             using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
             {
                 for (int i = 0; i < trackData.Length; i++)
-                    trackPoints[i] = Gps.ToPixelCoordinate(trackData[i], trackSize);
+                    trackPoints[i] = Gps.ToPixelCoordinate(trackData[i], trackSize, wholeTrackLineWidth);
                 drawTrack.DrawLines(wholeTrackPen, trackPoints);
             }
         }
@@ -52,7 +52,7 @@ public class WidgetTrack : WidgetDrawOnMap
                 prevIndex = index;
             }
         }
-        grfx.DrawImage(trackBitmap, GetPosition());
+        grfx.DrawImage(trackBitmap, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
     }
 }
 

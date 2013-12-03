@@ -29,7 +29,7 @@ class WidgetMap : WidgetDrawOnMap
             webClient.DownloadFile(path, "test.png");
             map = new Bitmap("test.png");
         }
-        grfx.DrawImage(map, GetBoundPosition());
+        grfx.DrawImage(map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
     }
 }
 
