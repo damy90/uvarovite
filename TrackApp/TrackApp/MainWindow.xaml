@@ -69,7 +69,7 @@
             <Label x:Name="lblTrack" Content="Track:" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" Width="166"/>
             <Label x:Name="lblOutputVideo" Content="Output video:" HorizontalAlignment="Left" Margin="0,166,0,0" VerticalAlignment="Top" Width="166"/>
         </Grid>
-        <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="283" Margin="186,37,0,0" d:IsHidden="True">
+        <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="283" Margin="186,37,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="Markings" Height="30"/>
                 <RowDefinition x:Name="TrackStart" Height="30"/>
@@ -91,6 +91,10 @@
             <xctk:IntegerUpDown x:Name="udVideoEndMinutes" Margin="169,6,72,0"   Height="25" Grid.Row="2" FormatString="F0" Increment="1" Maximum="59" Minimum="0" Value="0" />
             <xctk:IntegerUpDown x:Name="udVideoEndSeconds" Margin="234,6,10,0"  Height="25" Grid.Row="2" FormatString="F0" Increment="1" Maximum="59" Minimum="0" Value="0"/>
             <Label Grid.Row="2" x:Name="lblVideoEnd" Content="Video End:" HorizontalAlignment="Left" Margin="11,6,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="92" FontFamily="Arial" FontSize="15" Height="25"/>
+            <xctk:IntegerUpDown x:Name="udTrackEndHours" Margin="105,35,134,-29"  Height="25" Grid.Row="3" FormatString="F0" Increment="1" Minimum="0" Value="0"/>
+            <xctk:IntegerUpDown x:Name="udTrackEndMinutes" Margin="169,35,72,-29"   Height="25" Grid.Row="3" FormatString="F0" Increment="1" Maximum="59" Minimum="0" Value="0" />
+            <xctk:IntegerUpDown x:Name="udTrackEndSeconds" Margin="234,35,10,-29"  Height="25" Grid.Row="3" FormatString="F0" Increment="1" Maximum="59" Minimum="0" Value="0"/>
+            <Label Grid.Row="3" x:Name="lbTrackEnd" Content="Track End:" HorizontalAlignment="Left" Margin="11,35,0,-29" VerticalAlignment="Top" Foreground="#3045FF" Width="91" FontFamily="Arial" FontSize="15" Height="25" RenderTransformOrigin="0.459,2.157"/>
         </Grid>
         <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" VerticalAlignment="Top" Width="170" Margin="5,31,0,-166" d:IsHidden="True">
             <Button x:Name="btnFiles" 

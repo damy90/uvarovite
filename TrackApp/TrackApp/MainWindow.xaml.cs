@@ -23,7 +23,6 @@ namespace TrackApp
             IniializeVisibilities();
             InitializeContent();
         }
-  
        
         #region Helping Methods
         private void IniializeVisibilities()
@@ -51,6 +50,7 @@ namespace TrackApp
         }
         private void InitializeContent()
         {
+
             //Track
             this.cbEnableTrack.IsChecked = settings.ShowTrack;
             this.txtTrackX.Text = settings.TrackPostion.X.ToString();
@@ -109,6 +109,22 @@ namespace TrackApp
                 return false;
             }
             return true;
+        }
+        private void InitializeSyncronization()
+        {
+            //Syncronization
+            this.udTrackHours.Value = (int)settings.TrackStart / 3600;
+            this.udTrackMinutes.Value = (int)(settings.TrackStart - this.udTrackHours.Value * 3600) / 60;
+            this.udTrackSeconds.Value = (int)(settings.TrackStart - this.udTrackHours.Value * 3600 - this.udTrackMinutes.Value * 60);
+            this.udTrackEndHours.Value = (int)settings.TrackEnd / 3600;
+            this.udTrackEndMinutes.Value = (int)(settings.TrackEnd - this.udTrackEndHours.Value * 3600) / 60;
+            this.udTrackEndSeconds.Value = (int)(settings.TrackEnd - this.udTrackEndHours.Value * 3600 - this.udTrackEndMinutes.Value * 60);
+            this.udVideoStHours.Value = (int)settings.VideoStart / 3600;
+            this.udVideoStMinutes.Value = (int)(settings.VideoStart - this.udVideoStHours.Value * 3600) / 60;
+            this.udVideoStSeconds.Value = (int)(settings.VideoStart - this.udVideoStHours.Value * 3600 - this.udVideoStMinutes.Value * 60);
+            this.udVideoEndHours.Value = (int)settings.VideoEnd / 3600;
+            this.udVideoEndMinutes.Value = (int)(settings.VideoEnd - this.udVideoEndHours.Value * 3600) / 60;
+            this.udVideoEndSeconds.Value = (int)(settings.VideoEnd - this.udVideoEndHours.Value * 3600 - this.udVideoEndMinutes.Value * 60);
         }
         #endregion
         #region ClickEH
@@ -254,6 +270,7 @@ namespace TrackApp
             //settings = settings.Deserialize();
             settings.VideoOutputPath = this.txtOutputDir.Text;
             settings.TrackStart = Convert.ToInt32(udTrackHours.Value) * 3600f + Convert.ToInt32(udTrackMinutes.Value) * 60 + Convert.ToInt32(udTrackSeconds.Value);
+            settings.TrackEnd = Convert.ToInt32(udTrackEndHours.Value) * 3600f + Convert.ToInt32(udTrackEndMinutes.Value) * 60 + Convert.ToInt32(udTrackEndSeconds.Value);
             settings.VideoStart = Convert.ToInt32(udVideoStHours.Value) * 3600f + Convert.ToInt32(udVideoStMinutes.Value) * 60 + Convert.ToInt32(udVideoStSeconds.Value);
             settings.VideoEnd = Convert.ToInt32(udVideoEndHours.Value) * 3600f + Convert.ToInt32(udVideoEndMinutes.Value) * 60 + Convert.ToInt32(udVideoEndSeconds.Value);
             //settings.BitRate = 20000000;
@@ -522,9 +539,12 @@ namespace TrackApp
             if (loadFileDialog.FileName != String.Empty && loadFileDialog.FileName != null)
             {
                 settings.Deserialize(loadFileDialog.FileName);
+                InitializeSyncronization();
                 InitializeContent();
             }
         }
+  
+        
     }
         #endregion
 }
