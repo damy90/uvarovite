@@ -140,17 +140,17 @@ public sealed class ProjectSettings
       return _instance;
     }
 
-    public void Serialize()
+    public void Serialize(string path = "saved-settings.xml")
     {
         XmlSerializer x = new XmlSerializer(GetType());
-        StreamWriter file = new StreamWriter("saved-settings.xml");
+        StreamWriter file = new StreamWriter(path);
         x.Serialize(file, this);
         file.Close();
     }
-    public ProjectSettings Deserialize()
+    public ProjectSettings Deserialize(string path = "saved-settings.xml")
     {
         XmlSerializer x = new XmlSerializer(GetType());
-        StreamReader file = new StreamReader("saved-settings.xml");
+        StreamReader file = new StreamReader(path);
         _instance = (ProjectSettings)x.Deserialize(file);
         file.Close();
         return _instance;
