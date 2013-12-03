@@ -11,8 +11,9 @@ public class WidgetTrack : WidgetDrawOnMap
     public override void Draw(Graphics grfx, float time)
     {
         //whole track
-        int wholeTrackLineWidth = Settings.WholeTrackLineWidth;
-        Pen wholeTrackPen = new Pen(Settings.WholeTrackColor, wholeTrackLineWidth);
+        var settings=ProjectSettings.GetSettings();
+        int wholeTrackLineWidth = settings.WholeTrackLineWidth;
+        Pen wholeTrackPen = new Pen(settings.WholeTrackColor, wholeTrackLineWidth);
 
         if (trackBitmap == null)
         {
@@ -26,13 +27,13 @@ public class WidgetTrack : WidgetDrawOnMap
             using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
             {
                 for (int i = 0; i < trackData.Length; i++)
-                    trackPoints[i] = Gps.ToPixelCoordinate(trackData[i], trackSize, wholeTrackLineWidth);
+                    trackPoints[i] = Gps.ToPixelCoordinate(trackData[i], trackSize);
                 drawTrack.DrawLines(wholeTrackPen, trackPoints);
             }
         }
         //draw track (traveled)
         //TODO: use interpolation
-        if (Settings.ShowTraveledTrack)
+        if (settings.ShowTraveledTrack)
         {
             int index = Gps.GetIndex(time);
             if (prevIndex != null && index != prevIndex)
@@ -40,8 +41,8 @@ public class WidgetTrack : WidgetDrawOnMap
                 PointF[] subTrackPoints = new PointF[index - prevIndex + 1];
                 Array.Copy(trackPoints, prevIndex, subTrackPoints, 0, index - prevIndex + 1);//index - prevIndex + 1 = 2
 
-                int traveledTrackLineWidth = Settings.TraveledTrackLineWidth;
-                Pen traveledTrackPen = new Pen(Settings.TraveledTrackColor, traveledTrackLineWidth);
+                int traveledTrackLineWidth = settings.TraveledTrackLineWidth;
+                Pen traveledTrackPen = new Pen(settings.TraveledTrackColor, traveledTrackLineWidth);
 
                 using (Graphics drawTrack = Graphics.FromImage(trackBitmap))
                 {
@@ -51,7 +52,6 @@ public class WidgetTrack : WidgetDrawOnMap
                 prevIndex = index;
             }
         }
-
         grfx.DrawImage(trackBitmap, GetPosition());
     }
 }

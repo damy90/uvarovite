@@ -6,6 +6,7 @@ using AForge.Video.FFMPEG;
 public static class VideoCompositor
 {
     private static List<Widget> activeWidgets;
+    public static Size VideoDimensions { get; private set; }
 
     public static void RenderVideo()
     {
@@ -21,9 +22,11 @@ public static class VideoCompositor
 
         // open video file
         reader.Open(settings.VideoInputPath);
+        VideoDimensions = new Size(reader.Width, reader.Height);
         float framerate = reader.FrameRate;
         // create new AVI file and open it
         writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, settings.VideoQuality * 1000000);
+
 
         long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
         //videoEnd = 6000;

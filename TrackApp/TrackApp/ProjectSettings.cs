@@ -35,54 +35,56 @@ public sealed class ProjectSettings
     public string VideoInputPath = @"C:\Users\Dany\Desktop\GOPR2340.avi";
     public string VideoOutputPath = @"C:\Users\Dany\Desktop\video-out.avi";
     public string GPXPath = @"C:\Users\Dany\Desktop\Debug\workout.gpx";
-    public VideoFormats Format = VideoFormats.xvid;
+    public VideoFormats Format= VideoFormats.xvid;
     //public int BitRate = 50000000;//2 Mbit/s
 
     //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
-    public float VideoStart = 0;//in seconds
-    public float TrackStart = 0;//VideoStart and TrackStart is the only synchronization we need!!!
-    public float VideoEnd = 0;//zero if video length is not trimmed
+
+    public float VideoStart = 60;//in seconds
+    public float TrackStart = 0;
+    public float VideoEnd = 240;//zero if video length is not trimmed
     public float TrackEnd = 0;// TODO add in GUI
     public int VideoSpeed = 8; //speed multiplier TODO add in GUI
     public int VideoQuality = 7;//Bitrate = quality * 1 000 000 TODO add in GUI
 
-    public bool ShowTrack = true;//TO DO: Finish track widget and change to true
-    public Point TrackPostion = new Point(100, 0);
-    public int TrackHeight = 250;//the width is calculated from the track points
+    public bool ShowTrack=true;//TO DO: Finish track widget and change to true
+
+    public Point TrackPostion = new Point(80, 80);
+    public int TrackHeight = 20;//the width is calculated from the track points 
     public Color TraveledTrackColor = Color.Red;
     public int TraveledTrackLineWidth = 2;
     public Color WholeTrackColor = Color.White;
     public int WholeTrackLineWidth = 6;
     public bool ShowTraveledTrack = true;//TODO add to GUI
 
-    public bool ShowPositionMarker = false;
+    public bool ShowPositionMarker=false;
     public int PositionMarkerSize = 10;
     public Color PositionMarkerColor = Color.DarkGreen;
     //TODO add classes for the rest of the widgets
-    public bool ShowOverlayImage = false;
+    public bool ShowOverlayImage=false;
     public string overlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
-    public Point overlayImagePosition = new Point(300, 300);
+    public Point overlayImagePosition=new Point(300,300);
 
-    public bool ShowElevationWidget = false;
+    public bool ShowElevationWidget=false;
     [XmlIgnoreAttribute]
     public Font ElevationWidgetFont = new Font("Ariel", 28);
-    public Point ElevationWidgetPosition = new Point(300, 0);
-    public Color ElevationWidgetColor = Color.White;
+    public Point ElevationWidgetPosition=new Point(300,0);
+    public Color ElevationWidgetColor=Color.White;
 
-    public bool ShowMap = false;
+    public bool ShowMap=false;
     public int MapHeight = 240;//should be bigger than the track height, width is bigger by the same value
     public float MapOpacity;
 
     public bool ShowDistanceWidget = false;
     [XmlIgnoreAttribute]
     public Font DistanceWidgetFont = new Font("Ariel", 28);
-    public Point DistanceWidgetPosition = new Point(0, 300);
+    public Point DistanceWidgetPosition = new Point(30, 95);
     public Color DistanceWidgetColor = Color.White;
 
     public bool ShowSpeedWidget = false;
     [XmlIgnoreAttribute]
     public Font SpeedWidgetFont = new Font("Ariel", 28);
-    public Point SpeedWidgetPosition = new Point(0, 400);
+    public Point SpeedWidgetPosition = new Point(3, 95);
     public Color SpeedWidgetColor = Color.White;
 
     private static ProjectSettings _instance;  //променлива за единствената инстанция на този клас
@@ -131,11 +133,11 @@ public sealed class ProjectSettings
     //единтвения начин за инстанцииране е от тук
     public static ProjectSettings GetSettings()
     {
-        if (_instance == null)
-        {
-            _instance = new ProjectSettings();
-        }
-        return _instance;
+      if (_instance == null)
+      {
+        _instance = new ProjectSettings();
+      }
+      return _instance;
     }
 
     public void Serialize()
@@ -153,4 +155,4 @@ public sealed class ProjectSettings
         file.Close();
         return _instance;
     }
-}
+  }

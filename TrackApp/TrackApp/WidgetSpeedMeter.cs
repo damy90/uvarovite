@@ -9,14 +9,15 @@ public class WidgetSpeedMeter:Widget
 {
     public override void Draw(Graphics grfx, float time)
     {
-        //TODO: if default
-        Point position = new Point(10, (int)(grfx.VisibleClipBounds.Height) - 50);
+        var settings = ProjectSettings.GetSettings();
+
+        Point position = PecentToPixels(settings.SpeedWidgetPosition);
 
         double speed = GPSData.GetData().GetSpeed(time);
         string s = string.Format("{0:0.0} {1}", speed, "km/h");
 
-        Font font = ProjectSettings.GetSettings().SpeedWidgetFont;
-        Brush brush = new SolidBrush(ProjectSettings.GetSettings().SpeedWidgetColor);
+        Font font = settings.SpeedWidgetFont;
+        Brush brush = new SolidBrush(settings.SpeedWidgetColor);
         grfx.DrawString(s, font, brush, position);
     }
 }

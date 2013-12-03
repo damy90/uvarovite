@@ -6,21 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public abstract class WidgetDrawOnMap : Widget
+public abstract class WidgetDrawOnMap:Widget
 {
-
     protected static Size WidgetSize;
-    protected static ProjectSettings Settings = ProjectSettings.GetSettings();
     protected static GPSData Gps = GPSData.GetData();
 
     protected static Point GetBoundPosition()
     {
-        return Settings.TrackPostion;
+        /*var inputPos = ProjectSettings.GetSettings().TrackPostion;
+        if (inputPos.X + GetBoundSize().Width > 100)
+            inputPos.X = 100 - GetBoundSize().Width;
+        if (inputPos.Y + GetBoundSize().Height > 100)
+            inputPos.Y = 100 - GetBoundSize().Height;*/
+        return PecentToPixels(ProjectSettings.GetSettings().TrackPostion);//TODO remoove
     }
 
     protected static PointF GetPosition()
     {
-        int wholeTrackLineWidth = Settings.WholeTrackLineWidth;
+        int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
         PointF pos = GetBoundPosition();
         return new PointF(pos.X - ((float)wholeTrackLineWidth) / 2, pos.Y - ((float)wholeTrackLineWidth) / 2);
     }
@@ -29,19 +32,18 @@ public abstract class WidgetDrawOnMap : Widget
         if (WidgetSize == new Size(0, 0))
         {
             GPSBox box = Gps.GetBox();
-            WidgetSize.Height = Settings.TrackHeight;
-            int wholeTrackLineWidth = Settings.WholeTrackLineWidth;
+            WidgetSize.Height = ProjectSettings.GetSettings().TrackHeight;
+            int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
             double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
             double ratio = (WidgetSize.Height - wholeTrackLineWidth) / (box.Size.Latitude);//avaiable size is slighly smaller due to line width
             WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
         }
-        return WidgetSize;
+        return PecentToPixels(WidgetSize);
     }
     protected static SizeF GetSize()
     {
-        SizeF pos = GetBoundSize();
-        int maxLineWidth = Math.Max(Settings.WholeTrackLineWidth, Settings.TraveledTrackLineWidth);
-        return new SizeF(pos.Width - maxLineWidth, pos.Height - maxLineWidth);
+        int maxLineWidth = Math.Max(ProjectSettings.GetSettings().WholeTrackLineWidth, ProjectSettings.GetSettings().TraveledTrackLineWidth);
+        return new SizeF(GetBoundSize().Width - maxLineWidth, GetBoundSize().Height - maxLineWidth);
     }
 }
 

@@ -10,13 +10,15 @@ public class WidgetDistanceMeter:Widget
 {
     public override void Draw(Graphics grfx, float time)
     {
-        Point position = new Point(200, System.Convert.ToInt32(grfx.VisibleClipBounds.Height) - 50);
+        var settings = ProjectSettings.GetSettings();
+        Point position = PecentToPixels(settings.DistanceWidgetPosition);
+        //200px, bottom
 
         double distance = GPSData.GetData().GetDistance(time) / 1000;
         string s = string.Format("{0:0.0} {1}", distance, "km");
 
-        Font font = ProjectSettings.GetSettings().DistanceWidgetFont;
-        Brush brush = new SolidBrush(ProjectSettings.GetSettings().DistanceWidgetColor);
+        Font font = settings.DistanceWidgetFont;
+        Brush brush = new SolidBrush(settings.DistanceWidgetColor);
         grfx.DrawString(s, font, brush, position);
     }
 }

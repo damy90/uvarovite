@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 public class WidgetPositionMarker : WidgetDrawOnMap
@@ -12,16 +8,17 @@ public class WidgetPositionMarker : WidgetDrawOnMap
     public override void Draw(Graphics grfx, float time)
     {
         GPSData gps = GPSData.GetData();
+        var settings = ProjectSettings.GetSettings();
 
         int index = gps.GetIndex(time);
-        PointF trackPoint = gps.ToPixelCoordinate(gps.GetTrack()[index], GetSize(), Settings.WholeTrackLineWidth);
+        PointF trackPoint = gps.ToPixelCoordinate(gps.GetTrack()[index], GetSize(), settings.WholeTrackLineWidth);
         trackPoint.X += GetPosition().X;
         trackPoint.Y += GetPosition().Y;
 
-        Pen pen = new Pen(ProjectSettings.GetSettings().PositionMarkerColor, 2);
-        Brush brush = new SolidBrush(ProjectSettings.GetSettings().PositionMarkerColor);
-        grfx.FillRectangle(brush, trackPoint.X, trackPoint.Y, ProjectSettings.GetSettings().PositionMarkerSize, ProjectSettings.GetSettings().PositionMarkerSize);
-        grfx.DrawRectangle(pen, trackPoint.X, trackPoint.Y, ProjectSettings.GetSettings().PositionMarkerSize, ProjectSettings.GetSettings().PositionMarkerSize);
+        Pen pen = new Pen(settings.PositionMarkerColor, 2);
+        Brush brush = new SolidBrush(settings.PositionMarkerColor);
+        grfx.FillRectangle(brush, trackPoint.X, trackPoint.Y, settings.PositionMarkerSize, settings.PositionMarkerSize);
+        grfx.DrawRectangle(pen, trackPoint.X, trackPoint.Y, settings.PositionMarkerSize, settings.PositionMarkerSize);
 
         // TODO: Add custom immage and orientation
     }
