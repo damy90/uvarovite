@@ -52,6 +52,7 @@ namespace TrackApp
         private void InitializeContent()
         {
             //Track
+            this.cbEnableTrack.IsChecked = settings.ShowTrack;
             this.txtTrackX.Text = settings.TrackPostion.X.ToString();
             this.txtTrackY.Text = settings.TrackPostion.Y.ToString();
             this.txtTrackHeight.Text = settings.TrackHeight.ToString();
@@ -60,21 +61,26 @@ namespace TrackApp
             this.cpTrackWholeColor.SelectedColor = Color.FromArgb(settings.WholeTrackColor.A, settings.WholeTrackColor.R, settings.WholeTrackColor.G, settings.WholeTrackColor.B);
             this.txtTrackWholeWidth.Text = settings.WholeTrackLineWidth.ToString();
             //Position marker
+            this.cbEnablePM.IsChecked = settings.ShowPositionMarker;
             this.txtPMSize.Text = settings.PositionMarkerSize.ToString();
             this.cpPMColor.SelectedColor = Color.FromArgb(settings.PositionMarkerColor.A, settings.PositionMarkerColor.R, settings.PositionMarkerColor.G, settings.PositionMarkerColor.B);
             //Overlay Image
+            this.cbEnableOverlayImage.IsChecked = settings.ShowOverlayImage;
             this.txtOIX.Text = settings.overlayImagePosition.X.ToString();
             this.txtOIY.Text = settings.overlayImagePosition.Y.ToString();
             //Map
+            this.cbEnableMap.IsChecked = settings.ShowMap;
             this.txtMapHeight.Text = settings.MapHeight.ToString();
             this.dudMapOpacity.Value = settings.MapOpacity;
             //Distance
+            this.cbEnableDistance.IsChecked = settings.ShowDistanceWidget;
             this.txtDistanceX.Text = settings.DistanceWidgetPosition.X.ToString();
             this.txtDistanceY.Text = settings.DistanceWidgetPosition.Y.ToString();
             this.cbDistanceFont.SelectedValue = new FontFamily(settings.PDistanceWidgetFont.FontFamily);
             this.txtDistanceFontSize.Value = settings.PDistanceWidgetFont.Size;
             this.cpDistanceColor.SelectedColor = Color.FromArgb(settings.DistanceWidgetColor.A, settings.DistanceWidgetColor.R, settings.DistanceWidgetColor.G, settings.DistanceWidgetColor.B);
             //Speed
+            this.cbEnableSpeed.IsChecked = settings.ShowSpeedWidget;
             this.txtSpeedX.Text = settings.SpeedWidgetPosition.X.ToString();
             this.txtSpeedY.Text = settings.SpeedWidgetPosition.Y.ToString();
             this.cbSpeedFont.SelectedValue = new FontFamily(settings.PSpeedWidgetFont.FontFamily);
@@ -493,6 +499,30 @@ namespace TrackApp
             {
                 svOutputDir.Visibility = Visibility.Visible;
                 txtOutputDir.Text = saveFileDialog.FileName;
+            }
+        }
+
+        private void btnSaveSettings_Click(object sender, RoutedEventArgs e)
+        {
+            saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XAML (.XAML)|*.xaml";
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.FileName != String.Empty && saveFileDialog.FileName != null)
+            {
+                settings.Serialize(saveFileDialog.FileName);
+            }
+        }
+
+        private void btnLoadSettings_Click(object sender, RoutedEventArgs e)
+        {
+            loadFileDialog = new OpenFileDialog();
+            loadFileDialog.Filter = "XAML (.XAMl)|*.xaml";
+            loadFileDialog.Multiselect = false;
+            loadFileDialog.ShowDialog();
+            if (loadFileDialog.FileName != String.Empty && loadFileDialog.FileName != null)
+            {
+                settings.Deserialize(loadFileDialog.FileName);
+                InitializeContent();
             }
         }
     }
