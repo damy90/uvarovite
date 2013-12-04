@@ -28,7 +28,7 @@
     </Window.Resources>
 
     <Grid Margin="0,0,2,161">
-        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Width="283" Margin="215,37,0,-115" d:IsHidden="True">
+        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Width="283" Margin="215,37,0,-115">
             <Button x:Name="btnLoadVideo" Style="{StaticResource PictureButton}"
                     Click="btnLoadVideoClick" 
                     MouseEnter="btnLoadVideo_MouseEnter"
@@ -48,8 +48,8 @@
                     <ImageBrush ImageSource="Resources\iconGPX_leave.png"/>
                 </Button.Background>
             </Button>
-            <Label x:Name="lblEncoding" HorizontalAlignment="Left" Margin="0,239,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6" Content="Encoding:"/>
-            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="163,241,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbEncoding_SelectionChanged"/>
+            <Label x:Name="lblEncoding" HorizontalAlignment="Left" Margin="0,230,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6" Content="Encoding:"/>
+            <ComboBox x:Name="cmbEncoding" HorizontalAlignment="Left" Margin="5,260,0,0" VerticalAlignment="Top" Width="66" SelectionChanged="cmbEncoding_SelectionChanged"/>
             <Label x:Name="lblOutputDir" HorizontalAlignment="Left" Height="47" Margin="0,192,0,0"  VerticalAlignment="Top" Width="181">
                 <ScrollViewer x:Name="svOutputDir" Visibility="Hidden" >
                     <TextBlock x:Name="txtOutputDir" TextWrapping="Wrap"/>
@@ -68,8 +68,34 @@
             <Label x:Name="lblInputVideo" Content="Input video:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166"/>
             <Label x:Name="lblTrack" Content="Track:" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" Width="166"/>
             <Label x:Name="lblOutputVideo" Content="Output video:" HorizontalAlignment="Left" Margin="0,166,0,0" VerticalAlignment="Top" Width="166"/>
+            <Label x:Name="lblQuality" HorizontalAlignment="Left" Margin="96,230,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6" Content="Quality:"/>
+            <ComboBox x:Name="cmbOutputQuality" HorizontalAlignment="Left" Margin="101,260,0,0" VerticalAlignment="Top" Width="59" >
+                <ComboBoxItem  Content="1"/>
+                <ComboBoxItem  Content="2"/>
+                <ComboBoxItem  Content="3"/>
+                <ComboBoxItem  Content="4"/>
+                <ComboBoxItem  Content="5"/>
+                <ComboBoxItem  Content="6"/>
+                <ComboBoxItem  Content="7"/>
+                <ComboBoxItem  Content="8"/>
+                <ComboBoxItem  Content="9"/>
+                <ComboBoxItem  Content="10"/>
+            </ComboBox>
+            <Label x:Name="lblOutputSpeed" HorizontalAlignment="Left" Margin="186,229,-11,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="30" RenderTransformOrigin="0.491,0.6" Content="Speed:"/>
+            <ComboBox x:Name="cmbSpeed" HorizontalAlignment="Left" Margin="190,259,0,0" VerticalAlignment="Top" Width="59" RenderTransformOrigin="0.519,-0.03" SelectedIndex="0">
+                <ComboBoxItem x:Name="x1" Content="x1"/>
+                <ComboBoxItem x:Name="x2" Content="x2"/>
+                <ComboBoxItem x:Name="x3" Content="x3"/>
+                <ComboBoxItem x:Name="x4" Content="x4"/>
+                <ComboBoxItem x:Name="x5" Content="x5"/>
+                <ComboBoxItem x:Name="x6" Content="x6"/>
+                <ComboBoxItem x:Name="x7" Content="x7"/>
+                <ComboBoxItem x:Name="x8" Content="x8"/>
+                <ComboBoxItem x:Name="x9" Content="x9"/>
+                <ComboBoxItem x:Name="x10" Content="x10"/>
+            </ComboBox>
         </Grid>
-        <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="283" Margin="186,37,0,0">
+        <Grid x:Name="grdSync" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="283" Margin="186,37,0,0" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="Markings" Height="30"/>
                 <RowDefinition x:Name="TrackStart" Height="30"/>
@@ -96,7 +122,7 @@
             <xctk:IntegerUpDown x:Name="udTrackEndSeconds" Margin="234,35,10,-29"  Height="25" Grid.Row="3" FormatString="F0" Increment="1" Maximum="59" Minimum="0" Value="0"/>
             <Label Grid.Row="3" x:Name="lbTrackEnd" Content="Track End:" HorizontalAlignment="Left" Margin="11,35,0,-29" VerticalAlignment="Top" Foreground="#3045FF" Width="91" FontFamily="Arial" FontSize="15" Height="25" RenderTransformOrigin="0.459,2.157"/>
         </Grid>
-        <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" VerticalAlignment="Top" Width="170" Margin="5,31,0,-166" d:IsHidden="True">
+        <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" VerticalAlignment="Top" Width="170" Margin="5,31,0,-166">
             <Button x:Name="btnFiles" 
                     Style="{StaticResource PictureButton}" 
                     Margin="5,6,10,366"
@@ -160,20 +186,21 @@
             <CheckBox x:Name="cbEnableTrack" Content="Enable Track" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableTrack_Checked" Unchecked="cbEnableTrack_Uncheck"/>
             <Grid x:Name="grdEnabledTrack" Margin="18,39,0,5">
                 <Label  x:Name="lblTrackCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtTrackX" HorizontalAlignment="Left" Height="23" Margin="40,27,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblTrackX" Content="X:" HorizontalAlignment="Left" Margin="6,26,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtTrackY" HorizontalAlignment="Left" Height="23" Margin="140,27,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblTrackY" Content="Y:" HorizontalAlignment="Left" Margin="106,25,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtTrackX" HorizontalAlignment="Left" Height="23" Margin="51,27,0,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblTrackX" Content="X(%):" HorizontalAlignment="Left" Margin="6,26,0,0" VerticalAlignment="Top" Width="51" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtTrackY" HorizontalAlignment="Left" Height="23" Margin="153,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblTrackY" Content="Y(%):" HorizontalAlignment="Left" Margin="106,25,0,0" VerticalAlignment="Top" Width="50" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <xctk:ColorPicker x:Name="cpTrackTravelledColor" Margin="6,106,165,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" AvailableColorsHeader="Standard Colors" DisplayColorAndName="True" ShowAdvancedButton="True" />
                 <Label  x:Name="lblTrackHeight" Content="Height:" HorizontalAlignment="Left" Margin="0,56,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <TextBox x:Name="txtTrackHeight" HorizontalAlignment="Left" Height="23" Margin="121,56,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="txtTrackHeight" HorizontalAlignment="Left" Height="23" Margin="121,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
                 <Label  x:Name="lblTrackTravelled" Content="Travelled track:" HorizontalAlignment="Left" Margin="0,82,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <xctk:ColorPicker x:Name="cpTrackWholeColor" Margin="6,158,164,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" AvailableColorsHeader="Standard Colors" DisplayColorAndName="True" ShowAdvancedButton="True" />
-                <Label  x:Name="lblTrackWhole" Content="Whole track:" HorizontalAlignment="Left" Margin="0,134,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
+                <xctk:ColorPicker x:Name="cpTrackWholeColor" Margin="5,189,165,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" AvailableColorsHeader="Standard Colors" DisplayColorAndName="True" ShowAdvancedButton="True" />
+                <Label  x:Name="lblTrackWhole" Content="Whole track:" HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
                 <Label  x:Name="lblTrackTravelledWidth" Content="Width:" HorizontalAlignment="Left" Margin="105,106,0,0" VerticalAlignment="Top" Width="59" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <Label  x:Name="lblTrackWholeWidth" Content="Width:" HorizontalAlignment="Left" Margin="106,158,0,0" VerticalAlignment="Top" Width="57" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <TextBox x:Name="txtTrackTravelledWidth" HorizontalAlignment="Left" Height="23" Margin="163,106,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="27"/>
-                <TextBox x:Name="txtTrackWholeWidth" HorizontalAlignment="Left" Height="23" Margin="164,158,0,0" TextWrapping="Wrap" Text="9" VerticalAlignment="Top" Width="27"/>
+                <Label  x:Name="lblTrackWholeWidth" Content="Width:" HorizontalAlignment="Left" Margin="105,187,0,0" VerticalAlignment="Top" Width="57" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
+                <TextBox x:Name="txtTrackTravelledWidth" HorizontalAlignment="Left" Height="23" Margin="163,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="27"/>
+                <TextBox x:Name="txtTrackWholeWidth" HorizontalAlignment="Left" Height="23" Margin="163,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="27"/>
+                <CheckBox x:Name="cbShowTravelledTrack" Content="show travelled track" HorizontalAlignment="Left" Margin="34,139,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="156" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableTrack_Checked" Unchecked="cbEnableTrack_Uncheck"/>
 
             </Grid>
         </Grid>
@@ -189,17 +216,17 @@
                 <ComboBox x:Name="cbSpeedFont" Margin="113,9,9,0" VerticalAlignment="Top" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" SelectedIndex="0" Height="25"/>
                 <Label  x:Name="lblSpeedFont" Content="Font:" HorizontalAlignment="Left" Margin="29,10,0,0" VerticalAlignment="Top" Width="52" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <Label  x:Name="lblSpeedCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="29,98,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtSpeedX" HorizontalAlignment="Left" Height="23" Margin="126,124,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblSpeedX" Content="X:" HorizontalAlignment="Left" Margin="97,124,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtSpeedY" HorizontalAlignment="Left" Height="23" Margin="204,125,0,0" TextWrapping="Wrap" Text="400" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5"/>
-                <Label  x:Name="lblSpeedY" Content="Y:" HorizontalAlignment="Left" Margin="175,123,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtSpeedX" HorizontalAlignment="Left" Height="23" Margin="115,124,0,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblSpeedX" Content="X(%):" HorizontalAlignment="Left" Margin="67,124,0,0" VerticalAlignment="Top" Width="48" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtSpeedY" HorizontalAlignment="Left" Height="23" Margin="204,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5"/>
+                <Label  x:Name="lblSpeedY" Content="Y(%):" HorizontalAlignment="Left" Margin="164,124,0,0" VerticalAlignment="Top" Width="44" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <xctk:ColorPicker x:Name="cpSpeedColor" Margin="170,39,10,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" AvailableColorsHeader="Standard Colors" DisplayColorAndName="True" ShowAdvancedButton="True" />
                 <Label  x:Name="lblSpeedColor" Content="Color:" HorizontalAlignment="Left" Margin="29,40,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <Label  x:Name="lblSpeedFontSize" Content="Font size:" HorizontalAlignment="Left" Margin="29,73,0,0" VerticalAlignment="Top" Width="87" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15" RenderTransformOrigin="0.533,0.213"/>
                 <xctk:IntegerUpDown x:Name="txtSpeedFontSize" Margin="170,74,10,97" Increment="1" Minimum="28" Value="28"/>
             </Grid>
         </Grid>
-        <Grid x:Name="grdOptions">
+        <Grid x:Name="grdOptions" d:IsHidden="True">
             <Button x:Name="btnLoadSettings" Style="{StaticResource PictureButton}" Click="btnLoadSettings_Click" Margin="10,10,401,227" Content="Load Settings" />
             <Button x:Name="btnSaveSettings" Style="{StaticResource PictureButton}" Click="btnSaveSettings_Click" Margin="125,10,286,227" Content="Save Settings" />
         </Grid>
@@ -210,13 +237,13 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <CheckBox x:Name="cbEnableDistance" Content="Enable Distance" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="133" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableDistance_Checked" Unchecked="cbEnableDistance_Uncheck" d:IsHidden="True"/>
-            <Grid x:Name="grdEnabledDistance" HorizontalAlignment="Left" Height="175" Margin="10,10,0,-62" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263" d:IsHidden="True">
+            <CheckBox x:Name="cbEnableDistance" Content="Enable Distance" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="133" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableDistance_Checked" Unchecked="cbEnableDistance_Uncheck"/>
+            <Grid x:Name="grdEnabledDistance" HorizontalAlignment="Left" Height="175" Margin="10,10,0,-62" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263">
                 <Label  x:Name="lblDistanceCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="5,95,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtDistanceX" HorizontalAlignment="Left" Height="23" Margin="45,122,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblDistanceX" Content="X:" HorizontalAlignment="Left" Margin="11,121,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtDistanceY" HorizontalAlignment="Left" Height="23" Margin="135,122,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblDistanceY" Content="Y:" HorizontalAlignment="Left" Margin="101,120,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtDistanceX" HorizontalAlignment="Left" Height="23" Margin="54,122,0,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblDistanceX" Content="X(%):" HorizontalAlignment="Left" Margin="11,121,0,0" VerticalAlignment="Top" Width="43" Foreground="#3045FF" FontFamily="Arial" Height="26" FontSize="15"/>
+                <TextBox x:Name="txtDistanceY" HorizontalAlignment="Left" Height="23" Margin="143,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblDistanceY" Content="Y(%):" HorizontalAlignment="Left" Margin="102,122,0,0" VerticalAlignment="Top" Width="44" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <ComboBox x:Name="cbDistanceFont" Margin="90,9,32,0" VerticalAlignment="Top" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" SelectedIndex="0" Height="25"/>
                 <Label  x:Name="lblDistanceFont" Content="Font:" HorizontalAlignment="Left" Margin="6,7,0,0" VerticalAlignment="Top" Width="52" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
                 <xctk:ColorPicker x:Name="cpDistanceColor" Margin="135,69,34,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" AvailableColorsHeader="Standard Colors" DisplayColorAndName="True" ShowAdvancedButton="True" />
@@ -250,10 +277,10 @@
             <CheckBox x:Name="cbEnableOverlayImage" Content="Enable Overlay Image" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="172" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableOI_Checked" Unchecked="cbEnableOI_Uncheck"/>
             <Grid x:Name="grdEnabledOI" HorizontalAlignment="Left" Height="176" Margin="10,10,0,-63" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="263">
                 <Label  x:Name="lblOICoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="7,2,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtOIX" HorizontalAlignment="Left" Height="23" Margin="47,29,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblOIX" Content="X:" HorizontalAlignment="Left" Margin="13,28,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtOIY" HorizontalAlignment="Left" Height="23" Margin="137,29,0,0" TextWrapping="Wrap" Text="0&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblOIY" Content="Y:" HorizontalAlignment="Left" Margin="103,27,0,0" VerticalAlignment="Top" Width="29" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                <TextBox x:Name="txtOIX" HorizontalAlignment="Left" Height="23" Margin="54,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblOIX" Content="X(%):" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="44" Foreground="#3045FF" FontFamily="Arial" Height="33" FontSize="15"/>
+                <TextBox x:Name="txtOIY" HorizontalAlignment="Left" Height="23" Margin="153,29,0,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" Width="49"/>
+                <Label  x:Name="lblOIY" Content="Y(%):" HorizontalAlignment="Left" Margin="103,27,0,0" VerticalAlignment="Top" Width="45" Foreground="#3045FF" FontFamily="Arial" Height="34" FontSize="15"/>
                 <Button x:Name="btnBrowseImage" Style="{StaticResource PictureButton}" Content="Browse Image" Margin="90,74,77,47" Click="btnBrowseImage_Click"/>
             </Grid>
         </Grid>
@@ -266,13 +293,13 @@
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnableMap" Content="Enable Map" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="133" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableMap_Checked" Unchecked="cbEnableMap_Uncheck"/>
             <Grid x:Name="grdEnabledMap" HorizontalAlignment="Left" Height="174" Margin="10,10,0,-61" VerticalAlignment="Top" Width="265" Grid.Row="1" Grid.RowSpan="3">
-                <Label  x:Name="lblMapHeight" Content="Height:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <TextBox x:Name="txtMapHeight" HorizontalAlignment="Left" Height="23" Margin="103,15,0,0" TextWrapping="Wrap" Text="240" VerticalAlignment="Top" Width="68"/>
+                <Label  x:Name="lblMapHeight" Content="Height(%):" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
+                <TextBox x:Name="txtMapHeight" HorizontalAlignment="Left" Height="23" Margin="103,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
                 <Label  x:Name="lblMapOpacity" Content="Opacity:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <xctk:DoubleUpDown x:Name="dudMapOpacity" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" VerticalAlignment="Top" Width="68" Increment="0.1" Maximum="1" Minimum="0" Value="0.5"/>
+                <xctk:DoubleUpDown x:Name="dudMapOpacity" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" VerticalAlignment="Top" Width="68" Increment="0.1" Maximum="1" Minimum="0" />
             </Grid>
         </Grid>
-        <Button x:Name="btnProceed" Style="{StaticResource PictureButton}" Click="btnProceed_Click" Margin="373,325,12,-152" >
+        <Button x:Name="btnProceed" Style="{StaticResource PictureButton}" Click="btnProceed_Click" Margin="380,346,12,-152" >
             <Button.Background>
                 <ImageBrush ImageSource="Resources/Proseed_white.png"/>
             </Button.Background>

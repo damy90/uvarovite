@@ -43,9 +43,9 @@ public sealed class ProjectSettings
     public float VideoStart = 60;//in seconds
     public float TrackStart = 0;
     public float VideoEnd = 240;//zero if video length is not trimmed
-    public float TrackEnd = 0;// TODO add in GUI
-    public int VideoSpeed = 8; //speed multiplier TODO add in GUI
-    public int VideoQuality = 7;//Bitrate = quality * 1 000 000 TODO add in GUI
+    public float TrackEnd = 0;
+    public int VideoSpeed = 8; //speed multiplier 
+    public int VideoQuality = 7;//Bitrate = quality * 1 000 000 
 
     public bool ShowTrack=true;//TO DO: Finish track widget and change to true
 
@@ -55,7 +55,7 @@ public sealed class ProjectSettings
     public int TraveledTrackLineWidth = 2;
     public Color WholeTrackColor = Color.White;
     public int WholeTrackLineWidth = 6;
-    public bool ShowTraveledTrack = true;//TODO add to GUI
+    public bool ShowTraveledTrack = true;
 
     public bool ShowPositionMarker=false;
     public int PositionMarkerSize = 10;

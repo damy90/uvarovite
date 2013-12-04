@@ -50,7 +50,10 @@ namespace TrackApp
         }
         private void InitializeContent()
         {
-
+            //Video Settings
+            this.cmbEncoding.SelectedIndex = (int)settings.Format;
+            this.cmbSpeed.SelectedIndex = settings.VideoSpeed - 1;
+            this.cmbOutputQuality.SelectedIndex = settings.VideoQuality - 1;
             //Track
             this.cbEnableTrack.IsChecked = settings.ShowTrack;
             this.txtTrackX.Text = settings.TrackPostion.X.ToString();
@@ -60,6 +63,7 @@ namespace TrackApp
             this.txtTrackTravelledWidth.Text = settings.TraveledTrackLineWidth.ToString();
             this.cpTrackWholeColor.SelectedColor = Color.FromArgb(settings.WholeTrackColor.A, settings.WholeTrackColor.R, settings.WholeTrackColor.G, settings.WholeTrackColor.B);
             this.txtTrackWholeWidth.Text = settings.WholeTrackLineWidth.ToString();
+            this.cbShowTravelledTrack.IsChecked = settings.ShowTraveledTrack;
             //Position marker
             this.cbEnablePM.IsChecked = settings.ShowPositionMarker;
             this.txtPMSize.Text = settings.PositionMarkerSize.ToString();
@@ -273,6 +277,9 @@ namespace TrackApp
             settings.TrackEnd = Convert.ToInt32(udTrackEndHours.Value) * 3600f + Convert.ToInt32(udTrackEndMinutes.Value) * 60 + Convert.ToInt32(udTrackEndSeconds.Value);
             settings.VideoStart = Convert.ToInt32(udVideoStHours.Value) * 3600f + Convert.ToInt32(udVideoStMinutes.Value) * 60 + Convert.ToInt32(udVideoStSeconds.Value);
             settings.VideoEnd = Convert.ToInt32(udVideoEndHours.Value) * 3600f + Convert.ToInt32(udVideoEndMinutes.Value) * 60 + Convert.ToInt32(udVideoEndSeconds.Value);
+            settings.VideoSpeed = this.cmbSpeed.SelectedIndex + 1;
+            settings.VideoQuality = this.cmbOutputQuality.SelectedIndex + 1;
+            //settings.Format = (VideoFormats)this.cmbEncoding.SelectedIndex; //not tested
             //settings.BitRate = 20000000;
             //Track
             settings.ShowTrack = (bool)this.cbEnableTrack.IsChecked;
@@ -284,6 +291,7 @@ namespace TrackApp
                 settings.TraveledTrackLineWidth = Convert.ToInt32(this.txtTrackTravelledWidth.Text);
                 settings.WholeTrackColor = System.Drawing.Color.FromArgb(this.cpTrackWholeColor.SelectedColor.A, this.cpTrackWholeColor.SelectedColor.R, this.cpTrackWholeColor.SelectedColor.G, this.cpTrackWholeColor.SelectedColor.B);
                 settings.WholeTrackLineWidth = Convert.ToInt32(this.txtTrackWholeWidth.Text);
+                settings.ShowTraveledTrack = (bool)this.cbShowTravelledTrack.IsChecked;
             }
             //Position marker
             settings.ShowPositionMarker = (bool)this.cbEnablePM.IsChecked;
