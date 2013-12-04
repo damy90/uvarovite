@@ -11,6 +11,7 @@ public class WidgetTrack : WidgetDrawOnMap
     public override void Draw(Graphics grfx, float time)
     {
         //whole track
+        //TODO If there is only 1 point
         var settings=ProjectSettings.GetSettings();
         int wholeTrackLineWidth = settings.WholeTrackLineWidth;
         Pen wholeTrackPen = new Pen(settings.WholeTrackColor, wholeTrackLineWidth);

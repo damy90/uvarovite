@@ -168,6 +168,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EmptyTrackExeption.cs" />
     <Compile Include="GPSUtil.cs" />
     <Compile Include="ProjectSettings.cs" />
     <Compile Include="Settings.xaml.cs">

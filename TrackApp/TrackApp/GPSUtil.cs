@@ -138,6 +138,8 @@ public sealed class GPSData
 
         gpsPoints = new GPSPoint[pts.Count];//we need an array rather than list for faster access
         //TODO throw exeption if track is empty
+        if (gpsPoints.Length == 0)
+            throw new EmptyTrackExeption("The generated track is empty! Try default sync settings or another track file.");
         int n = 0;
         foreach (GPSPoint point in pts)
         {
