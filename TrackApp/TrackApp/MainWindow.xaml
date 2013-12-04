@@ -28,7 +28,7 @@
     </Window.Resources>
 
     <Grid Margin="0,0,2,161">
-        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Width="283" Margin="215,37,0,-115">
+        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Width="283" Margin="215,37,0,-115" d:IsHidden="True">
             <Button x:Name="btnLoadVideo" Style="{StaticResource PictureButton}"
                     Click="btnLoadVideoClick" 
                     MouseEnter="btnLoadVideo_MouseEnter"
@@ -122,7 +122,7 @@
             <xctk:IntegerUpDown x:Name="udTrackEndSeconds" Margin="234,35,10,-29"  Height="25" Grid.Row="3" FormatString="F0" Increment="1" Maximum="59" Minimum="0" Value="0"/>
             <Label Grid.Row="3" x:Name="lbTrackEnd" Content="Track End:" HorizontalAlignment="Left" Margin="11,35,0,-29" VerticalAlignment="Top" Foreground="#3045FF" Width="91" FontFamily="Arial" FontSize="15" Height="25" RenderTransformOrigin="0.459,2.157"/>
         </Grid>
-        <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" VerticalAlignment="Top" Width="170" Margin="5,31,0,-166">
+        <Grid x:Name="grdControlButtons" HorizontalAlignment="Left" Height="407" VerticalAlignment="Top" Width="170" Margin="5,31,0,-166" d:IsHidden="True">
             <Button x:Name="btnFiles" 
                     Style="{StaticResource PictureButton}" 
                     Margin="5,6,10,366"
@@ -182,7 +182,7 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid x:Name="grdTrack" HorizontalAlignment="Left" Width="283" Margin="200,39,0,-105" d:IsHidden="True">
+        <Grid x:Name="grdTrack" HorizontalAlignment="Left" Width="283" Margin="200,39,0,-105">
             <CheckBox x:Name="cbEnableTrack" Content="Enable Track" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableTrack_Checked" Unchecked="cbEnableTrack_Uncheck"/>
             <Grid x:Name="grdEnabledTrack" Margin="18,39,0,5">
                 <Label  x:Name="lblTrackCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
@@ -200,7 +200,7 @@
                 <Label  x:Name="lblTrackWholeWidth" Content="Width:" HorizontalAlignment="Left" Margin="105,187,0,0" VerticalAlignment="Top" Width="57" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
                 <TextBox x:Name="txtTrackTravelledWidth" HorizontalAlignment="Left" Height="23" Margin="163,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="27"/>
                 <TextBox x:Name="txtTrackWholeWidth" HorizontalAlignment="Left" Height="23" Margin="163,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="27"/>
-                <CheckBox x:Name="cbShowTravelledTrack" Content="show travelled track" HorizontalAlignment="Left" Margin="34,139,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="156" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableTrack_Checked" Unchecked="cbEnableTrack_Uncheck"/>
+                <CheckBox x:Name="cbShowTravelledTrack" Content="show travelled track" HorizontalAlignment="Left" Margin="34,139,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="156" FontFamily="Arial" FontSize="15" Height="20" />
 
             </Grid>
         </Grid>

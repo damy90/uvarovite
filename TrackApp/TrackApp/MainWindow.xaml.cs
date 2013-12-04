@@ -530,7 +530,7 @@ namespace TrackApp
         private void btnSaveSettings_Click(object sender, RoutedEventArgs e)
         {
             saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "XAML (.XAML)|*.xaml";
+            saveFileDialog.Filter = "XML (.XML)|*.xml";
             saveFileDialog.ShowDialog();
             if (saveFileDialog.FileName != String.Empty && saveFileDialog.FileName != null)
             {
@@ -541,7 +541,7 @@ namespace TrackApp
         private void btnLoadSettings_Click(object sender, RoutedEventArgs e)
         {
             loadFileDialog = new OpenFileDialog();
-            loadFileDialog.Filter = "XAML (.XAMl)|*.xaml";
+            loadFileDialog.Filter = "XML (.XMl)|*.xml";
             loadFileDialog.Multiselect = false;
             loadFileDialog.ShowDialog();
             if (loadFileDialog.FileName != String.Empty && loadFileDialog.FileName != null)
