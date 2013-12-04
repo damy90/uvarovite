@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using AForge.Video.FFMPEG;
+using System.Windows.Forms;//for testing
 
 public static class VideoCompositor
 {
@@ -12,7 +14,7 @@ public static class VideoCompositor
     {
         ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
         //string encoding = settings.Format.ToString();//трябва да се тества
-        //TODO moove to Widget
+        //TODO moove to Widget, if null
         new GPXFileLoader().LoadPoints(settings.GPXPath);
 
         UpdateActiveWidgets(ref activeWidgets);
@@ -83,11 +85,12 @@ public static class VideoCompositor
         new GPXFileLoader().LoadPoints(settings.GPXPath);
         UpdateActiveWidgets(ref activeWidgets);
         float framerate = reader.FrameRate;
+        VideoDimensions = new Size(reader.Width, reader.Height);
         for (long n = 0; n < reader.FrameCount; n++)
         {
             // get next frame
             Bitmap videoFrame = reader.ReadVideoFrame();
-            if (n % time * framerate == 0 && n > 0)
+            if (n == time * framerate && n > 0)
             {
                 using (Graphics grfx = Graphics.FromImage(videoFrame))
                 {
@@ -95,8 +98,8 @@ public static class VideoCompositor
                     foreach (var widget in activeWidgets)
                         widget.Draw(grfx, time);
                 }
-                videoFrame.Dispose();
                 reader.Close();
+                videoFrame.Save("testPreviewFrame.png",ImageFormat.Png);//test
                 return videoFrame;
             }
             videoFrame.Dispose();

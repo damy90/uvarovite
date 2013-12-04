@@ -23,7 +23,7 @@ namespace TrackApp
             IniializeVisibilities();
             InitializeContent();
         }
-       
+
         #region Helping Methods
         private void IniializeVisibilities()
         {
@@ -89,7 +89,7 @@ namespace TrackApp
             this.txtSpeedY.Text = settings.SpeedWidgetPosition.Y.ToString();
             this.cbSpeedFont.SelectedValue = new FontFamily(settings.PSpeedWidgetFont.FontFamily);
             this.cpSpeedColor.SelectedColor = Color.FromArgb(settings.SpeedWidgetColor.A, settings.SpeedWidgetColor.R, settings.SpeedWidgetColor.G, settings.SpeedWidgetColor.B);
-        } 
+        }
         private void ChangeIconBackground(string path, System.Windows.Controls.Button btn)
         {
             var imgBrush = new ImageBrush();
@@ -99,7 +99,7 @@ namespace TrackApp
         }
         private bool CheckFileGridInput()
         {
-            
+
             if (settings.VideoInputPath == null || settings.VideoInputPath == string.Empty)
             {
                 return false;
@@ -336,10 +336,11 @@ namespace TrackApp
             }
             try
             {
+                VideoCompositor.Preview(180);
                 //VideoCompositor.RenderVideo();
                 MessageBoxResult error = MessageBox.Show("Success!");
                 //comment this if you don't want to start the video immediately after the rendering
-                Process.Start(saveFileDialog.FileName);
+                //Process.Start(saveFileDialog.FileName);
             }
             catch (Exception ex)
             {
@@ -535,7 +536,7 @@ namespace TrackApp
             if (saveFileDialog.FileName != String.Empty && saveFileDialog.FileName != null)
             {
                 settings.Serialize(saveFileDialog.FileName);
-            }
+    }
         }
 
         private void btnLoadSettings_Click(object sender, RoutedEventArgs e)
