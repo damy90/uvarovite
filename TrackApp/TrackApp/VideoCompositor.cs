@@ -12,8 +12,8 @@ public static class VideoCompositor
     {
         ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
         //string encoding = settings.Format.ToString();//трябва да се тества
+        //TODO moove to Widget
         new GPXFileLoader().LoadPoints(settings.GPXPath);
-
 
         UpdateActiveWidgets(ref activeWidgets);
         VideoFileWriter writer = new VideoFileWriter();
@@ -72,6 +72,36 @@ public static class VideoCompositor
         }
         reader.Close();
         writer.Close();
+    }
+
+    public static Bitmap Preview(float time)
+    {
+        ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
+        VideoFileReader reader = new VideoFileReader();
+        reader.Open(settings.VideoInputPath);
+        //TODO moove to Widget
+        new GPXFileLoader().LoadPoints(settings.GPXPath);
+        UpdateActiveWidgets(ref activeWidgets);
+        float framerate = reader.FrameRate;
+        for (long n = 0; n < reader.FrameCount; n++)
+        {
+            // get next frame
+            Bitmap videoFrame = reader.ReadVideoFrame();
+            if (n % time * framerate == 0 && n > 0)
+            {
+                using (Graphics grfx = Graphics.FromImage(videoFrame))
+                {
+                    grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    foreach (var widget in activeWidgets)
+                        widget.Draw(grfx, time);
+                }
+                videoFrame.Dispose();
+                reader.Close();
+                return videoFrame;
+            }
+            videoFrame.Dispose();
+        }
+        throw new ApplicationException("The time speciffied is outside the video timespan.");
     }
 
     private static void UpdateActiveWidgets(ref List<Widget> activeWidgets)
