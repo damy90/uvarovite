@@ -11,7 +11,7 @@ public static class VideoCompositor
     public static void RenderVideo()
     {
         ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
-        string encoding = settings.Format.ToString();//трябва да се тества
+        //string encoding = settings.Format.ToString();//трябва да се тества
         new GPXFileLoader().LoadPoints(settings.GPXPath);
 
 
@@ -25,8 +25,25 @@ public static class VideoCompositor
         VideoDimensions = new Size(reader.Width, reader.Height);
         float framerate = reader.FrameRate;
         // create new AVI file and open it
-        writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, VideoCodec.MPEG4, settings.VideoQuality * 1000000);
+        var encoding = VideoCodec.MPEG4;
+        switch (settings.Format.ToString())
+        {
+            
+            case "WMV2":
+                encoding = VideoCodec.WMV2;
+                break;
+            case "MPEG2":
+                encoding = VideoCodec.MPEG2;
+                break;
+            case "Raw":
+                encoding = VideoCodec.Raw;
+                break;
+            default:
+                encoding = VideoCodec.MPEG4;
+                break;
+        }
 
+        writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, encoding, settings.VideoQuality * 1000000);
 
         long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
         //videoEnd = 6000;
