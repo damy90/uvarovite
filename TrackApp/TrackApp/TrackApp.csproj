@@ -180,6 +180,7 @@
     <Compile Include="WidgetDistanceMeter.cs" />
     <Compile Include="WidgetDrawOnMap.cs" />
     <Compile Include="WidgetMap.cs" />
+    <Compile Include="WidgetOverlayImage.cs" />
     <Compile Include="WidgetPositionMarker.cs" />
     <Compile Include="WidgetSpeedMeter.cs" />
     <Compile Include="WidgetTrack.cs" />

@@ -8,12 +8,12 @@ public static class VideoCompositor
 {
     private static List<Widget> activeWidgets;
     public static Size VideoDimensions { get; private set; }
-
+    //TODO add sound
     public static void RenderVideo()
     {
         ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
         //string encoding = settings.Format.ToString();//трябва да се тества
-        //TODO moove to Widget, if null
+        //TODO moove to Widget, if null check
         new GPXFileLoader().LoadPoints(settings.GPXPath);
 
         UpdateActiveWidgets(ref activeWidgets);
@@ -47,7 +47,6 @@ public static class VideoCompositor
         writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, encoding, settings.VideoQuality * 1000000);
 
         long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
-        //videoEnd = 6000;
         long videoStart = (int)(settings.VideoStart * reader.FrameRate);
         if (videoEnd == 0 || videoEnd > reader.FrameCount)
             videoEnd = reader.FrameCount;

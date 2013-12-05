@@ -58,13 +58,14 @@ public sealed class ProjectSettings
     public bool ShowTraveledTrack = true;
 
     public bool ShowPositionMarker=false;
+    public bool ShowOrientation = true;//TODO Add to gui
     public int PositionMarkerSize = 10;
     public Color PositionMarkerColor = Color.DarkGreen;
     //TODO add classes for the rest of the widgets
     public bool ShowOverlayImage=false;
     public string overlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
     public Point overlayImagePosition=new Point(300,300);
-
+    //todo remoove
     public bool ShowElevationWidget=false;
     [XmlIgnoreAttribute]
     public Font ElevationWidgetFont = new Font("Ariel", 28);
@@ -72,7 +73,7 @@ public sealed class ProjectSettings
     public Color ElevationWidgetColor=Color.White;
 
     public bool ShowMap=false;
-    public int MapHeight = 240;//should be bigger than the track height, width is bigger by the same value
+    public int MapHeight = 240;//should be bigger than the track height, width is bigger by the same value (remoove
     public float MapOpacity;
 
     public bool ShowDistanceWidget = false;
