@@ -56,7 +56,7 @@ public class GPSPoint : GPSCoord, IComparable<GPSPoint>
                         Math.Cos(startLatitudeRadians) * Math.Cos(endLatitudeRadians) *
                         Math.Pow(Math.Sin(distanceLongitude / 2.0), 2.0);
 
-        // Using 6367500 - radius 40075040 as the number of meters around the earth
+        // Using 6367500 as the radius around the earth
         var result2 = 6367500 * 2.0 *
                         Math.Atan2(Math.Sqrt(result1), Math.Sqrt(1.0 - result1));
 
@@ -84,10 +84,8 @@ public sealed class GPSData
     public static double longtitudeCorrectionScale = 1;
 
     private static GPSData _instance;
-    private Vector lastOrientation = new Vector(0, 0);
+    private Vector vector = new Vector(0, 0);//use the previous values when the direction length is 0
     GPSBox BoundingBox;
-
-    //public event EventHandler UpdateGPSData;
 
     private GPSData() { }
 
@@ -111,8 +109,6 @@ public sealed class GPSData
 
     public void Update(List<GPSPoint> pts)
     {
-        //TODO - trim, leave only the gpsPoints that we will need (using TrackStart and min((VideoEnd-VideoStart),TrackLength) )
-
         double maxLong = double.MinValue;
         double maxLat = double.MinValue;
         double maxEle = double.MinValue;
@@ -213,17 +209,6 @@ public sealed class GPSData
         return BoundingBox;
     }
 
-    /* public GPSCoord GetPosition(float time)
-     {
-       
-          * int index = GetIndex(time);
-         if (index == gpsPoints.Length - 1)
-             return new GPSCoord(gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].longitude, gpsPoints[gpsPoints.Length - 1].elevation);
-         double Long = Interpolate(time, gpsPoints[index].longitude, gpsPoints[index + 1].longitude, gpsPoints[index].time, gpsPoints[index + 1].time);
-         double lat = Interpolate(time,gpsPoints[index].longitude, gpsPoints[index + 1].latitude, gpsPoints[index].time, gpsPoints[index + 1].time);
-         double ele = Interpolate(time, gpsPoints[index].elevation, gpsPoints[index + 1].elevation, gpsPoints[index].time, gpsPoints[index + 1].time);
-         return new GPSCoord(Long, lat, ele);
-          * */
     public GPSCoord GetPosition(float time)
     {
         int index = GetIndex(time);
@@ -235,15 +220,19 @@ public sealed class GPSData
         return new GPSCoord(Long, lat, ele);
     }
 
-    public Vector GetOrientation(float time)
+    public Vector[] GetOrientation(float time, double length=1)
     {
         int index = GetIndex(time);
-        double longDirection = gpsPoints[index + 1].Longitude - gpsPoints[index].Longitude;
+        double longDirection = (gpsPoints[index + 1].Longitude - gpsPoints[index].Longitude) * longtitudeCorrectionScale;
         double latDirection = gpsPoints[index + 1].Latitude - gpsPoints[index].Latitude;
-        double length = Math.Sqrt(longDirection * longDirection + latDirection * latDirection);
-        if (length != 0)
-            lastOrientation = new Vector(longDirection / length, latDirection / length);
-        return lastOrientation;
+
+        double lengthVector = Math.Sqrt(longDirection * longDirection + latDirection * latDirection);
+        if (lengthVector != 0)
+            vector = new Vector(longDirection, latDirection) * length / lengthVector;
+        Vector perpVector = new Vector(vector.Y, -vector.X);
+
+        Vector[] orientation = { vector, perpVector };
+        return orientation;
     }
     public double GetDistance(float time)
     {
@@ -268,10 +257,6 @@ public sealed class GPSData
         }
         return index;
     }
-    //WidgetSize.Width = (int)Math.Ceiling(ratio * (BoundingBox.Size.Longtitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
-
-    //size.x = WidgetSize.Width - wholeTrackLineWidth
-    //position.x = settings.TrackPostion + wholeTrackLineWidth
 
     //converts a GPS coordinate to pixel coordinate
     //size and return value are in pixels
@@ -333,7 +318,6 @@ public class GPXFileLoader : GPSLoader
             }
             // This is where we'd instantiate data
             // containers for the information retrieved.
-            //int timeSpan=
             pts.Add(new GPSPoint(
                                             Convert.ToDouble(pt.Longitude, CultureInfo.InvariantCulture),
                                             Convert.ToDouble(pt.Latitude, CultureInfo.InvariantCulture),

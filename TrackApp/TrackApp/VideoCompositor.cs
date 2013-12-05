@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using AForge.Video.FFMPEG;
-using System.Windows.Forms;//for testing
 
 public static class VideoCompositor
 {
@@ -90,7 +89,7 @@ public static class VideoCompositor
         {
             // get next frame
             Bitmap videoFrame = reader.ReadVideoFrame();
-            if (n == time * framerate && n > 0)
+            if (n == time * framerate)
             {
                 using (Graphics grfx = Graphics.FromImage(videoFrame))
                 {
@@ -103,6 +102,7 @@ public static class VideoCompositor
                 return videoFrame;
             }
             videoFrame.Dispose();
+            string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
         }
         throw new ApplicationException("The time speciffied is outside the video timespan.");
     }

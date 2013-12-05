@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -254,7 +253,7 @@ namespace TrackApp
         }
         private void btnLoadVideoClick(object sender, RoutedEventArgs e)
         {
-            loadFileDialog.Filter = "Video Files (.avi)|*.avi";
+            loadFileDialog.Filter = "Video Files (.avi)|*.avi|(.MP4)|*.MP4";
             loadFileDialog.FilterIndex = 1;
             loadFileDialog.Multiselect = false;
             loadFileDialog.ShowDialog();
@@ -336,11 +335,11 @@ namespace TrackApp
             }
             try
             {
-                VideoCompositor.Preview(180);
-                //VideoCompositor.RenderVideo();
+                //VideoCompositor.Preview(180);
+                VideoCompositor.RenderVideo();
                 MessageBoxResult error = MessageBox.Show("Success!");
                 //comment this if you don't want to start the video immediately after the rendering
-                //Process.Start(saveFileDialog.FileName);
+                Process.Start(saveFileDialog.FileName);
             }
             catch (Exception ex)
             {

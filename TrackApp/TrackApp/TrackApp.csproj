@@ -182,7 +182,6 @@
     <Compile Include="WidgetMap.cs" />
     <Compile Include="WidgetPositionMarker.cs" />
     <Compile Include="WidgetSpeedMeter.cs" />
-    <Compile Include="WidgetTest.cs" />
     <Compile Include="WidgetTrack.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
