@@ -20,12 +20,11 @@ namespace TrackApp
     /// </summary>
     public partial class Preview : Window
     {
-        public Preview()
+        public Preview(string path)
         {
             InitializeComponent();
-            //tuk gurmi no basically trqbva samo da se naglasi urito i e gotovo
-            //Uri uri = new Uri(@"pack://application:,,,bin/Debug/testPreviewFrame.png", UriKind.RelativeOrAbsolute);
-            //imgPreview.Source = new BitmapImage(uri);
+            Uri uri = new Uri(path, UriKind.Absolute);
+            imgPreview.Source = new BitmapImage(uri);
         }
     }
 }

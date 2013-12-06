@@ -19,6 +19,7 @@ namespace TrackApp
     /// </summary>
     public partial class SetPreviewTime : Window
     {
+        private float time;
         public float Time
         {
             get
@@ -26,7 +27,7 @@ namespace TrackApp
                 return this.time;
             }
         }
-        private float time;
+
         public SetPreviewTime()
         {
             InitializeComponent();
@@ -48,8 +49,7 @@ namespace TrackApp
             {
                 this.time = Convert.ToInt32(udHours.Value) * 3600f + Convert.ToInt32(udMinutes.Value) * 60 + Convert.ToInt32(udSeconds.Value);
             }
-            VideoCompositor.Preview(this.time);
-            Preview prevWindow = new Preview();
+            Preview prevWindow = new Preview(VideoCompositor.Preview(this.time));
             prevWindow.Show();
         }
     }
