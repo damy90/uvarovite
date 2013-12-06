@@ -74,7 +74,7 @@ public static class VideoCompositor
         writer.Close();
     }
 
-    public static Bitmap Preview(float time)
+    public static string Preview(float time)
     {
         ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
         VideoFileReader reader = new VideoFileReader();
@@ -98,7 +98,8 @@ public static class VideoCompositor
                 }
                 reader.Close();
                 videoFrame.Save("testPreviewFrame.png",ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
-                return videoFrame;
+                videoFrame.Dispose();
+                return System.IO.Directory.GetCurrentDirectory();
             }
             videoFrame.Dispose();
             string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
