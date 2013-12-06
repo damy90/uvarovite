@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -6,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.ComponentModel;
 namespace TrackApp
 {
     //TODO collect data from user
@@ -14,10 +16,13 @@ namespace TrackApp
         OpenFileDialog loadFileDialog;
         SaveFileDialog saveFileDialog;
         ProjectSettings settings;
+        SetPreviewTime prevTimeWind;
+        Preview prevWindow;
         public MainWindow()
         {
             InitializeComponent();
             loadFileDialog = new OpenFileDialog();
+            prevTimeWind = new SetPreviewTime();
             settings = ProjectSettings.GetSettings();
             IniializeVisibilities();
             InitializeContent();
@@ -253,7 +258,7 @@ namespace TrackApp
         }
         private void btnLoadVideoClick(object sender, RoutedEventArgs e)
         {
-            loadFileDialog.Filter = "Video Files (.avi)|*.avi|(.MP4)|*.MP4";
+            loadFileDialog.Filter = "Video Files (.avi)|*.avi";
             loadFileDialog.FilterIndex = 1;
             loadFileDialog.Multiselect = false;
             loadFileDialog.ShowDialog();
@@ -265,7 +270,29 @@ namespace TrackApp
                 loadFileDialog.FileName = null;
             }
         }
+        BackgroundWorker worker;
+        public ProgressWindow pd;
         private void btnProceed_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO:add validations
+            //settings.Serialize();
+            //settings.VideoEnd = 300;
+            //settings = settings.Deserialize();
+            PassSettingsDown();
+            try
+            {
+                pd.ShowDialog();
+                VideoCompositor.RenderVideo();
+                MessageBoxResult error = MessageBox.Show("Success!");
+                //comment this if you don't want to start the video immediately after the rendering
+                Process.Start(settings.VideoOutputPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult error = MessageBox.Show(ex.Message);
+            }
+        }
+        private void PassSettingsDown()
         {
             //TODO:add validations
             //settings.Serialize();
@@ -333,20 +360,10 @@ namespace TrackApp
                 settings.SpeedWidgetFont = new System.Drawing.Font(this.cbSpeedFont.SelectedValue.ToString(), Convert.ToInt32(this.txtSpeedFontSize.Text));
                 settings.SpeedWidgetColor = System.Drawing.Color.FromArgb(this.cpSpeedColor.SelectedColor.A, this.cpSpeedColor.SelectedColor.R, this.cpSpeedColor.SelectedColor.G, this.cpSpeedColor.SelectedColor.B);
             }
-            try
-            {
-                //VideoCompositor.Preview(180);
-                VideoCompositor.RenderVideo();
-                MessageBoxResult error = MessageBox.Show("Success!");
-                //comment this if you don't want to start the video immediately after the rendering
-                Process.Start(saveFileDialog.FileName);
-            }
-            catch (Exception ex)
-            {
-                MessageBoxResult error = MessageBox.Show(ex.Message);
-            }
         }
+
         #endregion
+
         #region HoverEffects
         public void btnWidgets_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -534,8 +551,9 @@ namespace TrackApp
             saveFileDialog.ShowDialog();
             if (saveFileDialog.FileName != String.Empty && saveFileDialog.FileName != null)
             {
+                PassSettingsDown();
                 settings.Serialize(saveFileDialog.FileName);
-    }
+            }
         }
 
         private void btnLoadSettings_Click(object sender, RoutedEventArgs e)
@@ -551,8 +569,11 @@ namespace TrackApp
                 InitializeContent();
             }
         }
-  
-        
+        private void btnPreview_Click(object sender, RoutedEventArgs e)
+        {
+            this.prevTimeWind.Show();
+        }
+
     }
         #endregion
 }

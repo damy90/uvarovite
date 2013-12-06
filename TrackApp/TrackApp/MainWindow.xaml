@@ -28,7 +28,7 @@
     </Window.Resources>
 
     <Grid Margin="0,0,2,161">
-        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Width="283" Margin="215,37,0,-115" d:IsHidden="True">
+        <Grid x:Name="grdFiles" HorizontalAlignment="Left" Width="283" Margin="215,37,0,-115">
             <Button x:Name="btnLoadVideo" Style="{StaticResource PictureButton}"
                     Click="btnLoadVideoClick" 
                     MouseEnter="btnLoadVideo_MouseEnter"
@@ -182,7 +182,7 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid x:Name="grdTrack" HorizontalAlignment="Left" Width="283" Margin="200,39,0,-105">
+        <Grid x:Name="grdTrack" HorizontalAlignment="Left" Width="283" Margin="200,39,0,-105" d:IsHidden="True">
             <CheckBox x:Name="cbEnableTrack" Content="Enable Track" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableTrack_Checked" Unchecked="cbEnableTrack_Uncheck"/>
             <Grid x:Name="grdEnabledTrack" Margin="18,39,0,5">
                 <Label  x:Name="lblTrackCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
@@ -299,6 +299,11 @@
                 <xctk:DoubleUpDown x:Name="dudMapOpacity" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" VerticalAlignment="Top" Width="68" Increment="0.1" Maximum="1" Minimum="0" />
             </Grid>
         </Grid>
+        <Button x:Name="btnPreview" Style="{StaticResource PictureButton}" Click="btnPreview_Click" Margin="242,346,150,-152" >
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/preview.png"/>
+            </Button.Background>
+        </Button>
         <Button x:Name="btnProceed" Style="{StaticResource PictureButton}" Click="btnProceed_Click" Margin="380,346,12,-152" >
             <Button.Background>
                 <ImageBrush ImageSource="Resources/Proseed_white.png"/>

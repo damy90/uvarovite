@@ -97,7 +97,7 @@ public static class VideoCompositor
                         widget.Draw(grfx, time);
                 }
                 reader.Close();
-                videoFrame.Save("testPreviewFrame.png",ImageFormat.Png);//test
+                videoFrame.Save("testPreviewFrame.png",ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
                 return videoFrame;
             }
             videoFrame.Dispose();
