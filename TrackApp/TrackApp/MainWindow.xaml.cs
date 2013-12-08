@@ -281,7 +281,7 @@ namespace TrackApp
             PassSettingsDown();
             try
             {
-                pd.ShowDialog();
+                //pd.ShowDialog();
                 VideoCompositor.RenderVideo();
                 MessageBoxResult error = MessageBox.Show("Success!");
                 //comment this if you don't want to start the video immediately after the rendering
@@ -360,7 +360,7 @@ namespace TrackApp
                 settings.SpeedWidgetFont = new System.Drawing.Font(this.cbSpeedFont.SelectedValue.ToString(), Convert.ToInt32(this.txtSpeedFontSize.Text));
                 settings.SpeedWidgetColor = System.Drawing.Color.FromArgb(this.cpSpeedColor.SelectedColor.A, this.cpSpeedColor.SelectedColor.R, this.cpSpeedColor.SelectedColor.G, this.cpSpeedColor.SelectedColor.B);
             }
-        }
+            }
 
         #endregion
 
@@ -550,11 +550,9 @@ namespace TrackApp
             saveFileDialog.Filter = "XML (.XML)|*.xml";
             saveFileDialog.ShowDialog();
             if (saveFileDialog.FileName != String.Empty && saveFileDialog.FileName != null)
-            {
-                PassSettingsDown();
+                PassSettingsDown();//TODO check weird color names
                 settings.Serialize(saveFileDialog.FileName);
             }
-        }
 
         private void btnLoadSettings_Click(object sender, RoutedEventArgs e)
         {
@@ -564,7 +562,7 @@ namespace TrackApp
             loadFileDialog.ShowDialog();
             if (loadFileDialog.FileName != String.Empty && loadFileDialog.FileName != null)
             {
-                settings.Deserialize(loadFileDialog.FileName);
+                settings = settings.Deserialize(loadFileDialog.FileName);
                 InitializeSyncronization();
                 InitializeContent();
             }
@@ -573,7 +571,7 @@ namespace TrackApp
         {
             this.prevTimeWind.Show();
         }
-
+  
     }
         #endregion
 }

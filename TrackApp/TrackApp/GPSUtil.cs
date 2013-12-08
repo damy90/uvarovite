@@ -133,7 +133,7 @@ public sealed class GPSData
         pts.RemoveRange(trackEndPos, pts.Count - trackEndPos);
 
         gpsPoints = new GPSPoint[pts.Count];//we need an array rather than list for faster access
-        //TODO throw exeption if track is empty
+        
         if (gpsPoints.Length == 0)
             throw new EmptyTrackExeption("The generated track is empty! Try default sync settings or another track file.");
         int n = 0;
@@ -167,22 +167,6 @@ public sealed class GPSData
 
     //generate the UpdateGPSData event
     //UpdateGPSData(this, EventArgs.Empty);
-    //TODO Remoove weird method
-    public double GetAverageSpeed(float time)
-    {
-        int index = GetIndex(time);
-        if ((index == gpsPoints.Length - 1) || (gpsPoints.Length == 0))
-            return 0;
-        double distance = 0;
-
-        for (int i = 0; i < index; i++)
-        {
-            distance += gpsPoints[i].DistanceFromPoint(gpsPoints[i + 1]);
-        }
-
-        float timeSpan = gpsPoints[index].Time - gpsPoints[0].Time;
-        return distance / timeSpan;
-    }
     //TODO average speed (gradually change speed)
     public double GetSpeed(float time)
     {
@@ -193,16 +177,6 @@ public sealed class GPSData
         float timeSpan = gpsPoints[index + 1].Time - gpsPoints[index].Time;
         return distance / timeSpan;
     }
-    //TODO Use GetDistance (with interpolation) instead
-    public double GetCumulativeDistance(float time)
-    {
-        int index = GetIndex(time);
-        double distance = gpsPoints[index].Distance;
-
-        return distance;
-    }
-
-
 
     public GPSBox GetBox()
     {
@@ -281,16 +255,16 @@ public interface IGPSReader
     int LoadPoints(string sFile);
 }
 
-public abstract class GPSLoader : IGPSReader
+/*public abstract class GPSLoader : IGPSReader
 {
     public abstract int LoadPoints(string sFile);
-}
-//TO DO: Implement Track Start time
-public class GPXFileLoader : GPSLoader
+}*/
+
+public class GPXFileLoader : IGPSReader
 {
     //GPSData gpsData = new GPSData();
     List<GPSPoint> pts = new List<GPSPoint>();
-    public override int LoadPoints(string sFile)
+    public int LoadPoints(string sFile)
     {
         XDocument gpxDoc = XDocument.Load(sFile);
         XNamespace gpxNamespace = XNamespace.Get("http://www.topografix.com/GPX/1/1");

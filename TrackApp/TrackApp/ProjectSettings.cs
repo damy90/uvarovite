@@ -51,17 +51,20 @@ public sealed class ProjectSettings
 
     public Point TrackPostion = new Point(80, 80);
     public int TrackHeight = 20;//the width is calculated from the track points 
-    public Color TraveledTrackColor = Color.Red;
+    [XmlIgnoreAttribute]
+    public Color TraveledTrackColor = Color.Red ;
     public int TraveledTrackLineWidth = 2;
-    public Color WholeTrackColor = Color.White;
+    [XmlIgnoreAttribute]
+    public Color WholeTrackColor = Color.Yellow;
     public int WholeTrackLineWidth = 6;
     public bool ShowTraveledTrack = true;
 
     public bool ShowPositionMarker=false;
     public bool ShowOrientation = true;//TODO Add to gui
     public int PositionMarkerSize = 10;
+    [XmlIgnoreAttribute]
     public Color PositionMarkerColor = Color.DarkGreen;
-    //TODO add classes for the rest of the widgets
+
     public bool ShowOverlayImage=false;
     public string overlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
     public Point overlayImagePosition=new Point(300,300);
@@ -70,8 +73,8 @@ public sealed class ProjectSettings
     [XmlIgnoreAttribute]
     public Font ElevationWidgetFont = new Font("Ariel", 28);
     public Point ElevationWidgetPosition=new Point(300,0);
+    [XmlIgnoreAttribute]
     public Color ElevationWidgetColor=Color.White;
-
     public bool ShowMap=false;
     public int MapHeight = 240;//should be bigger than the track height, width is bigger by the same value (remoove
     public float MapOpacity;
@@ -80,8 +83,8 @@ public sealed class ProjectSettings
     [XmlIgnoreAttribute]
     public Font DistanceWidgetFont = new Font("Ariel", 28);
     public Point DistanceWidgetPosition = new Point(30, 95);
+    [XmlIgnoreAttribute]
     public Color DistanceWidgetColor = Color.White;
-
     public bool ShowSpeedWidget = false;
     [XmlIgnoreAttribute]
     public Font SpeedWidgetFont = new Font("Ariel", 28);
@@ -95,6 +98,45 @@ public sealed class ProjectSettings
     {
     }
 
+    //Color serialization
+    [XmlElement("TraveledTrackColor")]
+    public int TraveledTrackColorAsArgb
+    {
+        get { return TraveledTrackColor.ToArgb(); }
+        set { TraveledTrackColor = Color.FromArgb(value); }
+    }
+    [XmlElement("WholeTrackColor")]
+    public int WholeTrackColorAsArgb
+    {
+        get { return WholeTrackColor.ToArgb(); }
+        set { WholeTrackColor = Color.FromArgb(value); }
+    }
+    [XmlElement("PositionMarkerColor")]
+    public int PositionMarkerColorAsArgb
+    {
+        get { return PositionMarkerColor.ToArgb(); }
+        set { PositionMarkerColor = Color.FromArgb(value); }
+    }
+    [XmlElement("ElevationWidgetColor")]
+    public int ElevationWidgetColorAsArgb
+    {
+        get { return ElevationWidgetColor.ToArgb(); }
+        set { ElevationWidgetColor = Color.FromArgb(value); }
+    }
+    [XmlElement("DistanceWidgetColor")]
+    public int DistanceWidgetColorAsArgb
+    {
+        get { return DistanceWidgetColor.ToArgb(); }
+        set { DistanceWidgetColor = Color.FromArgb(value); }
+    }
+    [XmlIgnoreAttribute]
+    [XmlElement("SpeedWidgetColor")]
+    public int SpeedWidgetColorAsArgb
+    {
+        get { return SpeedWidgetColor.ToArgb(); }
+        set { SpeedWidgetColor = Color.FromArgb(value); }
+    }
+    //Font serialization
     public SerializableFont PSpeedWidgetFont
     {
         get
