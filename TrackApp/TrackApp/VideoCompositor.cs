@@ -78,35 +78,37 @@ public static class VideoCompositor
     {
         ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
         VideoFileReader reader = new VideoFileReader();
+        using (reader)
+        {
         reader.Open(settings.VideoInputPath);
         //TODO moove to Widget
         new GPXFileLoader().LoadPoints(settings.GPXPath);
         UpdateActiveWidgets(ref activeWidgets);
         float framerate = reader.FrameRate;
         VideoDimensions = new Size(reader.Width, reader.Height);
-        for (long n = 0; n < reader.FrameCount; n++)
-        {
-            // get next frame
-            Bitmap videoFrame = reader.ReadVideoFrame();
-            if (n == time * framerate)
+            for (long n = 0; n < reader.FrameCount; n++)
             {
-                using (Graphics grfx = Graphics.FromImage(videoFrame))
+                // get next frame
+                Bitmap videoFrame = reader.ReadVideoFrame();
+                if (n == time * framerate)
                 {
-                    grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    foreach (var widget in activeWidgets)
-                        widget.Draw(grfx, time);
+                    using (Graphics grfx = Graphics.FromImage(videoFrame))
+                    {
+                        grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                        foreach (var widget in activeWidgets)
+                            widget.Draw(grfx, time);
+                    }
+                    reader.Close();
+                    if (System.IO.File.Exists("testPreviewFrame.png"))
+                        System.IO.File.Delete("testPreviewFrame.png");
+                    videoFrame.Save("testPreviewFrame.png", ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
+                    videoFrame.Dispose();
+                    string path = System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
+                    return System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
                 }
-                reader.Close();
-                if (System.IO.File.Exists("testPreviewFrame.png"))
-                    System.IO.File.Delete("testPreviewFrame.png");
-                videoFrame.Save("testPreviewFrame.png",ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
                 videoFrame.Dispose();
-                string path = System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
-                return System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
+                string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
             }
-            reader.Close();
-            videoFrame.Dispose();
-            string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
         }
         throw new ApplicationException("The time speciffied is outside the video timespan.");
     }

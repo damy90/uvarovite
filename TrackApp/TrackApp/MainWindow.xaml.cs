@@ -22,7 +22,6 @@ namespace TrackApp
         {
             InitializeComponent();
             loadFileDialog = new OpenFileDialog();
-            prevTimeWind = new SetPreviewTime();
             settings = ProjectSettings.GetSettings();
             IniializeVisibilities();
             InitializeContent();
@@ -570,6 +569,7 @@ namespace TrackApp
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
             PassSettingsDown();
+            this.prevTimeWind = new SetPreviewTime();
             this.prevTimeWind.Show();
         }
   
