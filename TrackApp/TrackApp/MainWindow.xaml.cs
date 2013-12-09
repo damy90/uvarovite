@@ -569,6 +569,7 @@ namespace TrackApp
         }
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
+            PassSettingsDown();
             this.prevTimeWind.Show();
         }
   

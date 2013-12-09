@@ -97,11 +97,14 @@ public static class VideoCompositor
                         widget.Draw(grfx, time);
                 }
                 reader.Close();
+                if (System.IO.File.Exists("testPreviewFrame.png"))
+                    System.IO.File.Delete("testPreviewFrame.png");
                 videoFrame.Save("testPreviewFrame.png",ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
                 videoFrame.Dispose();
                 string path = System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
                 return System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
             }
+            reader.Close();
             videoFrame.Dispose();
             string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
         }
