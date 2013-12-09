@@ -23,7 +23,14 @@ class WidgetMap : WidgetDrawOnMap
                             + "+%20&sensor=false";
             //MessageBox.Show(path);
             //TODO catch web client exeption System.Net.WebException
-            webClient.DownloadFile(path, "test.png");
+            try
+            {
+                webClient.DownloadFile(path, "test.png");
+            }
+            catch (WebException)
+            {
+                throw new WebException("Could not load google map");
+            }
             map = new Bitmap("test.png");
         }
         grfx.DrawImage(map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
