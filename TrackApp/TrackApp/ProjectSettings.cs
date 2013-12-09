@@ -89,6 +89,7 @@ public sealed class ProjectSettings
     [XmlIgnoreAttribute]
     public Font SpeedWidgetFont = new Font("Ariel", 28);
     public Point SpeedWidgetPosition = new Point(3, 95);
+    [XmlIgnoreAttribute]
     public Color SpeedWidgetColor = Color.White;
 
     private static ProjectSettings _instance;  //променлива за единствената инстанция на този клас
@@ -129,7 +130,6 @@ public sealed class ProjectSettings
         get { return DistanceWidgetColor.ToArgb(); }
         set { DistanceWidgetColor = Color.FromArgb(value); }
     }
-    [XmlIgnoreAttribute]
     [XmlElement("SpeedWidgetColor")]
     public int SpeedWidgetColorAsArgb
     {
@@ -153,11 +153,11 @@ public sealed class ProjectSettings
     {
         get
         {
-            return new SerializableFont(this.SpeedWidgetFont);
+            return new SerializableFont(this.DistanceWidgetFont);
         }
         set
         {
-            this.SpeedWidgetFont = value.ToFont();
+            this.DistanceWidgetFont = value.ToFont();
         }
     }
 

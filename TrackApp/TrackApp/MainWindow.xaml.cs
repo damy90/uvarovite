@@ -500,12 +500,13 @@ namespace TrackApp
 
         private void btnBrowseImage_Click(object sender, RoutedEventArgs e)
         {
-            loadFileDialog.Filter = "JPG Files (.jpg)|*.jpg";
+            loadFileDialog.Filter = "JPG Files (.jpg)|*.jpg|(.png)|*.png";
             loadFileDialog.FilterIndex = 1;
             loadFileDialog.Multiselect = false;
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
+                ProjectSettings.GetSettings().overlayImageFile = loadFileDialog.FileName;
                 loadFileDialog.FileName = null;
             }
         }

@@ -123,6 +123,8 @@ public static class VideoCompositor
         activeWidgets = new List<Widget>();
         if (settings.ShowMap)
             activeWidgets.Add(new WidgetMap());
+        if (settings.ShowOverlayImage)
+            activeWidgets.Add(new WidgetOverlayImage());
         if (settings.ShowTrack)
             activeWidgets.Add(new WidgetTrack());
         if (settings.ShowPositionMarker)
