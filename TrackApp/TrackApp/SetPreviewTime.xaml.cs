@@ -49,8 +49,15 @@ namespace TrackApp
             {
                 this.time = Convert.ToInt32(udHours.Value) * 3600f + Convert.ToInt32(udMinutes.Value) * 60 + Convert.ToInt32(udSeconds.Value);
             }
-            Preview prevWindow = new Preview(VideoCompositor.Preview(this.time));
-            prevWindow.Show();
+            try
+            {
+                Preview prevWindow = new Preview(VideoCompositor.Preview(this.time));
+                prevWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

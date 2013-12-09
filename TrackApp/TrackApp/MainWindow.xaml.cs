@@ -283,13 +283,13 @@ namespace TrackApp
             {
                 //pd.ShowDialog();
                 VideoCompositor.RenderVideo();
-                MessageBoxResult error = MessageBox.Show("Success!");
+                MessageBox.Show("Success!");
                 //comment this if you don't want to start the video immediately after the rendering
                 Process.Start(settings.VideoOutputPath);
             }
             catch (Exception ex)
             {
-                MessageBoxResult error = MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
         private void PassSettingsDown()
