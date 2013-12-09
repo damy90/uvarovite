@@ -7,6 +7,7 @@ using AForge.Video.FFMPEG;
 public static class VideoCompositor
 {
     private static List<Widget> activeWidgets;
+    private static int previewNumber = 0;
     public static Size VideoDimensions { get; private set; }
     //TODO add sound
     public static void RenderVideo()
@@ -80,13 +81,14 @@ public static class VideoCompositor
         VideoFileReader reader = new VideoFileReader();
         using (reader)
         {
-        reader.Open(settings.VideoInputPath);
-        //TODO moove to Widget
-        new GPXFileLoader().LoadPoints(settings.GPXPath);
-        UpdateActiveWidgets(ref activeWidgets);
-        float framerate = reader.FrameRate;
-        VideoDimensions = new Size(reader.Width, reader.Height);
-            for (long n = 0; n < reader.FrameCount; n++)
+            reader.Open(settings.VideoInputPath);
+            //TODO moove to Widget
+            new GPXFileLoader().LoadPoints(settings.GPXPath);
+            UpdateActiveWidgets(ref activeWidgets);
+            float framerate = reader.FrameRate;
+            VideoDimensions = new Size(reader.Width, reader.Height);
+            long frameCount = reader.FrameCount;
+            for (long n = 0; n < frameCount; n++)
             {
                 // get next frame
                 Bitmap videoFrame = reader.ReadVideoFrame();
@@ -99,12 +101,14 @@ public static class VideoCompositor
                             widget.Draw(grfx, time);
                     }
                     reader.Close();
-                    if (System.IO.File.Exists("testPreviewFrame.png"))
-                        System.IO.File.Delete("testPreviewFrame.png");
-                    videoFrame.Save("testPreviewFrame.png", ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
+                    //TODO successfully dispose of previous preview
+                    string previewFileName = string.Format("testPreviewFrame" + previewNumber + ".png");
+                    previewNumber++;
+                    if (System.IO.File.Exists(previewFileName))
+                        System.IO.File.Delete(previewFileName);
+                    videoFrame.Save(previewFileName, ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
                     videoFrame.Dispose();
-                    string path = System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
-                    return System.IO.Directory.GetCurrentDirectory() + "\\testPreviewFrame.png";
+                    return System.IO.Directory.GetCurrentDirectory() + "\\" + previewFileName;
                 }
                 videoFrame.Dispose();
                 string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
