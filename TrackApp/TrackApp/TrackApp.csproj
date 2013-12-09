@@ -170,6 +170,7 @@
     </ApplicationDefinition>
     <Compile Include="EmptyTrackExeption.cs" />
     <Compile Include="GPSUtil.cs" />
+    <Compile Include="IDrawable.cs" />
     <Compile Include="PreviewWindow.xaml.cs">
       <DependentUpon>PreviewWindow.xaml</DependentUpon>
     </Compile>

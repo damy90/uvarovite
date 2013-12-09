@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-public abstract class Widget
+public abstract class Widget: IDrawable//redundant interface
 {
     public abstract void Draw(Graphics grfx, float time);
 
