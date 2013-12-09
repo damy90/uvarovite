@@ -91,6 +91,7 @@ namespace TrackApp
             this.txtSpeedX.Text = settings.SpeedWidgetPosition.X.ToString();
             this.txtSpeedY.Text = settings.SpeedWidgetPosition.Y.ToString();
             this.cbSpeedFont.SelectedValue = new FontFamily(settings.PSpeedWidgetFont.FontFamily);
+            this.txtSpeedFontSize.Value = (int)settings.PSpeedWidgetFont.Size;
             this.cpSpeedColor.SelectedColor = Color.FromArgb(settings.SpeedWidgetColor.A, settings.SpeedWidgetColor.R, settings.SpeedWidgetColor.G, settings.SpeedWidgetColor.B);
         }
         private void ChangeIconBackground(string path, System.Windows.Controls.Button btn)

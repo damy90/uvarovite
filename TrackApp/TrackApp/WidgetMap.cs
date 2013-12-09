@@ -6,7 +6,8 @@ using System.Net;
 class WidgetMap : WidgetDrawOnMap
 {
     //TODO leave some space between the map frame and the track points, the map has to resize according to the track size
-    Bitmap map;
+    private Bitmap map;
+    private static int fileCount = 0;
     public override void Draw(Graphics grfx, float time)
     {
         if (map == null)
@@ -25,7 +26,8 @@ class WidgetMap : WidgetDrawOnMap
             //TODO catch web client exeption System.Net.WebException
             try
             {
-                webClient.DownloadFile(path, "test.png");
+                webClient.DownloadFile(path, "test" + fileCount + ".png");
+                fileCount++;
             }
             catch (WebException)
             {

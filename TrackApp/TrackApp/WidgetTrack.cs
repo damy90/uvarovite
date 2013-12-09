@@ -5,9 +5,9 @@ using System.Linq;
 
 public class WidgetTrack : WidgetDrawOnMap
 {
-    Bitmap trackBitmap;
-    PointF[] trackPoints;
-    int prevIndex = 0;
+    private Bitmap trackBitmap;
+    private PointF[] trackPoints;
+    private int prevIndex = 0;
     public override void Draw(Graphics grfx, float time)
     {
         //whole track

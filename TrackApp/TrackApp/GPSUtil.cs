@@ -77,9 +77,7 @@ public struct GPSBox
 
 public sealed class GPSData
 {
-    GPSPoint[] gpsPoints;
-
-
+    private GPSPoint[] gpsPoints;
 
     public static double longtitudeCorrectionScale = 1;
 
@@ -263,7 +261,7 @@ public interface IGPSReader
 public class GPXFileLoader : IGPSReader
 {
     //GPSData gpsData = new GPSData();
-    List<GPSPoint> pts = new List<GPSPoint>();
+    private List<GPSPoint> pts = new List<GPSPoint>();
     public int LoadPoints(string sFile)
     {
         XDocument gpxDoc = XDocument.Load(sFile);

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 class WidgetOverlayImage : Widget
 {
-    Bitmap image;
+    private Bitmap image;
     public override void Draw(Graphics grfx, float time)
     {
         var frameSize = VideoCompositor.VideoDimensions;
