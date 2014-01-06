@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="TrackApp.App" Collapsed="true">
-    <Position X="18.75" Y="0.5" Width="1.5" />
+    <Position X="11" Y="0.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrackApp.MainWindow" Collapsed="true">
-    <Position X="18.75" Y="1.5" Width="1.5" />
+    <Position X="11" Y="1.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>JDAEAGCIQAcYYI4QQBIIIsGAIA7BMAMGCQCAAAlFAA4=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrackApp.Preview" Collapsed="true">
-    <Position X="20.5" Y="1.5" Width="1.5" />
+    <Position X="12.75" Y="1.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PreviewWindow.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrackApp.ProgressWindow" Collapsed="true">
-    <Position X="22.25" Y="1.5" Width="1.5" />
+    <Position X="14.5" Y="1.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAAAAAAAAAAEAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>ProgressWindow.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrackApp.SetPreviewTime" Collapsed="true">
-    <Position X="22.25" Y="2.5" Width="1.5" />
+    <Position X="14.5" Y="2.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAACAAAAAIAAAAAEAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>SetPreviewTime.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrackApp.Settings" Collapsed="true">
-    <Position X="24" Y="2.5" Width="1.5" />
+    <Position X="16.25" Y="2.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>GSBACEgAACGgAAAGAIAACgAgAAIAEAhEEQADECAEAAA=</HashCode>
       <FileName>Settings.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EmptyTrackExeption" Collapsed="true">
-    <Position X="20.5" Y="0.5" Width="1.5" />
+    <Position X="12.75" Y="0.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>EmptyTrackExeption.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GPSCoord" Collapsed="true">
-    <Position X="4.5" Y="3.5" Width="1.5" />
+    <Position X="1.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAAIAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GPSUtil.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GPSPoint" Collapsed="true">
-    <Position X="4.5" Y="5.5" Width="1.5" />
+    <Position X="1.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQEAAAAAAAAAAAAAABAAAAAAAAAAQA=</HashCode>
       <FileName>GPSUtil.cs</FileName>
@@ -65,43 +65,43 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GPSData">
-    <Position X="16.25" Y="3.25" Width="1.5" />
+    <Position X="8.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AiQEAARAECAAQAAQAAAQAAQAICEQQAAAAEAAAAAAAAA=</HashCode>
       <FileName>GPSUtil.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GPXFileLoader" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="24" Y="0.5" Width="1.5" />
+    <Position X="16.25" Y="0.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAA=</HashCode>
       <FileName>GPSUtil.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SerializableFont" Collapsed="true">
-    <Position X="20.5" Y="2.5" Width="1.5" />
+    <Position X="12.75" Y="2.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAgAAAAAAAAAAAAAAAAAAABAAAAAABBAA=</HashCode>
       <FileName>ProjectSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectSettings" Collapsed="true">
-    <Position X="24" Y="1.5" Width="1.5" />
+    <Position X="16.25" Y="1.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>yBhEIImAAAAggAAgEAkAQQEAEnhgAgdEIIBAQDUgWAI=</HashCode>
       <FileName>ProjectSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VideoCompositor">
-    <Position X="22.25" Y="3.5" Width="1.5" />
+    <Position X="14.5" Y="3.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAIAAAAAAAAAAAAAAAAQEIAAAAAQ=</HashCode>
       <FileName>VideoCompositor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Widget" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+    <Position X="4.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Widget.cs</FileName>
@@ -109,89 +109,97 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="WidgetDistanceMeter" Collapsed="true">
-    <Position X="7.25" Y="1.75" Width="1.5" />
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <InheritanceLine Type="Widget" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="1.062" />
+        <Point X="5.5" Y="1.375" />
+        <Point X="4.062" Y="1.375" />
+        <Point X="4.062" Y="1.75" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WidgetDistanceMeter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WidgetDrawOnMap">
-    <Position X="11.75" Y="1.75" Width="1.5" />
+    <Position X="6.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAACAAAAAAAAAAAAIAAAAAAAAAAAIABA=</HashCode>
       <FileName>WidgetDrawOnMap.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WidgetMap" Collapsed="true">
-    <Position X="11.75" Y="5" Width="1.5" />
+    <Position X="5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>WidgetMap.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WidgetOverlayImage" Collapsed="true">
-    <Position X="16.25" Y="1.75" Width="1.5" />
+    <Position X="8.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WidgetOverlayImage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WidgetPositionMarker" Collapsed="true">
-    <Position X="14" Y="5" Width="1.5" />
+    <Position X="6.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WidgetPositionMarker.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WidgetSpeedMeter" Collapsed="true">
-    <Position X="5" Y="1.75" Width="1.5" />
+    <Position X="1.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WidgetSpeedMeter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WidgetTrack" Collapsed="true">
-    <Position X="9.5" Y="5" Width="1.5" />
+    <Position X="3.5" Y="5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAgAAAAAAAAAABACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WidgetTrack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrackApp.Properties.Resources" Collapsed="true">
-    <Position X="18.75" Y="2.5" Width="1.5" />
+    <Position X="11" Y="2.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="TrackApp.Properties.Settings" Collapsed="true">
-    <Position X="18.75" Y="3.5" Width="1.5" />
+    <Position X="11" Y="3.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Struct Name="GPSBox" Collapsed="true">
-    <Position X="18.75" Y="4.75" Width="1.5" />
+    <Position X="11" Y="4.75" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GPSUtil.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Interface Name="IGPSReader" Collapsed="true">
-    <Position X="20.5" Y="6" Width="1.5" />
+    <Position X="12.75" Y="6" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>GPSUtil.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="IDrawable" Collapsed="true">
-    <Position X="18.75" Y="6" Width="1.5" />
+    <Position X="11" Y="6" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IDrawable.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="VideoFormats" Collapsed="true">
-    <Position X="18.75" Y="7" Width="1.5" />
+    <Position X="11" Y="7" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAACAAAAAAAAAABBAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>VideoFormats.cs</FileName>
