@@ -30,7 +30,6 @@ public static class VideoCompositor
         var encoding = VideoCodec.MPEG4;
         switch (settings.Format.ToString())
         {
-            
             case "WMV2":
                 encoding = VideoCodec.WMV2;
                 break;

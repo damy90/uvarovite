@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\
 TrackApp
 none
 false
 DEBUG;TRACE
-D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\App.xaml
-21360784759
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\App.xaml
+51832895253
 
-16-985751236
-42608347254
-MainWindow.xaml;Settings.xaml;
+28-896529002
+12283792996
+MainWindow.xaml;PreviewWindow.xaml;ProgressWindow.xaml;SetPreviewTime.xaml;Settings.xaml;
 
 False
 

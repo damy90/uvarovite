@@ -71,3 +71,31 @@ D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp_MarkupCompile
 D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.g.resources
 D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.Properties.Resources.resources
 D:\Dropbox\Telerik_wf\OOP\SVN\TrackApp\TrackApp\obj\Debug\TrackApp.csproj.GenerateResource.Cache
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\TrackApp.exe.config
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.exe
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.pdb
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.csprojResolveAssemblyReference.cache
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\MainWindow.baml
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\PreviewWindow.baml
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\ProgressWindow.baml
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\SetPreviewTime.baml
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\Settings.baml
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\MainWindow.g.cs
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\PreviewWindow.g.cs
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\ProgressWindow.g.cs
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\SetPreviewTime.g.cs
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\Settings.g.cs
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\App.g.cs
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\TrackApp_MarkupCompile.cache
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.g.resources
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.Properties.Resources.resources
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\obj\Debug\TrackApp.csproj.GenerateResource.Cache
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\TrackApp.exe
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\TrackApp.pdb
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.FFMPEG.dll
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.dll
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\AForge.dll
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.FFMPEG.xml
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\AForge.Video.xml
+C:\Users\dany\Dropbox\telerik\OOP\Teamwork\New folder\TrackApp\TrackApp\bin\Debug\AForge.xml

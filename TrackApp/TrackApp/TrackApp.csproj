@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="AForge.Video.FFMPEG, Version=2.2.5.0, Culture=neutral, PublicKeyToken=03563089b1be05dd, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files\AForge.NET\Framework\Release\AForge.Video.FFMPEG.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\AForge.NET\Framework\Release\AForge.Video.FFMPEG.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -61,8 +61,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EmptyTrackExeption.cs" />
-    <Compile Include="GPSUtil.cs" />
+    <Compile Include="GPSBox.cs" />
+    <Compile Include="GPSData.cs" />
+    <Compile Include="GPSPoint.cs" />
+    <Compile Include="GPSCoord.cs" />
+    <Compile Include="GPXFileLoader.cs" />
     <Compile Include="IDrawable.cs" />
+    <Compile Include="IGPSReader.cs" />
     <Compile Include="PreviewWindow.xaml.cs">
       <DependentUpon>PreviewWindow.xaml</DependentUpon>
     </Compile>
