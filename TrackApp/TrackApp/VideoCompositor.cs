@@ -8,6 +8,8 @@ public static class VideoCompositor
 {
     private static List<Widget> activeWidgets;
     private static int previewNumber = 0;
+    private static long videoEnd;
+    private static long videoStart;
     public static Size VideoDimensions { get; private set; }
     //TODO add sound
     public static void RenderVideo()
@@ -46,32 +48,45 @@ public static class VideoCompositor
 
         writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, encoding, settings.VideoQuality * 1000000);
 
-        long videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
-        long videoStart = (int)(settings.VideoStart * reader.FrameRate);
+        videoEnd = (int)(settings.VideoEnd * reader.FrameRate);
+        videoStart = (int)(settings.VideoStart * reader.FrameRate);
         if (videoEnd == 0 || videoEnd > reader.FrameCount)
+        {
             videoEnd = reader.FrameCount;
+        }
 
-        for (long n = 0; n < videoEnd; n++)
+        for (long currentFrameNumber = 0; currentFrameNumber < videoEnd; currentFrameNumber++)
         {
             int speed = settings.VideoSpeed;
-            // get next frame
-            Bitmap videoFrame = reader.ReadVideoFrame();
-            if (n % speed == 0 && n > videoStart)
+
+            Bitmap videoFrame = GetFrame(reader, speed, ref currentFrameNumber);
+
+            using (Graphics grfx = Graphics.FromImage(videoFrame))
             {
-                using (Graphics grfx = Graphics.FromImage(videoFrame))
-                {
-                    grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    foreach (var widget in activeWidgets)
-                        widget.Draw(grfx, n / framerate);
-                }
-                writer.WriteVideoFrame(videoFrame);
-                videoFrame.Dispose();
+                grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                foreach (var widget in activeWidgets)
+                    widget.Draw(grfx, currentFrameNumber / framerate);
             }
+
+            writer.WriteVideoFrame(videoFrame);
             videoFrame.Dispose();
-            string progress = string.Format("{0} {1}", (int)(100 * n / videoEnd), '%');
+            //string progress = string.Format("{0} {1}", (int)(100 * n / videoEnd), '%');
         }
+
         reader.Close();
         writer.Close();
+    }
+
+    private static Bitmap GetFrame(VideoFileReader reader, long skipFrames, ref long currentFrame)
+    {
+        // skip frames
+        for (int i = 0; (i < skipFrames - 1 || currentFrame < videoStart) && currentFrame < videoEnd; i++)
+        {
+            reader.ReadVideoFrame().Dispose();
+            currentFrame++;
+        }
+
+        return reader.ReadVideoFrame();
     }
 
     public static string Preview(float time)
@@ -85,35 +100,38 @@ public static class VideoCompositor
             new GPXFileLoader().LoadPoints(settings.GPXPath);
             UpdateActiveWidgets(ref activeWidgets);
             float framerate = reader.FrameRate;
-            VideoDimensions = new Size(reader.Width, reader.Height);
             long frameCount = reader.FrameCount;
-            for (long n = 0; n < frameCount; n++)
+            if (time * framerate > frameCount)
             {
-                // get next frame
-                Bitmap videoFrame = reader.ReadVideoFrame();
-                if (n == time * framerate)
-                {
-                    using (Graphics grfx = Graphics.FromImage(videoFrame))
-                    {
-                        grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                        foreach (var widget in activeWidgets)
-                            widget.Draw(grfx, time);
-                    }
-                    reader.Close();
-                    //TODO successfully dispose of previous preview
-                    string previewFileName = string.Format("testPreviewFrame" + previewNumber + ".png");
-                    previewNumber++;
-                    if (System.IO.File.Exists(previewFileName))
-                        System.IO.File.Delete(previewFileName);
-                    videoFrame.Save(previewFileName, ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
-                    videoFrame.Dispose();
-                    return System.IO.Directory.GetCurrentDirectory() + "\\" + previewFileName;
-                }
-                videoFrame.Dispose();
-                string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
+                throw new ApplicationException("The time speciffied is outside the video timespan.");
             }
+            VideoDimensions = new Size(reader.Width, reader.Height);
+            videoEnd = reader.FrameCount;
+            videoStart = 0;
+            // unneeded in this context but needed for a method
+            long n = 0;
+            // get next frame
+
+            Bitmap videoFrame = GetFrame(reader, (long)(time * framerate), ref n);
+
+            using (Graphics grfx = Graphics.FromImage(videoFrame))
+            {
+                grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                foreach (var widget in activeWidgets)
+                    widget.Draw(grfx, time);
+            }
+
+            reader.Close();
+            //TODO successfully dispose of previous preview
+            string previewFileName = string.Format("testPreviewFrame" + previewNumber + ".png");
+            previewNumber++;
+            if (System.IO.File.Exists(previewFileName))
+                System.IO.File.Delete(previewFileName);
+            videoFrame.Save(previewFileName, ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
+            videoFrame.Dispose();
+            return System.IO.Directory.GetCurrentDirectory() + "\\" + previewFileName;
+            //string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
         }
-        throw new ApplicationException("The time speciffied is outside the video timespan.");
     }
 
     private static void UpdateActiveWidgets(ref List<Widget> activeWidgets)

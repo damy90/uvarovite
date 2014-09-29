@@ -24,6 +24,7 @@ class WidgetMap : WidgetDrawOnMap
                             + "+%20&sensor=false";
             //MessageBox.Show(path);
             //TODO catch web client exeption System.Net.WebException
+            //TODO use a variable instead of file
             try
             {
                 webClient.DownloadFile(path, "test" + fileCount + ".png");
@@ -33,7 +34,8 @@ class WidgetMap : WidgetDrawOnMap
             {
                 throw new WebException("Could not load google map");
             }
-            map = new Bitmap("test.png");
+
+            map = new Bitmap("test" + fileCount + ".png");
         }
         grfx.DrawImage(map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
     }
