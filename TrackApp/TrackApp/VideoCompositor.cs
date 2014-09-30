@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 using AForge.Video.FFMPEG;
 
 public static class VideoCompositor
@@ -10,8 +11,10 @@ public static class VideoCompositor
     private static int previewNumber = 0;
     private static long videoEnd;
     private static long videoStart;
+
     public static Size VideoDimensions { get; private set; }
     //TODO add sound
+
     public static void RenderVideo()
     {
         ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
@@ -55,18 +58,12 @@ public static class VideoCompositor
             videoEnd = reader.FrameCount;
         }
 
-        for (long currentFrameNumber = 0; currentFrameNumber < videoEnd; currentFrameNumber++)
+        int speed = settings.VideoSpeed;
+        for (long currentFrameNumber = 0; currentFrameNumber < videoEnd - speed; currentFrameNumber++)
         {
-            int speed = settings.VideoSpeed;
-
             Bitmap videoFrame = GetFrame(reader, speed, ref currentFrameNumber);
 
-            using (Graphics grfx = Graphics.FromImage(videoFrame))
-            {
-                grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                foreach (var widget in activeWidgets)
-                    widget.Draw(grfx, currentFrameNumber / framerate);
-            }
+            RenderFrame(framerate, currentFrameNumber, videoFrame);
 
             writer.WriteVideoFrame(videoFrame);
             videoFrame.Dispose();
@@ -75,6 +72,16 @@ public static class VideoCompositor
 
         reader.Close();
         writer.Close();
+    }
+
+    private static void RenderFrame(float framerate, long currentFrameNumber, Bitmap videoFrame)
+    {
+        using (Graphics grfx = Graphics.FromImage(videoFrame))
+        {
+            grfx.SmoothingMode = SmoothingMode.AntiAlias;
+            foreach (var widget in activeWidgets)
+                widget.Draw(grfx, currentFrameNumber / framerate);
+        }
     }
 
     private static Bitmap GetFrame(VideoFileReader reader, long skipFrames, ref long currentFrame)
@@ -101,10 +108,12 @@ public static class VideoCompositor
             UpdateActiveWidgets(ref activeWidgets);
             float framerate = reader.FrameRate;
             long frameCount = reader.FrameCount;
-            if (time * framerate > frameCount)
+            long frameNumnber = (long)(time * framerate);
+            if (frameNumnber > frameCount)
             {
                 throw new ApplicationException("The time speciffied is outside the video timespan.");
             }
+
             VideoDimensions = new Size(reader.Width, reader.Height);
             videoEnd = reader.FrameCount;
             videoStart = 0;
@@ -112,16 +121,12 @@ public static class VideoCompositor
             long n = 0;
             // get next frame
 
-            Bitmap videoFrame = GetFrame(reader, (long)(time * framerate), ref n);
+            Bitmap videoFrame = GetFrame(reader, frameNumnber, ref n);
 
-            using (Graphics grfx = Graphics.FromImage(videoFrame))
-            {
-                grfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                foreach (var widget in activeWidgets)
-                    widget.Draw(grfx, time);
-            }
+            RenderFrame(framerate, frameNumnber, videoFrame);
 
             reader.Close();
+
             //TODO successfully dispose of previous preview
             string previewFileName = string.Format("testPreviewFrame" + previewNumber + ".png");
             previewNumber++;
@@ -129,6 +134,7 @@ public static class VideoCompositor
                 System.IO.File.Delete(previewFileName);
             videoFrame.Save(previewFileName, ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
             videoFrame.Dispose();
+
             return System.IO.Directory.GetCurrentDirectory() + "\\" + previewFileName;
             //string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
         }

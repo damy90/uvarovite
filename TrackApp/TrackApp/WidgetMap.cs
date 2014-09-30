@@ -23,7 +23,6 @@ class WidgetMap : WidgetDrawOnMap
                             + (box.Position.Longitude + 0.00 + box.Size.Longitude).ToString()
                             + "+%20&sensor=false";
             //MessageBox.Show(path);
-            //TODO catch web client exeption System.Net.WebException
             //TODO use a variable instead of file
             try
             {
