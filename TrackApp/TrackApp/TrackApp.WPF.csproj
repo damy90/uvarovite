@@ -61,37 +61,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="EmptyTrackExeption.cs" />
-    <Compile Include="GPSBox.cs" />
-    <Compile Include="GPSData.cs" />
-    <Compile Include="GPSPoint.cs" />
-    <Compile Include="GPSCoord.cs" />
-    <Compile Include="GPXFileLoader.cs" />
-    <Compile Include="IDrawable.cs" />
-    <Compile Include="IGPSReader.cs" />
     <Compile Include="PreviewWindow.xaml.cs">
       <DependentUpon>PreviewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProjectSettings.cs" />
     <Compile Include="SetPreviewTime.xaml.cs">
       <DependentUpon>SetPreviewTime.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VideoCompositor.cs" />
-    <Compile Include="VideoFormats.cs" />
-    <Compile Include="Widget.cs" />
-    <Compile Include="WidgetDistanceMeter.cs" />
-    <Compile Include="WidgetDrawOnMap.cs" />
-    <Compile Include="WidgetMap.cs" />
-    <Compile Include="WidgetOverlayImage.cs" />
-    <Compile Include="WidgetPositionMarker.cs" />
-    <Compile Include="WidgetSpeedMeter.cs" />
-    <Compile Include="WidgetTrack.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -204,6 +185,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrackApp.Logic\TrackApp.Logic.csproj">
+      <Project>{1ff2ab87-6a16-4a6c-8a4c-69893884d2bb}</Project>
+      <Name>TrackApp.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

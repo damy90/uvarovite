@@ -8,6 +8,8 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.ComponentModel;
+using TrackApp.Logic;
+
 namespace TrackApp
 {
     //TODO collect data from user
