@@ -10,7 +10,7 @@ namespace TrackApp.Logic.Gps
     public class GPXFileLoader : IGPSReader
     {
         //GPSData gpsData = new GPSData();
-        private List<GPSPoint> pts = new List<GPSPoint>();
+        private readonly List<GPSPoint> pts = new List<GPSPoint>();
 
         public int LoadPoints(string sFile)
         {
@@ -26,7 +26,6 @@ namespace TrackApp.Logic.Gps
                              Dt = point.Element(gpxNamespace + "time") != null ? point.Element(gpxNamespace + "time").Value : null
                          };
 
-            StringBuilder sb = new StringBuilder();
             DateTime startTime = new DateTime();
             bool isStart = true;
             foreach (var pt in points)

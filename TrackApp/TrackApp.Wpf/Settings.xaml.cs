@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using TrackApp.Logic;
 
 namespace TrackApp.Wpf
 { 
@@ -12,9 +13,9 @@ namespace TrackApp.Wpf
     //TODO collect data from user
     public partial class Settings : Window
     {
-        const int spaceBetweenGrids = 5;
-        const int rowHeight = 40;
-        const int colWidth = 150;
+        const int SpaceBetweenGrids = 5;
+        const int RowHeight = 40;
+        const int ColWidth = 150;
         float videoStart;
         float trackStart;
         bool enableMap;
@@ -34,20 +35,20 @@ namespace TrackApp.Wpf
         #region helpingMethods
         private void ResizeGrid(Grid grid)
         {
-            if (grid.Height == rowHeight)
+            if (grid.Height == RowHeight)
             {
-                grid.Height = grid.RowDefinitions.Count * rowHeight;
+                grid.Height = grid.RowDefinitions.Count * RowHeight;
             }
             else
             {
-                grid.Height = rowHeight;
+                grid.Height = RowHeight;
             }
         }
         private void AnimationDown(Grid grd)
         {
             ThicknessAnimation ta = new ThicknessAnimation();
             ta.From = grd.Margin;
-            ta.To = new Thickness(grd.Margin.Left, (3*rowHeight+spaceBetweenGrids), 0, 0);
+            ta.To = new Thickness(grd.Margin.Left, (3*RowHeight+SpaceBetweenGrids), 0, 0);
             ta.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             grd.BeginAnimation(Grid.MarginProperty, ta);
         }
@@ -55,7 +56,7 @@ namespace TrackApp.Wpf
         {
             ThicknessAnimation ta = new ThicknessAnimation();
             ta.From = grid.Margin;
-            ta.To = new Thickness(grid.Margin.Left, rowHeight + spaceBetweenGrids, 0, 0);
+            ta.To = new Thickness(grid.Margin.Left, RowHeight + SpaceBetweenGrids, 0, 0);
             ta.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             grid.BeginAnimation(Grid.MarginProperty, ta);
         }

@@ -9,11 +9,11 @@ namespace TrackApp.Logic.Gps
     {
         private GPSPoint[] gpsPoints;
 
-        public static double longtitudeCorrectionScale = 1;
+        public static double LongtitudeCorrectionScale = 1;
 
         private static GPSData _instance;
         private Vector vector = new Vector(0, 0);//use the previous values when the direction length is 0
-        GPSBox BoundingBox;
+        GPSBox boundingBox;
 
         private GPSData()
         {
@@ -82,9 +82,9 @@ namespace TrackApp.Logic.Gps
             }
             GPSCoord position = new GPSCoord(minLong, minLat, minEle);
             GPSCoord size = new GPSCoord(maxLong - minLong, maxLat - minLat, maxEle - minEle);
-            this.BoundingBox = new GPSBox(position, size);
+            this.boundingBox = new GPSBox(position, size);
             //for drawing maps
-            longtitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
+            LongtitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
             //distances from start point
             double distanceSum = 0;
             for (int i = 1; i < this.gpsPoints.Length; i++)
@@ -109,7 +109,7 @@ namespace TrackApp.Logic.Gps
 
         public GPSBox GetBox()
         {
-            return this.BoundingBox;
+            return this.boundingBox;
         }
 
         public GPSCoord GetPosition(float time)
@@ -126,7 +126,7 @@ namespace TrackApp.Logic.Gps
         public Vector[] GetOrientation(float time, double length=1)
         {
             int index = this.GetIndex(time);
-            double longDirection = (this.gpsPoints[index + 1].Longitude - this.gpsPoints[index].Longitude) * longtitudeCorrectionScale;
+            double longDirection = (this.gpsPoints[index + 1].Longitude - this.gpsPoints[index].Longitude) * LongtitudeCorrectionScale;
             double latDirection = this.gpsPoints[index + 1].Latitude - this.gpsPoints[index].Latitude;
 
             double lengthVector = Math.Sqrt(longDirection * longDirection + latDirection * latDirection);
@@ -172,9 +172,9 @@ namespace TrackApp.Logic.Gps
         //size and return value are in pixels
         public PointF ToPixelCoordinate(GPSCoord pt, SizeF size, int border = 0)
         {
-            double ratio = size.Height / (this.BoundingBox.Size.Latitude);
-            return new PointF((float)((pt.Longitude - this.BoundingBox.Position.Longitude) * ratio * longtitudeCorrectionScale) + ((float)border) / 2,
-                size.Height - (float)((pt.Latitude - this.BoundingBox.Position.Latitude) * ratio) + ((float)border) / 2);
+            double ratio = size.Height / (this.boundingBox.Size.Latitude);
+            return new PointF((float)((pt.Longitude - this.boundingBox.Position.Longitude) * ratio * LongtitudeCorrectionScale) + ((float)border) / 2,
+                size.Height - (float)((pt.Latitude - this.boundingBox.Position.Latitude) * ratio) + ((float)border) / 2);
         }
 
         private double Interpolate(float time, double previousReading, double nextReading, float previousTime, float nextTime)

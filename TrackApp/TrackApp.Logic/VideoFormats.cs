@@ -1,4 +1,10 @@
-﻿public enum VideoFormats
+﻿namespace TrackApp.Logic
 {
-    WMV2, MPEG2, Raw, MPEG4
+    public enum VideoFormats
+    {
+        WMV2,
+        MPEG2,
+        Raw,
+        MPEG4
+    }
 }

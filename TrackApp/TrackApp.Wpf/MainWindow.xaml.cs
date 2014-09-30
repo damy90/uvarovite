@@ -74,8 +74,8 @@ namespace TrackApp.Wpf
             this.cpPMColor.SelectedColor = Color.FromArgb(settings.PositionMarkerColor.A, settings.PositionMarkerColor.R, settings.PositionMarkerColor.G, settings.PositionMarkerColor.B);
             //Overlay Image
             this.cbEnableOverlayImage.IsChecked = settings.ShowOverlayImage;
-            this.txtOIX.Text = settings.overlayImagePosition.X.ToString();
-            this.txtOIY.Text = settings.overlayImagePosition.Y.ToString();
+            this.txtOIX.Text = settings.OverlayImagePosition.X.ToString();
+            this.txtOIY.Text = settings.OverlayImagePosition.Y.ToString();
             //Map
             this.cbEnableMap.IsChecked = settings.ShowMap;
             this.txtMapHeight.Text = settings.MapHeight.ToString();
@@ -331,7 +331,7 @@ namespace TrackApp.Wpf
             settings.ShowOverlayImage = (bool)this.cbEnableOverlayImage.IsChecked;
             if ((bool)this.cbEnableOverlayImage.IsChecked)
             {
-                settings.overlayImagePosition = new System.Drawing.Point(Convert.ToInt32(this.txtOIX.Text), Convert.ToInt32(this.txtOIY.Text));
+                settings.OverlayImagePosition = new System.Drawing.Point(Convert.ToInt32(this.txtOIX.Text), Convert.ToInt32(this.txtOIY.Text));
             }
             //Elevation widget - not included in the UI so giving it the hardcoded data
             //settings.ShowElevationWidget = false;
@@ -508,7 +508,7 @@ namespace TrackApp.Wpf
             loadFileDialog.ShowDialog();
             if (loadFileDialog != null)
             {
-                ProjectSettings.GetSettings().overlayImageFile = loadFileDialog.FileName;
+                ProjectSettings.GetSettings().OverlayImageFile = loadFileDialog.FileName;
                 loadFileDialog.FileName = null;
             }
         }

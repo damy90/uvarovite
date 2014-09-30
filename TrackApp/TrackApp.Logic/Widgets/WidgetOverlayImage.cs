@@ -12,7 +12,7 @@ namespace TrackApp.Logic.Widgets
             var frameSize = VideoCompositor.VideoDimensions;
             if (image == null)
             {
-                image = new Bitmap(ProjectSettings.GetSettings().overlayImageFile);
+                image = new Bitmap(ProjectSettings.GetSettings().OverlayImageFile);
                 float hratio = Math.Abs((float)(image.Height - frameSize.Height) / (float)image.Height);
                 float wratio = Math.Abs((float)(image.Width - frameSize.Width) / (float)image.Width);
                 if (hratio > 0.02 || wratio > 0.02)

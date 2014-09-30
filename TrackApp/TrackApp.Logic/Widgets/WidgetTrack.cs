@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using TrackApp.Logic.Gps;
 
 namespace TrackApp.Logic.Widgets

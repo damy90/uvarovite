@@ -40,8 +40,8 @@ namespace TrackApp.Logic
         public Color PositionMarkerColor = Color.DarkGreen;
 
         public bool ShowOverlayImage = false;
-        public string overlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
-        public Point overlayImagePosition = new Point(300,300);
+        public string OverlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
+        public Point OverlayImagePosition = new Point(300,300);
         //todo remoove
         public bool ShowElevationWidget = false;
         [XmlIgnoreAttribute]

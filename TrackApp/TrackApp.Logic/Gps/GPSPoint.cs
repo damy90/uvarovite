@@ -43,6 +43,7 @@ namespace TrackApp.Logic.Gps
             var result2 = 6367500 * 2.0 *
                           Math.Atan2(Math.Sqrt(result1), Math.Sqrt(1.0 - result1));
 
+            //TODO use elevation
             return result2;//Math.Sqrt(result2 * result2 + distanceElevation * distanceElevation);
         }
     }

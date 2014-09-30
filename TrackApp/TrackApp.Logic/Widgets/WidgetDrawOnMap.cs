@@ -33,7 +33,7 @@ namespace TrackApp.Logic.Widgets
                 GPSBox box = Gps.GetBox();
                 WidgetSize.Height = ProjectSettings.GetSettings().TrackHeight * VideoCompositor.VideoDimensions.Height / 100;
                 int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
-                double longtitudeCorrectionScale = GPSData.longtitudeCorrectionScale;
+                double longtitudeCorrectionScale = GPSData.LongtitudeCorrectionScale;
                 double ratio = (WidgetSize.Height - wholeTrackLineWidth) / (box.Size.Latitude);//avaiable size is slighly smaller due to line width
                 WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
             }
