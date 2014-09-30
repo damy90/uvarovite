@@ -6,11 +6,13 @@ using System.Drawing.Drawing2D;
 using AForge.Video.FFMPEG;
 using TrackApp.Logic.Gps;
 using TrackApp.Logic.Widgets;
+using System.IO;
 
 namespace TrackApp.Logic
 {
     public static class VideoCompositor
     {
+        private static readonly VideoFileReader reader = new VideoFileReader();
         private static List<Widget> activeWidgets;
         private static int previewNumber = 0;
         private static long videoEnd;
@@ -22,15 +24,19 @@ namespace TrackApp.Logic
 
         public static void RenderVideo()
         {
-            ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
+            ProjectSettings settings = ProjectSettings.GetSettings();
 
-            //TODO moove to Widget, if null check
+            //TODO moove to Widget
+            if (string.IsNullOrEmpty(settings.GPXPath))
+            {
+                throw new ArgumentNullException("No track file was selected!");
+            }
+
             new GPXFileLoader().LoadPoints(settings.GPXPath);
 
             UpdateActiveWidgets(ref activeWidgets);
+
             VideoFileWriter writer = new VideoFileWriter();
-            // instantiate AVI reader
-            VideoFileReader reader = new VideoFileReader();
 
             // open video file
             reader.Open(settings.VideoInputPath);
@@ -38,6 +44,11 @@ namespace TrackApp.Logic
             float framerate = reader.FrameRate;
             // create new AVI file and open it
             var encoding = (VideoCodec)Enum.Parse(typeof(VideoCodec), settings.Format.ToString());
+
+            if (string.IsNullOrEmpty(settings.VideoOutputPath))
+            {
+                throw new ArgumentNullException("No output video file was specified!");
+            }
 
             writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, encoding, settings.VideoQuality * 1000000);
 
@@ -53,7 +64,7 @@ namespace TrackApp.Logic
             {
                 Bitmap videoFrame = GetFrame(reader, speed, ref currentFrameNumber);
 
-                RenderFrame(framerate, currentFrameNumber, videoFrame);
+                RenderFrame(currentFrameNumber / framerate, videoFrame);
 
                 writer.WriteVideoFrame(videoFrame);
                 videoFrame.Dispose();
@@ -66,32 +77,40 @@ namespace TrackApp.Logic
 
         public static string Preview(float time)
         {
-            ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
-            VideoFileReader reader = new VideoFileReader();
+            ProjectSettings settings = ProjectSettings.GetSettings();
+
+            //TODO moove to Widget
+            if (string.IsNullOrEmpty(settings.GPXPath))
+            {
+                throw new EmptyTrackException("No track file was selected");
+            }
+
+            new GPXFileLoader().LoadPoints(settings.GPXPath);
+
+            UpdateActiveWidgets(ref activeWidgets);
+
             using (reader)
             {
                 reader.Open(settings.VideoInputPath);
-                //TODO moove to Widget
-                new GPXFileLoader().LoadPoints(settings.GPXPath);
-                UpdateActiveWidgets(ref activeWidgets);
+                
                 float framerate = reader.FrameRate;
-                long frameCount = reader.FrameCount;
                 long frameNumnber = (long)(time * framerate);
-                if (frameNumnber > frameCount)
+
+                videoEnd = reader.FrameCount;
+                if (frameNumnber > videoEnd)
                 {
                     throw new ApplicationException("The time speciffied is outside the video timespan.");
                 }
 
                 VideoDimensions = new Size(reader.Width, reader.Height);
-                videoEnd = reader.FrameCount;
+                
                 videoStart = 0;
                 // unneeded in this context but needed for a method
                 long n = 0;
-                // get next frame
 
                 Bitmap videoFrame = GetFrame(reader, frameNumnber, ref n);
 
-                RenderFrame(framerate, frameNumnber, videoFrame);
+                RenderFrame(time, videoFrame);
 
                 reader.Close();
 
@@ -108,13 +127,13 @@ namespace TrackApp.Logic
             }
         }
 
-        private static void RenderFrame(float framerate, long currentFrameNumber, Bitmap videoFrame)
+        private static void RenderFrame(float timeInSeconds, Bitmap videoFrame)
         {
             using (Graphics grfx = Graphics.FromImage(videoFrame))
             {
                 grfx.SmoothingMode = SmoothingMode.AntiAlias;
                 foreach (var widget in activeWidgets)
-                    widget.Draw(grfx, currentFrameNumber / framerate);
+                    widget.Draw(grfx, timeInSeconds);
             }
         }
 
