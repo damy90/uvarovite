@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,7 +7,6 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.ComponentModel;
-using TrackApp;
 using TrackApp.Logic;
 
 namespace TrackApp.Wpf
