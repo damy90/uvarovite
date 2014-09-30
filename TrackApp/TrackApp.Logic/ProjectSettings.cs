@@ -8,7 +8,7 @@ namespace TrackApp.Logic
     {
         public string VideoInputPath = @"C:\Users\Dany\Desktop\GOPR2340.avi";
         public string VideoOutputPath = @"C:\Users\Dany\Desktop\video-out.avi";
-        public string GPXPath = @"C:\Users\Dany\Desktop\Debug\workout.gpx";
+        public string GPXPath;// = @"C:\Users\Dany\Desktop\Debug\workout.gpx";
         public VideoFormats Format = VideoFormats.WMV2;
         //public int BitRate = 50000000;//2 Mbit/s
 

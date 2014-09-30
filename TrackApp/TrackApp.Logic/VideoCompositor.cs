@@ -23,7 +23,7 @@ namespace TrackApp.Logic
         public static void RenderVideo()
         {
             ProjectSettings settings = ProjectSettings.GetSettings();//Optimisation When multiple settings have to be read
-            //string encoding = settings.Format.ToString();//трябва да се тества
+
             //TODO moove to Widget, if null check
             new GPXFileLoader().LoadPoints(settings.GPXPath);
 
@@ -37,22 +37,7 @@ namespace TrackApp.Logic
             VideoDimensions = new Size(reader.Width, reader.Height);
             float framerate = reader.FrameRate;
             // create new AVI file and open it
-            var encoding = VideoCodec.MPEG4;
-            switch (settings.Format.ToString())
-            {
-                case "WMV2":
-                    encoding = VideoCodec.WMV2;
-                    break;
-                case "MPEG2":
-                    encoding = VideoCodec.MPEG2;
-                    break;
-                case "Raw":
-                    encoding = VideoCodec.Raw;
-                    break;
-                default:
-                    encoding = VideoCodec.MPEG4;
-                    break;
-            }
+            var encoding = (VideoCodec)Enum.Parse(typeof(VideoCodec), settings.Format.ToString());
 
             writer.Open(settings.VideoOutputPath, reader.Width, reader.Height, reader.FrameRate, encoding, settings.VideoQuality * 1000000);
 
