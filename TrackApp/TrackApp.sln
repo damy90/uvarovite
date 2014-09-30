@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackApp.WPF", "TrackApp\TrackApp.WPF.csproj", "{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackApp.Logic", "TrackApp.Logic\TrackApp.Logic.csproj", "{1FF2AB87-6A16-4A6C-8A4C-69893884D2BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackApp.Wpf", "TrackApp.Wpf\TrackApp.Wpf.csproj", "{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FF2AB87-6A16-4A6C-8A4C-69893884D2BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1FF2AB87-6A16-4A6C-8A4C-69893884D2BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF2AB87-6A16-4A6C-8A4C-69893884D2BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF2AB87-6A16-4A6C-8A4C-69893884D2BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE83F42-3D28-4C1F-852B-5E03584A9CF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
