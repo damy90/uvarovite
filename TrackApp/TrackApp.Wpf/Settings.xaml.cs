@@ -8,31 +8,32 @@ using System.Windows.Media.Imaging;
 using TrackApp.Logic;
 
 namespace TrackApp.Wpf
-{ 
+{
     //render video-commented out-->will be in main window
     //TODO collect data from user
     public partial class Settings : Window
     {
-        const int SpaceBetweenGrids = 5;
-        const int RowHeight = 40;
-        const int ColWidth = 150;
-        float videoStart;
-        float trackStart;
-        bool enableMap;
-        bool enableDistance;
-        bool enableSpeed;
-        VideoFormats videoFormat;
-        string outputName;
-        float fontSize;
-        Color fontColor;
-        Color outlineColor;
+        private const int SpaceBetweenGrids = 5;
+        private const int RowHeight = 40;
+        private const int ColWidth = 150;
+        //float videoStart;
+        //float trackStart;
+        //bool enableMap;
+        //bool enableDistance;
+        //bool enableSpeed;
+        //VideoFormats videoFormat;
+        //string outputName;
+        //float fontSize;
+        //Color fontColor;
+        //Color outlineColor;
 
         public Settings()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #region helpingMethods
+
         private void ResizeGrid(Grid grid)
         {
             if (grid.Height == RowHeight)
@@ -44,14 +45,16 @@ namespace TrackApp.Wpf
                 grid.Height = RowHeight;
             }
         }
+
         private void AnimationDown(Grid grd)
         {
             ThicknessAnimation ta = new ThicknessAnimation();
             ta.From = grd.Margin;
-            ta.To = new Thickness(grd.Margin.Left, (3*RowHeight+SpaceBetweenGrids), 0, 0);
+            ta.To = new Thickness(grd.Margin.Left, 3 * RowHeight + SpaceBetweenGrids, 0, 0);
             ta.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             grd.BeginAnimation(Grid.MarginProperty, ta);
         }
+
         private void AnimationUp(Grid grid)
         {
             ThicknessAnimation ta = new ThicknessAnimation();
@@ -93,48 +96,51 @@ namespace TrackApp.Wpf
             this.grdFont.Visibility = Visibility.Hidden;
             this.grdSync.Visibility = Visibility.Hidden;
         }
+
         private void btnFontForeground_Click(object sender, RoutedEventArgs e)
         {
         }
 
         private void btnFont_MouseEnter(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Font_enter.png", btnFont);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Font_enter.png", this.btnFont);
         }
+
         private void btnFont_MouseLeave(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Font_leave.png", btnFont);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Font_leave.png", this.btnFont);
         }
 
         private void btnVideo_MouseEnter(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Video_enter.png", btnVideo);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Video_enter.png", this.btnVideo);
         }
 
         private void btnVideo_MouseLeave(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Video_leave.png", btnVideo);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Video_leave.png", this.btnVideo);
         }
 
         private void btnSync_MouseEnter(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Syncronization_enter.png", btnSync);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Syncronization_enter.png", this.btnSync);
         }
 
         private void btnSync_MouseLeave(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Syncronization_leave.png", btnSync);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Syncronization_leave.png", this.btnSync);
         }
 
         private void btnAdvanced_MouseEnter(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Advanced_enter.png", btnAdvanced);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Advanced_enter.png", this.btnAdvanced);
         }
 
         private void btnAdvanced_MouseLeave(object sender, MouseEventArgs e)
         {
-            ChangeIconBackground(@"pack://application:,,,/Resources/SB_Advanced_leave.png", btnAdvanced);
+            this.ChangeIconBackground(@"pack://application:,,,/Resources/SB_Advanced_leave.png", this.btnAdvanced);
         }
+
         private void ChangeIconBackground(string path, System.Windows.Controls.Button btn)
         {
             var imgBrush = new ImageBrush();

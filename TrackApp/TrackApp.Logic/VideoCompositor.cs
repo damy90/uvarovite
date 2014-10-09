@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using AForge.Video.FFMPEG;
 using TrackApp.Logic.Gps;
 using TrackApp.Logic.Widgets;
@@ -74,7 +73,7 @@ namespace TrackApp.Logic
             writer.Close();
         }
 
-        public static string Preview(float time)
+        public static Bitmap Preview(float time)
         {
             ProjectSettings settings = ProjectSettings.GetSettings();
 
@@ -88,42 +87,30 @@ namespace TrackApp.Logic
 
             UpdateActiveWidgets(ref activeWidgets);
 
-                reader.Open(settings.VideoInputPath);
+            reader.Open(settings.VideoInputPath);
 
-                float framerate = reader.FrameRate;
-                long frameNumnber = (long)(time * framerate);
+            float framerate = reader.FrameRate;
+            long frameNumnber = (long)(time * framerate);
 
-                videoEnd = reader.FrameCount;
-                if (frameNumnber > videoEnd)
-                {
-                    throw new ApplicationException("The time speciffied is outside the video timespan.");
-                }
+            videoEnd = reader.FrameCount;
+            if (frameNumnber > videoEnd)
+            {
+                throw new ApplicationException("The time speciffied is outside the video timespan.");
+            }
 
-                VideoDimensions = new Size(reader.Width, reader.Height);
+            VideoDimensions = new Size(reader.Width, reader.Height);
+            videoStart = 0;
 
-                videoStart = 0;
+            // unneeded in this context but needed for a method
+            long n = 0;
 
-                // unneeded in this context but needed for a method
-                long n = 0;
+            Bitmap videoFrame = GetFrame(reader, frameNumnber, ref n);
 
-                Bitmap videoFrame = GetFrame(reader, frameNumnber, ref n);
+            RenderFrame(time, videoFrame);
 
-                RenderFrame(time, videoFrame);
+            reader.Close();
 
-                reader.Close();
-
-                // TODO successfully dispose of previous preview or use a variable
-                string previewFileName = string.Format("testPreviewFrame" + previewNumber + ".png");
-                previewNumber++;
-                if (System.IO.File.Exists(previewFileName))
-                {
-                    System.IO.File.Delete(previewFileName);
-                }
-                    
-                videoFrame.Save(previewFileName, ImageFormat.Png); // test - atm using the path, alternatively -> return path/BitmapImage
-                videoFrame.Dispose();
-
-                return System.IO.Directory.GetCurrentDirectory() + "\\" + previewFileName;
+            return videoFrame;
         }
 
         private static void RenderFrame(float timeInSeconds, Bitmap videoFrame)

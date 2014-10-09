@@ -10,8 +10,11 @@ namespace TrackApp.Wpf
     {
         public ProgressWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        public event EventHandler Cancel = delegate { };
+
         public string ProgressText
         {
             set
@@ -20,11 +23,9 @@ namespace TrackApp.Wpf
             }
         }
 
-        public event EventHandler Cancel = delegate { };
-
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Cancel(sender, e);
+            this.Cancel(sender, e);
         }
     }
 }

@@ -12,6 +12,12 @@ namespace TrackApp.Wpf
     public partial class SetPreviewTime : Window
     {
         private float time;
+
+        public SetPreviewTime()
+        {
+            this.InitializeComponent();
+        }
+
         public float Time
         {
             get
@@ -20,36 +26,34 @@ namespace TrackApp.Wpf
             }
         }
 
-        public SetPreviewTime()
-        {
-            InitializeComponent();
-        }
-
         private void btnPreview_MouseEnter(object sender, MouseEventArgs e)
         {
             this.btnPreview.Background = new SolidColorBrush(Colors.White);
-            this.btnPreview.Foreground = new SolidColorBrush(Color.FromRgb(30,60,255));
+            this.btnPreview.Foreground = new SolidColorBrush(Color.FromRgb(30, 60, 255));
         }
+
         private void btnPreview_MouseLeave(object sender, MouseEventArgs e)
         {
             this.btnPreview.Background = new SolidColorBrush(Color.FromRgb(30, 60, 255));
             this.btnPreview.Foreground = new SolidColorBrush(Colors.White);
         }
+
         private void btnPreview_Click(object sender, RoutedEventArgs e)
         {
             if (udHours.Value != null && udMinutes.Value != null && udSeconds.Value != null)
             {
                 this.time = Convert.ToInt32(udHours.Value) * 3600f + Convert.ToInt32(udMinutes.Value) * 60 + Convert.ToInt32(udSeconds.Value);
             }
-            try
-            {
+
+            //try
+            //{
                 Preview prevWindow = new Preview(VideoCompositor.Preview(this.time));
                 prevWindow.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
     }
 }

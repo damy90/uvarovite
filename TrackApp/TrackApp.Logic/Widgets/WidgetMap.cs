@@ -7,7 +7,6 @@ namespace TrackApp.Logic.Widgets
     public class WidgetMap : WidgetDrawOnMap
     {
         // TODO leave some space between the map frame and the track points, the map has to resize according to the track size
-        private static int fileCount = 0;
         private Bitmap map;
 
         public override void Draw(Graphics grfx, float time)
@@ -29,16 +28,12 @@ namespace TrackApp.Logic.Widgets
                 // TODO use a variable instead of file
                 try
                 {
-                    webClient.DownloadFile(path, "test" + fileCount + ".png");
-                    ////Bitmap mapImage = (Bitmap)webClient.DownloadData(path);//encoding?
+                    this.map = new Bitmap(webClient.OpenRead(path));
                 }
                 catch (WebException)
                 {
                     throw new WebException("Could not load google map");
                 }
-
-                this.map = new Bitmap("test" + fileCount + ".png");
-                fileCount++;
             }
 
             grfx.DrawImage(this.map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
