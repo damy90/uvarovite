@@ -6,27 +6,27 @@ namespace TrackApp.Logic
 {
     public sealed class ProjectSettings
     {
-        public string VideoInputPath;// = @"C:\Users\Dany\Desktop\GOPR2340.avi";
-        public string VideoOutputPath;// = @"C:\Users\Dany\Desktop\video-out.avi";
-        public string GPXPath;// = @"C:\Users\Dany\Desktop\Debug\workout.gpx";
+        public string VideoInputPath; // = @"C:\Users\Dany\Desktop\GOPR2340.avi";
+        public string VideoOutputPath; // = @"C:\Users\Dany\Desktop\video-out.avi";
+        public string GPXPath; // = @"C:\Users\Dany\Desktop\Debug\workout.gpx";
         public VideoFormats Format = VideoFormats.WMV2;
-        //public int BitRate = 50000000;//2 Mbit/s
+        ////public int BitRate = 50000000;//2 Mbit/s
 
-        //public TimeZone TimeZone = TimeZone.CurrentTimeZone;
+        ////public TimeZone TimeZone = TimeZone.CurrentTimeZone;
 
-        public float VideoStart = 60;//in seconds
+        public float VideoStart = 60; // in seconds
         public float TrackStart = 0;
-        public float VideoEnd = 240;//zero if video length is not trimmed
+        public float VideoEnd = 240; // zero if video length is not trimmed
         public float TrackEnd = 0;
-        public int VideoSpeed = 8; //speed multiplier 
-        public int VideoQuality = 7;//Bitrate = quality * 1 000 000 
+        public int VideoSpeed = 8; // speed multiplier 
+        public int VideoQuality = 7; // Bitrate = quality * 1 000 000 
 
-        public bool ShowTrack = true;//TO DO: Finish track widget and change to true
+        public bool ShowTrack = true;
 
         public Point TrackPostion = new Point(80, 80);
-        public int TrackHeight = 20;//the width is calculated from the track points 
+        public int TrackHeight = 20; // the width is calculated from the track points 
         [XmlIgnoreAttribute]
-        public Color TraveledTrackColor = Color.Red ;
+        public Color TraveledTrackColor = Color.Red;
         public int TraveledTrackLineWidth = 2;
         [XmlIgnoreAttribute]
         public Color WholeTrackColor = Color.Yellow;
@@ -34,23 +34,24 @@ namespace TrackApp.Logic
         public bool ShowTraveledTrack = true;
 
         public bool ShowPositionMarker = false;
-        public bool ShowOrientation = true;//TODO Add to gui
+        public bool ShowOrientation = true; // TODO Add to gui
         public int PositionMarkerSize = 10;
         [XmlIgnoreAttribute]
         public Color PositionMarkerColor = Color.DarkGreen;
 
         public bool ShowOverlayImage = false;
-        public string OverlayImageFile;//draw a background image, like this: http://i.imgur.com/jjKmk.jpg
-        public Point OverlayImagePosition = new Point(300,300);
-        //todo remoove
+        public string OverlayImageFile;
+        public Point OverlayImagePosition = new Point(300, 300);
+
+        // todo remoove
         public bool ShowElevationWidget = false;
         [XmlIgnoreAttribute]
         public Font ElevationWidgetFont = new Font("Ariel", 28);
-        public Point ElevationWidgetPosition = new Point(300,0);
+        public Point ElevationWidgetPosition = new Point(300, 0);
         [XmlIgnoreAttribute]
         public Color ElevationWidgetColor = Color.White;
         public bool ShowMap = false;
-        public int MapHeight = 240;//should be bigger than the track height, width is bigger by the same value (remoove
+        public int MapHeight = 240; // should be bigger than the track height, width is bigger by the same value
         public float MapOpacity;
 
         public bool ShowDistanceWidget = false;
@@ -66,24 +67,25 @@ namespace TrackApp.Logic
         [XmlIgnoreAttribute]
         public Color SpeedWidgetColor = Color.White;
 
-        private static ProjectSettings _instance;  //променлива за единствената инстанция на този клас
+        private static ProjectSettings _instance;  // променлива за единствената инстанция на този клас
 
         // Constructor is 'protected' - конструтора е защитен и не може да бъде извикан
         protected ProjectSettings()
         {
         }
 
-        //Color serialization
+        // Color serialization
         [XmlElement("TraveledTrackColor")]
         public int TraveledTrackColorAsArgb
         {
             get
             {
-                return TraveledTrackColor.ToArgb();
+                return this.TraveledTrackColor.ToArgb();
             }
+
             set
             {
-                TraveledTrackColor = Color.FromArgb(value);
+                this.TraveledTrackColor = Color.FromArgb(value);
             }
         }
 
@@ -92,11 +94,12 @@ namespace TrackApp.Logic
         {
             get
             {
-                return WholeTrackColor.ToArgb();
+                return this.WholeTrackColor.ToArgb();
             }
+
             set
             {
-                WholeTrackColor = Color.FromArgb(value);
+                this.WholeTrackColor = Color.FromArgb(value);
             }
         }
 
@@ -105,11 +108,12 @@ namespace TrackApp.Logic
         {
             get
             {
-                return PositionMarkerColor.ToArgb();
+                return this.PositionMarkerColor.ToArgb();
             }
+
             set
             {
-                PositionMarkerColor = Color.FromArgb(value);
+                this.PositionMarkerColor = Color.FromArgb(value);
             }
         }
 
@@ -118,11 +122,12 @@ namespace TrackApp.Logic
         {
             get
             {
-                return ElevationWidgetColor.ToArgb();
+                return this.ElevationWidgetColor.ToArgb();
             }
+
             set
             {
-                ElevationWidgetColor = Color.FromArgb(value);
+                this.ElevationWidgetColor = Color.FromArgb(value);
             }
         }
 
@@ -131,11 +136,12 @@ namespace TrackApp.Logic
         {
             get
             {
-                return DistanceWidgetColor.ToArgb();
+                return this.DistanceWidgetColor.ToArgb();
             }
+
             set
             {
-                DistanceWidgetColor = Color.FromArgb(value);
+                this.DistanceWidgetColor = Color.FromArgb(value);
             }
         }
 
@@ -144,21 +150,23 @@ namespace TrackApp.Logic
         {
             get
             {
-                return SpeedWidgetColor.ToArgb();
+                return this.SpeedWidgetColor.ToArgb();
             }
+
             set
             {
-                SpeedWidgetColor = Color.FromArgb(value);
+                this.SpeedWidgetColor = Color.FromArgb(value);
             }
         }
 
-        //Font serialization
+        // Font serialization
         public SerializableFont PSpeedWidgetFont
         {
             get
             {
                 return new SerializableFont(this.SpeedWidgetFont);
             }
+
             set
             {
                 this.SpeedWidgetFont = value.ToFont();
@@ -171,6 +179,7 @@ namespace TrackApp.Logic
             {
                 return new SerializableFont(this.DistanceWidgetFont);
             }
+
             set
             {
                 this.DistanceWidgetFont = value.ToFont();
@@ -183,19 +192,21 @@ namespace TrackApp.Logic
             {
                 return new SerializableFont(this.SpeedWidgetFont);
             }
+
             set
             {
                 this.SpeedWidgetFont = value.ToFont();
             }
         }
 
-        //единтвения начин за инстанцииране е от тук
+        // единтвения начин за инстанцииране е от тук
         public static ProjectSettings GetSettings()
         {
             if (_instance == null)
             {
                 _instance = new ProjectSettings();
             }
+
             return _instance;
         }
 

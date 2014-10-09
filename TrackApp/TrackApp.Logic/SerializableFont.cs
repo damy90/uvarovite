@@ -4,6 +4,18 @@ namespace TrackApp.Logic
 {
     public class SerializableFont
     {
+        public SerializableFont(Font f)
+        {
+            this.FontFamily = f.FontFamily.Name;
+            this.GraphicsUnit = f.Unit;
+            this.Size = f.Size;
+            this.Style = f.Style;
+        }
+
+        private SerializableFont()
+        {
+        }
+
         public string FontFamily { get; set; }
 
         public GraphicsUnit GraphicsUnit { get; set; }
@@ -12,22 +24,9 @@ namespace TrackApp.Logic
 
         public FontStyle Style { get; set; }
 
-        private SerializableFont()
-        {
-        }
-
-        public SerializableFont(Font f)
-        {
-            FontFamily = f.FontFamily.Name;
-            GraphicsUnit = f.Unit;
-            Size = f.Size;
-            Style = f.Style;
-        }
-
         public Font ToFont()
         {
-            return new Font(FontFamily, Size, Style,
-                GraphicsUnit);
+            return new Font(this.FontFamily, this.Size, this.Style, this.GraphicsUnit);
         }
     }
 }

@@ -9,16 +9,6 @@ namespace TrackApp.Logic.Widgets
         protected static Size WidgetSize;
         protected static GPSData Gps = GPSData.GetData();
 
-        /*protected static Point GetBoundPosition()
-        {
-        /*var inputPos = ProjectSettings.GetSettings().TrackPostion;
-        if (inputPos.X + GetBoundSize().Width > 100)
-        inputPos.X = 100 - GetBoundSize().Width;
-        if (inputPos.Y + GetBoundSize().Height > 100)
-        inputPos.Y = 100 - GetBoundSize().Height;
-        return PecentToPixels(ProjectSettings.GetSettings().TrackPostion);//TODO remoove
-        }*/
-
         protected static PointF GetPosition()
         {
             int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
@@ -34,9 +24,10 @@ namespace TrackApp.Logic.Widgets
                 WidgetSize.Height = ProjectSettings.GetSettings().TrackHeight * VideoCompositor.VideoDimensions.Height / 100;
                 int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
                 double longtitudeCorrectionScale = GPSData.LongtitudeCorrectionScale;
-                double ratio = (WidgetSize.Height - wholeTrackLineWidth) / (box.Size.Latitude);//avaiable size is slighly smaller due to line width
+                double ratio = (WidgetSize.Height - wholeTrackLineWidth) / box.Size.Latitude; // avaiable size is slighly smaller due to line width
                 WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
             }
+
             return WidgetSize;
         }
 
@@ -47,4 +38,3 @@ namespace TrackApp.Logic.Widgets
         }
     }
 }
-

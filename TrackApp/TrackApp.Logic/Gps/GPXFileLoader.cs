@@ -9,15 +9,15 @@ namespace TrackApp.Logic.Gps
 {
     public class GPXFileLoader : IGPSReader
     {
-        //GPSData gpsData = new GPSData();
         private readonly List<GPSPoint> pts = new List<GPSPoint>();
 
-        public int LoadPoints(string sFile)
+        public void LoadPoints(string path)
         {
-            XDocument gpxDoc = XDocument.Load(sFile);
+            XDocument gpxDoc = XDocument.Load(path);
             XNamespace gpxNamespace = XNamespace.Get("http://www.topografix.com/GPX/1/1");
 
-            var points = from point in gpxDoc.Descendants(gpxNamespace + "trkpt")  //trk/trkseg/trkpt
+            // WHAT?
+            var points = from point in gpxDoc.Descendants(gpxNamespace + "trkpt")  // trk/trkseg/trkpt
                          select new
                          {
                              Latitude = point.Attribute("lat").Value,
@@ -35,21 +35,19 @@ namespace TrackApp.Logic.Gps
                     startTime = System.Convert.ToDateTime(pt.Dt, CultureInfo.InvariantCulture);
                     isStart = false;
                 }
+
                 // This is where we'd instantiate data
                 // containers for the information retrieved.
                 this.pts.Add(new GPSPoint(
                     Convert.ToDouble(pt.Longitude, CultureInfo.InvariantCulture),
                     Convert.ToDouble(pt.Latitude, CultureInfo.InvariantCulture),
                     Convert.ToDouble(pt.Elevation, CultureInfo.InvariantCulture),
-                                          //System.Convert.ToDateTime(pt.Dt)
-                    (float)(Convert.ToDateTime(pt.Dt, CultureInfo.InvariantCulture) - startTime).TotalSeconds,
-                    0)); //new GPSPoint(20f, 30f, 40f, DateTime.Now)
-                //MessageBox.Show(string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n", pt.Longitude, pt.Latitude, pt.Elevation, pt.Dt));
+                    (float)(Convert.ToDateTime(pt.Dt, CultureInfo.InvariantCulture) - startTime).TotalSeconds, 0)); 
+                ////MessageBox.Show(string.Format("Latitude:{0} Longitude:{1} Elevation:{2} Date:{3}\n", pt.Longitude, pt.Latitude, pt.Elevation, pt.Dt));
             }
 
-            //MessageBox.Show(pts.Count.ToString());
+            ////MessageBox.Show(pts.Count.ToString());
             GPSData.GetData().Update(this.pts);
-            return GPSData.GetData().GetPointCount();
         }
     }
 }

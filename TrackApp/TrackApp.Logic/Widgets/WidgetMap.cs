@@ -4,19 +4,19 @@ using TrackApp.Logic.Gps;
 
 namespace TrackApp.Logic.Widgets
 {
-    class WidgetMap : WidgetDrawOnMap
+    public class WidgetMap : WidgetDrawOnMap
     {
-        //TODO leave some space between the map frame and the track points, the map has to resize according to the track size
-        private Bitmap map;
+        // TODO leave some space between the map frame and the track points, the map has to resize according to the track size
         private static int fileCount = 0;
+        private Bitmap map;
 
         public override void Draw(Graphics grfx, float time)
         {
-            if (map == null)
+            if (this.map == null)
             {
                 GPSBox box = Gps.GetBox();
                 WebClient webClient = new WebClient();
-                string path = @"http://maps.googleapis.com/maps/api/staticmap?size="//TODO max heigth=640, max width=640
+                string path = @"http://maps.googleapis.com/maps/api/staticmap?size="// TODO max heigth=640, max width=640
                               +
                               GetBoundSize().Width + 'x' + GetBoundSize().Height +
                               "&path=color:0x00000000|weight:5|" +
@@ -25,22 +25,23 @@ namespace TrackApp.Logic.Widgets
                               (box.Position.Latitude + 0.00 + box.Size.Latitude).ToString() + ',' +
                               (box.Position.Longitude + 0.00 + box.Size.Longitude).ToString() +
                               "+%20&sensor=false";
-                //MessageBox.Show(path);
-                //TODO use a variable instead of file
+                ////MessageBox.Show(path);
+                // TODO use a variable instead of file
                 try
                 {
                     webClient.DownloadFile(path, "test" + fileCount + ".png");
-                    fileCount++;
+                    ////Bitmap mapImage = (Bitmap)webClient.DownloadData(path);//encoding?
                 }
                 catch (WebException)
                 {
                     throw new WebException("Could not load google map");
                 }
 
-                map = new Bitmap("test" + fileCount + ".png");
+                this.map = new Bitmap("test" + fileCount + ".png");
+                fileCount++;
             }
-            grfx.DrawImage(map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
+
+            grfx.DrawImage(this.map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
         }
     }
 }
-

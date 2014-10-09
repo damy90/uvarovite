@@ -5,15 +5,17 @@ namespace TrackApp.Logic.Gps
     public class GPSPoint : GPSCoord, IComparable<GPSPoint>
     {
         public float Time;
-        public double Distance;//in meters
+        public double Distance; // in meters
 
-        public GPSPoint(double lon, double lat, double ele, float dt, double distance = 0) : base(lon, lat, ele)
+        public GPSPoint(double lon, double lat, double ele, float dt, double distance = 0)
+            : base(lon, lat, ele)
         {
             this.Time = dt;
             this.Distance = distance;
         }
 
-        public GPSPoint(float dt) : base(0, 0, 0)
+        public GPSPoint(float dt)
+            : base(0, 0, 0)
         {
             this.Time = dt;
             this.Distance = 0;
@@ -43,8 +45,8 @@ namespace TrackApp.Logic.Gps
             var result2 = 6367500 * 2.0 *
                           Math.Atan2(Math.Sqrt(result1), Math.Sqrt(1.0 - result1));
 
-            //TODO use elevation
-            return result2;//Math.Sqrt(result2 * result2 + distanceElevation * distanceElevation);
+            // TODO use elevation
+            return result2; // Math.Sqrt(result2 * result2 + distanceElevation * distanceElevation);
         }
     }
 }

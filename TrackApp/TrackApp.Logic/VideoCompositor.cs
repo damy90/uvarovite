@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using AForge.Video.FFMPEG;
 using TrackApp.Logic.Gps;
 using TrackApp.Logic.Widgets;
-using System.IO;
 
 namespace TrackApp.Logic
 {
@@ -20,13 +19,12 @@ namespace TrackApp.Logic
 
         public static Size VideoDimensions { get; private set; }
 
-        //TODO add sound
-
+        // TODO add sound
         public static void RenderVideo()
         {
             ProjectSettings settings = ProjectSettings.GetSettings();
 
-            //TODO moove to Widget
+            // TODO moove to Widget
             if (string.IsNullOrEmpty(settings.GPXPath))
             {
                 throw new ArgumentNullException("No track file was selected!");
@@ -42,6 +40,7 @@ namespace TrackApp.Logic
             reader.Open(settings.VideoInputPath);
             VideoDimensions = new Size(reader.Width, reader.Height);
             float framerate = reader.FrameRate;
+
             // create new AVI file and open it
             var encoding = (VideoCodec)Enum.Parse(typeof(VideoCodec), settings.Format.ToString());
 
@@ -68,7 +67,7 @@ namespace TrackApp.Logic
 
                 writer.WriteVideoFrame(videoFrame);
                 videoFrame.Dispose();
-                //string progress = string.Format("{0} {1}", (int)(100 * n / videoEnd), '%');
+                ////string progress = string.Format("{0} {1}", (int)(100 * n / videoEnd), '%');
             }
 
             reader.Close();
@@ -79,7 +78,7 @@ namespace TrackApp.Logic
         {
             ProjectSettings settings = ProjectSettings.GetSettings();
 
-            //TODO moove to Widget
+            // TODO moove to Widget
             if (string.IsNullOrEmpty(settings.GPXPath))
             {
                 throw new EmptyTrackException("No track file was selected");
@@ -89,10 +88,8 @@ namespace TrackApp.Logic
 
             UpdateActiveWidgets(ref activeWidgets);
 
-            using (reader)
-            {
                 reader.Open(settings.VideoInputPath);
-                
+
                 float framerate = reader.FrameRate;
                 long frameNumnber = (long)(time * framerate);
 
@@ -103,8 +100,9 @@ namespace TrackApp.Logic
                 }
 
                 VideoDimensions = new Size(reader.Width, reader.Height);
-                
+
                 videoStart = 0;
+
                 // unneeded in this context but needed for a method
                 long n = 0;
 
@@ -114,17 +112,18 @@ namespace TrackApp.Logic
 
                 reader.Close();
 
-                //TODO successfully dispose of previous preview
+                // TODO successfully dispose of previous preview or use a variable
                 string previewFileName = string.Format("testPreviewFrame" + previewNumber + ".png");
                 previewNumber++;
                 if (System.IO.File.Exists(previewFileName))
+                {
                     System.IO.File.Delete(previewFileName);
-                videoFrame.Save(previewFileName, ImageFormat.Png);//test - atm using the path, alternatively -> return path/BitmapImage
+                }
+                    
+                videoFrame.Save(previewFileName, ImageFormat.Png); // test - atm using the path, alternatively -> return path/BitmapImage
                 videoFrame.Dispose();
 
                 return System.IO.Directory.GetCurrentDirectory() + "\\" + previewFileName;
-                //string progress = string.Format("{0} {1}", (int)(100 * n / time * framerate), '%');
-            }
         }
 
         private static void RenderFrame(float timeInSeconds, Bitmap videoFrame)
@@ -133,7 +132,9 @@ namespace TrackApp.Logic
             {
                 grfx.SmoothingMode = SmoothingMode.AntiAlias;
                 foreach (var widget in activeWidgets)
+                {
                     widget.Draw(grfx, timeInSeconds);
+                }
             }
         }
 
@@ -154,18 +155,34 @@ namespace TrackApp.Logic
             ProjectSettings settings = ProjectSettings.GetSettings();
             activeWidgets = new List<Widget>();
             if (settings.ShowMap)
+            {
                 activeWidgets.Add(new WidgetMap());
+            }
+
             if (settings.ShowOverlayImage)
+            {
                 activeWidgets.Add(new WidgetOverlayImage());
+            }
+
             if (settings.ShowTrack)
+            {
                 activeWidgets.Add(new WidgetTrack());
+            }
+
             if (settings.ShowPositionMarker)
+            {
                 activeWidgets.Add(new WidgetPositionMarker());
+            }
+
             if (settings.ShowDistanceWidget)
+            {
                 activeWidgets.Add(new WidgetDistanceMeter());
+            }
+
             if (settings.ShowSpeedWidget)
+            {
                 activeWidgets.Add(new WidgetSpeedMeter());
+            }
         }
     }
 }
-

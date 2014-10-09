@@ -14,10 +14,3 @@
         }
     }
 }
-
-//TODO - leave only the abstract class (if we have class properties) or the interface (if we have only methods)
-
-/*public abstract class GPSLoader : IGPSReader
-{
-    public abstract int LoadPoints(string sFile);
-}*/

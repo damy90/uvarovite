@@ -2,6 +2,6 @@ namespace TrackApp.Logic.Gps
 {
     public interface IGPSReader
     {
-        int LoadPoints(string sFile);
+        void LoadPoints(string path);
     }
 }

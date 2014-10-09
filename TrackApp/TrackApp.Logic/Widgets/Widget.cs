@@ -2,7 +2,7 @@
 
 namespace TrackApp.Logic.Widgets
 {
-    public abstract class Widget : IDrawable//redundant interface
+    public abstract class Widget
     {
         public abstract void Draw(Graphics grfx, float time);
 

@@ -19,7 +19,7 @@ namespace TrackApp.Logic.Widgets
             if (settings.ShowOrientation)
             {
                 Vector fwd = gps.GetOrientation(time, size)[0];
-                Vector side = gps.GetOrientation(time, size)[1];//perpendicular
+                Vector side = gps.GetOrientation(time, size)[1]; // perpendicular
                 PointF[] markerPoints =
                 {
                     new PointF((float)fwd.X + position.X, -(float)fwd.Y + position.Y),
@@ -29,7 +29,10 @@ namespace TrackApp.Logic.Widgets
                 grfx.FillPolygon(brush, markerPoints);
             }
             else
+            {
                 grfx.FillRectangle(brush, position.X, position.Y, settings.PositionMarkerSize, settings.PositionMarkerSize);
+            }
+
             // TODO: Add custom immage
         }
     }
