@@ -2,6 +2,9 @@ using System.Drawing;
 
 namespace TrackApp.Logic
 {
+    /// <summary>
+    /// Class for serealizing and deserializing Font objects.
+    /// </summary>
     public class SerializableFont
     {
         public SerializableFont(Font f)

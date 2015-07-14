@@ -10,6 +10,9 @@ namespace TrackApp.Logic.Widgets
         private PointF[] trackPoints;
         private int prevIndex = 0;
 
+        /// <summary>
+        /// Draws the entire track as well as the path already traveled if enabled.
+        /// </summary>
         public override void Draw(Graphics grfx, float time)
         {
             // whole track
@@ -43,7 +46,7 @@ namespace TrackApp.Logic.Widgets
             if (settings.ShowTraveledTrack)
             {
                 int index = Gps.GetTrackPointIndex(time);
-                if (this.prevIndex != null && index != this.prevIndex)
+                if (index != this.prevIndex)
                 {
                     PointF[] subTrackPoints = new PointF[index - this.prevIndex + 1];
                     Array.Copy(this.trackPoints, this.prevIndex, subTrackPoints, 0, index - this.prevIndex + 1); // index - prevIndex + 1 = 2

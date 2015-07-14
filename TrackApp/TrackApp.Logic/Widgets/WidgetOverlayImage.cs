@@ -8,6 +8,9 @@ namespace TrackApp.Logic.Widgets
     {
         private Bitmap image;
 
+        /// <summary>
+        /// Draw any image on top of the video 
+        /// </summary>
         public override void Draw(Graphics grfx, float time)
         {
             var frameSize = VideoCompositor.VideoDimensions;

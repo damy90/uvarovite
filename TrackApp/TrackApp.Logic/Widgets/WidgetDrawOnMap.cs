@@ -4,11 +4,18 @@ using TrackApp.Logic.Gps;
 
 namespace TrackApp.Logic.Widgets
 {
+    /// <summary>
+    /// Base map widget for drawing maps and routs
+    /// </summary>
     public abstract class WidgetDrawOnMap : Widget
     {
         protected static Size WidgetSize;
         protected static GPSData Gps = GPSData.GetData();
 
+        /// <summary>
+        /// Ofsets the track by ProjectSettings.GetSettings().TrackPostion to prevent the track from drawing outside of the frame
+        /// </summary>
+        /// <returns>Offset position</returns>
         protected static PointF GetPosition()
         {
             int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
@@ -16,6 +23,11 @@ namespace TrackApp.Logic.Widgets
             return new PointF(pos.X - ((float)wholeTrackLineWidth) / 2, pos.Y - ((float)wholeTrackLineWidth) / 2);
         }
 
+        /// <summary>
+        /// Method for automatic map widget sizing by given heigth.
+        /// Adjusts widget aspect ratio (width) to the widget heigth and resulting width (east most and west most point in the route).
+        /// </summary>
+        /// <returns>The size of the map</returns>
         protected static Size GetBoundSize()
         {
             if (WidgetSize == new Size(0, 0))
@@ -31,6 +43,10 @@ namespace TrackApp.Logic.Widgets
             return WidgetSize;
         }
 
+        /// <summary>
+        /// Drawing box size for widgets that draw on the map
+        /// </summary>
+        /// <returns></returns>
         protected static SizeF GetSize()
         {
             int maxLineWidth = Math.Max(ProjectSettings.GetSettings().WholeTrackLineWidth, ProjectSettings.GetSettings().TraveledTrackLineWidth);

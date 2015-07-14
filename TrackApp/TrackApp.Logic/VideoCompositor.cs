@@ -170,6 +170,8 @@ namespace TrackApp.Logic
             List<Widget> activeWidgets = new List<Widget>();
             ProjectSettings settings = ProjectSettings.GetSettings();
             activeWidgets = new List<Widget>();
+
+            //TODO: pass project settings by constructor
             if (settings.ShowMap)
             {
                 activeWidgets.Add(new WidgetMap());

@@ -3,8 +3,14 @@ using TrackApp.Logic.Gps;
 
 namespace TrackApp.Logic.Widgets
 {
+    /// <summary>
+    /// Widgwt for displaying the distance traveled.
+    /// </summary>
     public class WidgetDistanceMeter : Widget
     {
+        /// <summary>
+        /// Render the distancetraveled as text 
+        /// </summary>
         public override void Draw(Graphics grfx, float time)
         {
             var settings = ProjectSettings.GetSettings();

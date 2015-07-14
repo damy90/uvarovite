@@ -4,6 +4,9 @@ using System.Xml.Serialization;
 
 namespace TrackApp.Logic
 {
+    /// <summary>
+    /// Project settings. This class is a singleton and cannot be initialized with a constructor.
+    /// </summary>
     public sealed class ProjectSettings
     {
         public string VideoInputPath; // = @"C:\Users\Dany\Desktop\GOPR2340.avi";
@@ -210,6 +213,10 @@ namespace TrackApp.Logic
             return _instance;
         }
 
+        /// <summary>
+        /// Writes all project settings to a .xml file
+        /// </summary>
+        /// <param name="path">File save location</param>
         public void Serialize(string path = "saved-settings.xml")
         {
             XmlSerializer x = new XmlSerializer(GetType());
@@ -218,6 +225,11 @@ namespace TrackApp.Logic
             file.Close();
         }
 
+        /// <summary>
+        /// Reads all project settings from a .xml file
+        /// </summary>
+        /// <param name="path">Path to .xml file</param>
+        /// <returns>The ProjectSettings instance</returns>
         public ProjectSettings Deserialize(string path = "saved-settings.xml")
         {
             XmlSerializer x = new XmlSerializer(GetType());

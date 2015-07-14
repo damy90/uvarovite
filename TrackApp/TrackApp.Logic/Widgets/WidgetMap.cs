@@ -8,7 +8,9 @@ namespace TrackApp.Logic.Widgets
     {
         // TODO leave some space between the map frame and the track points, the map has to resize according to the track size
         private Bitmap map;
-
+        /// <summary>
+        /// Get map from google maps and render it on a frame
+        /// </summary>
         public override void Draw(Graphics grfx, float time)
         {
             if (this.map == null)

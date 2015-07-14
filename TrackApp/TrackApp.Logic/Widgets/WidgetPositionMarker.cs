@@ -4,6 +4,9 @@ using TrackApp.Logic.Gps;
 
 namespace TrackApp.Logic.Widgets
 {
+    /// <summary>
+    /// Uses a triangle to indicate position and direction on the map
+    /// </summary>
     public class WidgetPositionMarker : WidgetDrawOnMap
     {
         public override void Draw(Graphics grfx, float time)
