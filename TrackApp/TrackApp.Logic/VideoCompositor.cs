@@ -8,17 +8,23 @@ using TrackApp.Logic.Widgets;
 
 namespace TrackApp.Logic
 {
+    /// <summary>
+    /// Class for initiating the rendering process
+    /// </summary>
     public static class VideoCompositor
     {
         private static readonly VideoFileReader reader = new VideoFileReader();
-        private static List<Widget> activeWidgets;
+        //private static List<Widget> activeWidgets;
         private static int previewNumber = 0;
         private static long videoEnd;
         private static long videoStart;
 
         public static Size VideoDimensions { get; private set; }
 
-        // TODO add sound
+        /// <summary>
+        /// Method for rendering  and saving the video to a new file. All settings are set in the ProjectSettings class.
+        /// </summary>
+        // TODO add sound, use constructor with parameters in a factory patern
         public static void RenderVideo()
         {
             ProjectSettings settings = ProjectSettings.GetSettings();
@@ -31,7 +37,7 @@ namespace TrackApp.Logic
 
             new GPXFileLoader().LoadPoints(settings.GPXPath);
 
-            UpdateActiveWidgets(ref activeWidgets);
+            List<Widget> activeWidgets = UpdateActiveWidgets();
 
             VideoFileWriter writer = new VideoFileWriter();
 
@@ -62,7 +68,7 @@ namespace TrackApp.Logic
             {
                 Bitmap videoFrame = GetFrame(reader, speed, ref currentFrameNumber);
 
-                RenderFrame(currentFrameNumber / framerate, videoFrame);
+                RenderFrame(currentFrameNumber / framerate, videoFrame, activeWidgets);
 
                 writer.WriteVideoFrame(videoFrame);
                 videoFrame.Dispose();
@@ -73,6 +79,11 @@ namespace TrackApp.Logic
             writer.Close();
         }
 
+        /// <summary>
+        /// Method for rendering a preview frame at a specified time in the input video. A quick way of checking widget settings and positions before rendering a video. All settings are set in the ProjectSettings class.
+        /// </summary>
+        /// <param name="time">Time in secconds.</param>
+        /// <returns>A bitmap image (an example frame).</returns>
         public static Bitmap Preview(float time)
         {
             ProjectSettings settings = ProjectSettings.GetSettings();
@@ -85,7 +96,7 @@ namespace TrackApp.Logic
 
             new GPXFileLoader().LoadPoints(settings.GPXPath);
 
-            UpdateActiveWidgets(ref activeWidgets);
+            List<Widget> activeWidgets = UpdateActiveWidgets();
 
             reader.Open(settings.VideoInputPath);
 
@@ -106,14 +117,19 @@ namespace TrackApp.Logic
 
             Bitmap videoFrame = GetFrame(reader, frameNumnber, ref n);
 
-            RenderFrame(time, videoFrame);
+            RenderFrame(time, videoFrame, activeWidgets);
 
             reader.Close();
 
             return videoFrame;
         }
 
-        private static void RenderFrame(float timeInSeconds, Bitmap videoFrame)
+        /// <summary>
+        /// Method for rendering all widgets to a frame given as a bitmap image.
+        /// </summary>
+        /// <param name="timeInSeconds">Time in seconds</param>
+        /// <param name="videoFrame">A bitmap image (video frame) with rendered widgets</param>
+        private static void RenderFrame(float timeInSeconds, Bitmap videoFrame, List<Widget> activeWidgets)
         {
             using (Graphics grfx = Graphics.FromImage(videoFrame))
             {
@@ -125,6 +141,13 @@ namespace TrackApp.Logic
             }
         }
 
+        /// <summary>
+        /// Method for reading the next frame from the video input stream. Can skip frames to speed up the resulting video
+        /// </summary>
+        /// <param name="reader">VideoFileReader object (the video input stream)</param>
+        /// <param name="skipFrames">Frames to skip</param>
+        /// <param name="currentFrame">Refference to the number of already processed frames from the input video.</param>
+        /// <returns>A frame from the input video stream</returns>
         private static Bitmap GetFrame(VideoFileReader reader, long skipFrames, ref long currentFrame)
         {
             // skip frames
@@ -137,8 +160,14 @@ namespace TrackApp.Logic
             return reader.ReadVideoFrame();
         }
 
-        private static void UpdateActiveWidgets(ref List<Widget> activeWidgets)
+        /// <summary>
+        ///  A method for poppulating a list with all enabled widgets from ProjectSettings.
+        /// </summary>
+        /// <param name="activeWidgets">An empty list of type Widget</param>
+        /// <returns>List of enabled widgets</returns>
+        private static List<Widget> UpdateActiveWidgets()
         {
+            List<Widget> activeWidgets = new List<Widget>();
             ProjectSettings settings = ProjectSettings.GetSettings();
             activeWidgets = new List<Widget>();
             if (settings.ShowMap)
@@ -170,6 +199,8 @@ namespace TrackApp.Logic
             {
                 activeWidgets.Add(new WidgetSpeedMeter());
             }
+
+            return activeWidgets;
         }
     }
 }
