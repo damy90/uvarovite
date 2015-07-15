@@ -7,10 +7,18 @@ using System.Xml.Linq;
 
 namespace TrackApp.Logic.Gps
 {
+    /// <summary>
+    /// GPX file format methods
+    /// </summary>
     public class GPXFileLoader : IGPSReader
     {
         private readonly List<GPSPoint> pts = new List<GPSPoint>();
 
+        //TODO: use xml parser
+        /// <summary>
+        /// Reads a GPX file to GPSData
+        /// </summary>
+        /// <param name="path">The file path to the GPX route</param>
         public void LoadPoints(string path)
         {
             XDocument gpxDoc = XDocument.Load(path);

@@ -5,6 +5,9 @@ using System.Windows;
 
 namespace TrackApp.Logic.Gps
 {
+    /// <summary>
+    /// GPS route and calculations
+    /// </summary>
     public sealed class GPSData
     {
         public static double LongtitudeCorrectionScale = 1;
@@ -29,11 +32,19 @@ namespace TrackApp.Logic.Gps
             return _instance;
         }
 
+        /// <summary>
+        /// Gets the count of all the points in the route
+        /// </summary>
         public int GetPointCount()
         {
             return this.gpsPoints.Length;
         }
 
+        //TODO: this needs heavy refactoring!
+        /// <summary>
+        /// Populates the gpsPoints array and trims the rout, cakculates the bounding box (contains the entire track), magick
+        /// </summary>
+        /// <param name="pts"></param>
         public void Update(List<GPSPoint> pts)
         {
             double maxLong = double.MinValue;
@@ -69,22 +80,17 @@ namespace TrackApp.Logic.Gps
             trackEndPos = trackEndPos - trackStartPos;
             pts.RemoveRange(trackEndPos, pts.Count - trackEndPos);
 
-            // TODO: lists are fast enough
-            this.gpsPoints = new GPSPoint[pts.Count]; // we need an array rather than list for faster access
+            // TODO: use lists
+            this.gpsPoints = pts.ToArray();
 
             if (this.gpsPoints.Length == 0)
             {
                 throw new EmptyTrackException("The generated track is empty! Try the default sync settings or another track file.");
             }
-
-            int n = 0;
+            
             foreach (GPSPoint point in pts)
             {
-                // coppy to array
-                this.gpsPoints[n] = point;
-                n++;
-
-                // find BoundingBox valuse
+                // find BoundingBox values
                 maxLong = Math.Max(point.Longitude, maxLong);
                 maxLat = Math.Max(point.Latitude, maxLat);
                 maxEle = Math.Max(point.Elevation, maxEle);
@@ -111,6 +117,11 @@ namespace TrackApp.Logic.Gps
         }
 
         // TODO average speed (gradually change speed)
+        /// <summary>
+        /// Gets the speed in kph
+        /// </summary>
+        /// <param name="time">time in the track</param>
+        /// <returns>speed in kph</returns>
         public double GetSpeed(float time)
         {
             int index = this.GetTrackPointIndex(time);
@@ -124,11 +135,20 @@ namespace TrackApp.Logic.Gps
             return distance / timeSpan;
         }
 
+        /// <summary>
+        /// Gets the smallest size of a box that fits the track
+        /// </summary>
+        /// <returns>The differencebetween max and min latitude, longtitude and elevation</returns>
         public GPSBox GetBox()
         {
             return this.boundingBox;
         }
 
+        /// <summary>
+        /// Retyrns the position on a track at a given time
+        /// </summary>
+        /// <param name="time">time in secconds</param>
+        /// <returns>GPS position (latitude, longtitude and altitude)</returns>
         public GPSCoord GetPosition(float time)
         {
             int index = this.GetTrackPointIndex(time);
@@ -143,6 +163,12 @@ namespace TrackApp.Logic.Gps
             return new GPSCoord(Long, lat, ele);
         }
 
+        /// <summary>
+        /// Returns the current orientation/direction on the track based on the current and previous positions
+        /// </summary>
+        /// <param name="time">Time in seconds</param>
+        /// <param name="length">The length of the vector</param>
+        /// <returns>A 2D vector with integer X and Y components</returns>
         public Vector[] GetOrientation(float time, double length = 1)
         {
             int index = this.GetTrackPointIndex(time);
@@ -165,6 +191,11 @@ namespace TrackApp.Logic.Gps
             return orientation;
         }
 
+        /// <summary>
+        /// Returns the distance traveled untill the current time in meters.
+        /// </summary>
+        /// <param name="time">Time in seconds</param>
+        /// <returns>Distance in meters</returns>
         public double GetDistance(float time)
         {
             int index = this.GetTrackPointIndex(time);
@@ -179,6 +210,11 @@ namespace TrackApp.Logic.Gps
             return this.gpsPoints;
         }
 
+        /// <summary>
+        /// Returns the nearest GPS position reccorded at or before a certajn time
+        /// </summary>
+        /// <param name="time">Time in secconds</param>
+        /// <returns>GPS position</returns>
         public int GetTrackPointIndex(float time)
         {
             int index = Array.BinarySearch(this.gpsPoints, new GPSPoint(time));
@@ -194,15 +230,25 @@ namespace TrackApp.Logic.Gps
 
         // converts a GPS coordinate to pixel coordinate
         // size and return value are in pixels
-        public PointF ToPixelCoordinate(GPSCoord pt, SizeF size, int border = 0)
+        /// <summary>
+        /// Converts a GPS coordinate to pixel position for drawing on a map.
+        /// </summary>
+        /// <param name="GpsPosition">GPS position</param>
+        /// <param name="size">Map size in pixels</param>
+        /// <param name="border">Size ofthe objectto be drawn in pixels</param>
+        /// <returns>A PointF structure with floating point X and Y components</returns>
+        public PointF ToPixelCoordinate(GPSCoord GpsPosition, SizeF size, int border = 0)
         {
             double ratio = size.Height / this.boundingBox.Size.Latitude;
             return new PointF(
-                (float)((pt.Longitude - this.boundingBox.Position.Longitude) * ratio * LongtitudeCorrectionScale) + ((float)border) / 2,
-                size.Height - (float)((pt.Latitude - this.boundingBox.Position.Latitude) * ratio) + ((float)border) / 2);
+                (float)((GpsPosition.Longitude - this.boundingBox.Position.Longitude) * ratio * LongtitudeCorrectionScale) + ((float)border) / 2,
+                size.Height - (float)((GpsPosition.Latitude - this.boundingBox.Position.Latitude) * ratio) + ((float)border) / 2);
         }
 
-        // In case some readings are made over greater time intervals (if you are in a tunel or loose signal, etc)
+        //TODO work with GpsPoint
+        /// <summary>
+        /// Interpolates getween two readings for a more gradual transition between points.
+        /// </summary>
         private double Interpolate(float time, double previousReading, double nextReading, float previousTime, float nextTime)
         {
             if (nextTime == previousTime)
