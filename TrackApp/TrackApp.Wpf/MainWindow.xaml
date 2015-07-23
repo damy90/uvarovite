@@ -183,13 +183,14 @@
             </Grid>
         </Grid>
         <Grid x:Name="grdTrack" HorizontalAlignment="Left" Width="283" Margin="200,39,0,-105" d:IsHidden="True">
-            <CheckBox x:Name="cbEnableTrack" Content="Enable Track" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableTrack_Checked" Unchecked="cbEnableTrack_Uncheck"/>
+            <CheckBox x:Name="cbEnableTrack" Content="Enable Track" HorizontalAlignment="Left" Margin="18,19,20,20" VerticalAlignment="Top" Foreground="#3045FF" Width="108" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableTrack_Checked" Unchecked="cbEnableTrack_Uncheck"/>
+            <Label  x:Name="lblTrackCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="16,39,20,20" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+            <TextBox x:Name="txtTrackX" HorizontalAlignment="Left" Height="23" Margin="61,65,0,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" Width="49"/>
+            <Label  x:Name="lblTrackX" Content="X(%):" HorizontalAlignment="Left" Margin="16,65,0,0" VerticalAlignment="Top" Width="51" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+            <TextBox x:Name="txtTrackY" HorizontalAlignment="Left" Height="23" Margin="160,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
+            <Label  x:Name="lblTrackY" Content="Y(%):" HorizontalAlignment="Left" Margin="113,65,0,0" VerticalAlignment="Top" Width="50" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
             <Grid x:Name="grdEnabledTrack" Margin="18,39,0,5">
-                <Label  x:Name="lblTrackCoordinates" Content="Coordinates:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtTrackX" HorizontalAlignment="Left" Height="23" Margin="51,27,0,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblTrackX" Content="X(%):" HorizontalAlignment="Left" Margin="6,26,0,0" VerticalAlignment="Top" Width="51" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
-                <TextBox x:Name="txtTrackY" HorizontalAlignment="Left" Height="23" Margin="153,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49"/>
-                <Label  x:Name="lblTrackY" Content="Y(%):" HorizontalAlignment="Left" Margin="106,25,0,0" VerticalAlignment="Top" Width="50" Foreground="#3045FF" FontFamily="Arial" Height="25" FontSize="15"/>
+                
                 <xctk:ColorPicker x:Name="cpTrackTravelledColor" Margin="6,106,165,0" Height="25" VerticalAlignment="Top" RenderTransformOrigin="0.475,3.04" AvailableColorsHeader="Standard Colors" DisplayColorAndName="True" ShowAdvancedButton="True" />
                 <Label  x:Name="lblTrackHeight" Content="Height:" HorizontalAlignment="Left" Margin="0,56,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
                 <TextBox x:Name="txtTrackHeight" HorizontalAlignment="Left" Height="23" Margin="121,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
@@ -293,8 +294,8 @@
             </Grid.RowDefinitions>
             <CheckBox x:Name="cbEnableMap" Content="Enable Map" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top" Foreground="#3045FF" Width="133" FontFamily="Arial" FontSize="15" Height="20" Checked="cbEnableMap_Checked" Unchecked="cbEnableMap_Uncheck"/>
             <Grid x:Name="grdEnabledMap" HorizontalAlignment="Left" Height="174" Margin="10,10,0,-61" VerticalAlignment="Top" Width="265" Grid.Row="1" Grid.RowSpan="3">
-                <Label  x:Name="lblMapHeight" Content="Height(%):" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
-                <TextBox x:Name="txtMapHeight" HorizontalAlignment="Left" Height="23" Margin="103,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
+                <!--<Label  x:Name="lblMapHeight" Content="Height(%):" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
+                <TextBox x:Name="txtMapHeight" HorizontalAlignment="Left" Height="23" Margin="103,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>-->
                 <Label  x:Name="lblMapOpacity" Content="Opacity:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="161" Foreground="#3045FF" FontFamily="Arial" Height="29" FontSize="15"/>
                 <xctk:DoubleUpDown x:Name="dudMapOpacity" HorizontalAlignment="Left" Height="23" Margin="103,49,0,0" VerticalAlignment="Top" Width="68" Increment="0.1" Maximum="1" Minimum="0" />
             </Grid>

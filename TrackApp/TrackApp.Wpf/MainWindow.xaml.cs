@@ -83,7 +83,7 @@ namespace TrackApp.Wpf
 
             // Map
             this.cbEnableMap.IsChecked = this.settings.ShowMap;
-            this.txtMapHeight.Text = this.settings.MapHeight.ToString();
+            //this.txtMapHeight.Text = this.settings.MapHeight.ToString();
             this.dudMapOpacity.Value = this.settings.MapOpacity;
 
             // Distance
@@ -370,7 +370,7 @@ namespace TrackApp.Wpf
             this.settings.ShowMap = (bool)this.cbEnableMap.IsChecked;
             if ((bool)this.cbEnableMap.IsChecked)
             {
-                this.settings.MapHeight = Convert.ToInt32(this.txtMapHeight.Text);
+                //this.settings.MapHeight = Convert.ToInt32(this.txtMapHeight.Text);
                 this.settings.MapOpacity = (float)this.dudMapOpacity.Value;
             }
 

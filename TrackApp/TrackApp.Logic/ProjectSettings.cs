@@ -54,7 +54,7 @@ namespace TrackApp.Logic
         [XmlIgnoreAttribute]
         public Color ElevationWidgetColor = Color.White;
         public bool ShowMap = false;
-        public int MapHeight = 240; // should be bigger than the track height, width is bigger by the same value
+        //public int MapHeight = 240; // should be bigger than the track height, width is bigger by the same value
         public float MapOpacity;
 
         public bool ShowDistanceWidget = false;
