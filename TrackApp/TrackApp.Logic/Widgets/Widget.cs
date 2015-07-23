@@ -7,6 +7,12 @@ namespace TrackApp.Logic.Widgets
     /// </summary>
     public abstract class Widget
     {
+        //public Widget(Point postion)
+        //{
+        //    this.position = position;
+        //}
+
+        //private Point position { get; set; }
         /// <summary>
         /// Render a widget onto a frame
         /// </summary>

@@ -6,6 +6,10 @@ namespace TrackApp.Logic.Widgets
 {
     public class WidgetTrack : WidgetDrawOnMap
     {
+        public WidgetTrack():base()
+        {
+
+        }
         private Bitmap trackBitmap;
         private PointF[] trackPoints;
         private int prevIndex = 0;

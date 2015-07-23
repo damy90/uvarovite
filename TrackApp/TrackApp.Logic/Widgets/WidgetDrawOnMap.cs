@@ -9,6 +9,12 @@ namespace TrackApp.Logic.Widgets
     /// </summary>
     public abstract class WidgetDrawOnMap : Widget
     {
+        //TODO: reduce static fields
+        public WidgetDrawOnMap()
+        {
+            WidgetSize = new Size(0, 0);
+        }
+
         protected static Size WidgetSize;
         protected static GPSData Gps = GPSData.GetData();
 
