@@ -9,6 +9,7 @@ namespace TrackApp.Logic
     /// </summary>
     public sealed class ProjectSettings
     {
+        //TODO: all sizes and positions in percent (including track width)
         public string VideoInputPath; // = @"C:\Users\Dany\Desktop\GOPR2340.avi";
         public string VideoOutputPath; // = @"C:\Users\Dany\Desktop\video-out.avi";
         public string GPXPath; // = @"C:\Users\Dany\Desktop\Debug\workout.gpx";

@@ -68,7 +68,7 @@ namespace TrackApp.Logic
             {
                 Bitmap videoFrame = GetFrame(reader, speed, ref currentFrameNumber);
 
-                RenderFrame(currentFrameNumber / framerate, videoFrame, activeWidgets);
+                RenderFrame(currentFrameNumber / framerate - settings.VideoStart, videoFrame, activeWidgets);
 
                 writer.WriteVideoFrame(videoFrame);
                 videoFrame.Dispose();

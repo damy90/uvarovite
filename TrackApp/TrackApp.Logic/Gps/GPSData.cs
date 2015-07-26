@@ -87,10 +87,13 @@ namespace TrackApp.Logic.Gps
             {
                 throw new EmptyTrackException("The generated track is empty! Try the default sync settings or another track file.");
             }
-            
-            foreach (GPSPoint point in pts)
+
+            float statTime = gpsPoints[0].Time;
+
+            foreach (GPSPoint point in gpsPoints)
             {
                 // find BoundingBox values
+                point.Time -= statTime;
                 maxLong = Math.Max(point.Longitude, maxLong);
                 maxLat = Math.Max(point.Latitude, maxLat);
                 maxEle = Math.Max(point.Elevation, maxEle);
@@ -158,7 +161,9 @@ namespace TrackApp.Logic.Gps
             }
 
             double Long = this.Interpolate(time, this.gpsPoints[index].Longitude, this.gpsPoints[index + 1].Longitude, this.gpsPoints[index].Time, this.gpsPoints[index + 1].Time);
+            //double Long = this.gpsPoints[index].Longitude;
             double lat = this.Interpolate(time, this.gpsPoints[index].Latitude, this.gpsPoints[index + 1].Latitude, this.gpsPoints[index].Time, this.gpsPoints[index + 1].Time);
+            //double lat = this.gpsPoints[index].Latitude;
             double ele = this.Interpolate(time, this.gpsPoints[index].Elevation, this.gpsPoints[index + 1].Elevation, this.gpsPoints[index].Time, this.gpsPoints[index + 1].Time);
             return new GPSCoord(Long, lat, ele);
         }
@@ -223,6 +228,12 @@ namespace TrackApp.Logic.Gps
                 // the value wasn't found
                 index = ~index;
                 index -= 1;
+            }
+
+            if (index < 0)
+            {
+                //the value for the first index was't found
+                index = 0;
             }
 
             return index;

@@ -15,11 +15,13 @@ namespace TrackApp.Logic.Widgets
             var settings = ProjectSettings.GetSettings();
 
             PointF position = gps.ToPixelCoordinate(gps.GetPosition(time), GetSize(), settings.WholeTrackLineWidth);
+            //position = Widget.PecentToPixels(settings.TrackPostion);
             position.X += GetPosition().X;
-            position.Y += GetPosition().Y;
+            position.Y = GetPosition().Y + position.Y;
+            
             Brush brush = new SolidBrush(settings.PositionMarkerColor);
             float size = settings.PositionMarkerSize;
-            if (settings.ShowOrientation)
+            if (settings.ShowOrientation)//
             {
                 Vector fwd = gps.GetOrientation(time, size)[0];
                 Vector side = gps.GetOrientation(time, size)[1]; // perpendicular
@@ -33,7 +35,7 @@ namespace TrackApp.Logic.Widgets
             }
             else
             {
-                grfx.FillRectangle(brush, position.X, position.Y, settings.PositionMarkerSize, settings.PositionMarkerSize);
+                grfx.FillRectangle(brush, position.X, position.Y, 30, 30);
             }
 
             // TODO: Add custom immage
