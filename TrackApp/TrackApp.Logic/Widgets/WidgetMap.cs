@@ -36,6 +36,8 @@ namespace TrackApp.Logic.Widgets
                 {
                     throw new WebException("Could not load google map");
                 }
+
+                this.map = ImageEffects.ChangeOpacity(this.map, ProjectSettings.GetSettings().MapOpacity);
             }
 
             grfx.DrawImage(this.map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));

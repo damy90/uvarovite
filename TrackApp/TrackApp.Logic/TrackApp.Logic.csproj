@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoCompositor.cs" />
     <Compile Include="VideoFormats.cs" />
+    <Compile Include="Widgets\ImageEffects.cs" />
     <Compile Include="Widgets\Widget.cs" />
     <Compile Include="Widgets\WidgetDistanceMeter.cs" />
     <Compile Include="Widgets\WidgetDrawOnMap.cs" />
