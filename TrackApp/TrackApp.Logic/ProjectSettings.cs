@@ -78,7 +78,7 @@ namespace TrackApp.Logic
         {
         }
 
-        // Color serialization
+        // Color serialization 
         [XmlElement("TraveledTrackColor")]
         public int TraveledTrackColorAsArgb
         {
