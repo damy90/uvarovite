@@ -4,7 +4,7 @@ using TrackApp.Logic.Gps;
 namespace TrackApp.Logic.Widgets
 {
     /// <summary>
-    /// Widgwt for displaying the distance traveled.
+    /// Widget for displaying the distance traveled.
     /// </summary>
     public class WidgetDistanceMeter : Widget
     {

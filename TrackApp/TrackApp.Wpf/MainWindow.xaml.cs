@@ -302,19 +302,19 @@ namespace TrackApp.Wpf
             //settings.VideoEnd = 300;
             //settings = settings.Deserialize();
             this.PassSettingsDown();
-            //try
-            //{
+            try
+            {
                 //pd.ShowDialog();
                 VideoCompositor.RenderVideo();
                 MessageBox.Show("Success!");
 
                 //comment this if you don't want to start the video immediately after the rendering
                 Process.Start(this.settings.VideoOutputPath);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void PassSettingsDown()
