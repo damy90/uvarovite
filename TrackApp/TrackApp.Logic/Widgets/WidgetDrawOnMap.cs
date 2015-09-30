@@ -32,6 +32,7 @@ namespace TrackApp.Logic.Widgets
         /// <summary>
         /// Method for automatic map widget sizing by given heigth.
         /// Adjusts widget aspect ratio (width) to the widget heigth and resulting width (east most and west most point in the route).
+        /// The method may change the widget dimencions in the settings to fit the largest supported size by the google maps api IF the map widget is active.
         /// </summary>
         /// <returns>The size of the map</returns>
         protected static Size GetBoundSize()

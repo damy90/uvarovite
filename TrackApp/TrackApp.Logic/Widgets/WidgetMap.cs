@@ -18,7 +18,7 @@ namespace TrackApp.Logic.Widgets
         //TODO: use google maps api for drawing, calculating, etc
         private Bitmap map;
         /// <summary>
-        /// Get map from google maps and render it on a frame
+        /// Get map from google maps and  it on a frame
         /// </summary>
         public override void Draw(Graphics grfx, float time)
         {
