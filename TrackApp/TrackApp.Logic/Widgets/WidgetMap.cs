@@ -121,7 +121,7 @@ namespace TrackApp.Logic.Widgets
             quickDemoHack.Add(13, 29);
             quickDemoHack.Add(14, 75);
 
-            return result;// - quickDemoHack[zoomLevel];
+            return result - quickDemoHack[zoomLevel];
         }
 
         private Bitmap GetMap(GPSCoord southWest, GPSCoord northEast, Point imageSize)
