@@ -46,7 +46,23 @@ namespace TrackApp.Logic.Widgets
                 WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
             }
 
+            int sizeMax = Math.Max(WidgetSize.Height, WidgetSize.Width);
+            if(ProjectSettings.GetSettings().ShowMap && sizeMax > 640)
+            {
+                //TODO: The map is too big. Maximum size supported is 640x640px. Would you like to shrink it automaticaly and continue?
+                ShrinkMapToMaxSize();
+                WidgetSize = new Size(0, 0);
+                GetBoundSize();
+            }
+
             return WidgetSize;
+        }
+
+        private static void ShrinkMapToMaxSize()
+        {
+            int sizeMax = Math.Max(WidgetSize.Height, WidgetSize.Width);
+            float shrinkRatio = (float)sizeMax / 640;
+            ProjectSettings.GetSettings().TrackHeight = (int)Math.Floor(ProjectSettings.GetSettings().TrackHeight/shrinkRatio);
         }
 
         /// <summary>

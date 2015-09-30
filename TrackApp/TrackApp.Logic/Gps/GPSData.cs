@@ -10,6 +10,7 @@ namespace TrackApp.Logic.Gps
     /// </summary>
     public sealed class GPSData
     {
+        //TODO: use google maps api for drawing, calculating, etc
         public static double LongtitudeCorrectionScale = 1;
 
         private static GPSData _instance;

@@ -17,7 +17,7 @@ namespace TrackApp.Logic.Gps
         /// <param name="lat">latitude</param>
         /// <param name="ele">elevation</param>
         /// <param name="dt">time</param>
-        /// <param name="distance">distance from previous point</param>
+        /// <param name="distance">distance from previous point in meters</param>
         public GPSPoint(double lon, double lat, double ele, float dt, double distance = 0)
             : base(lon, lat, ele)
         {
