@@ -7,6 +7,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using TrackApp.Logic;
+using log4net;
+using log4net.Config;
 
 namespace TrackApp.Wpf
 {
