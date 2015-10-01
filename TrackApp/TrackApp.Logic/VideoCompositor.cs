@@ -82,7 +82,7 @@ namespace TrackApp.Logic
         /// <summary>
         /// Method for rendering a preview frame at a specified time in the input video. A quick way of checking widget settings and positions before rendering a video. All settings are set in the ProjectSettings class.
         /// </summary>
-        /// <param name="time">Time in secconds.</param>
+        /// <param name="time">Time in seconds.</param>
         /// <returns>A bitmap image (an example frame).</returns>
         public static Bitmap Preview(float time)
         {

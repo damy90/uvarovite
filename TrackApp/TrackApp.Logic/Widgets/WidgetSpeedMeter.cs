@@ -4,7 +4,7 @@ using TrackApp.Logic.Gps;
 namespace TrackApp.Logic.Widgets
 {
     /// <summary>
-    /// Widgwt for displaying the speed as text.
+    /// Widget for displaying the speed as text.
     /// </summary>
     public class WidgetSpeedMeter : Widget
     {

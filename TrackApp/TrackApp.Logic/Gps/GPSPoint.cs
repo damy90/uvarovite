@@ -13,7 +13,7 @@ namespace TrackApp.Logic.Gps
         /// <summary>
         /// Contains GPS coordinates as well as the time the point was recorded and distance from previous point.
         /// </summary>
-        /// <param name="lon">longtitude</param>
+        /// <param name="lon">longitude</param>
         /// <param name="lat">latitude</param>
         /// <param name="ele">elevation</param>
         /// <param name="dt">time</param>

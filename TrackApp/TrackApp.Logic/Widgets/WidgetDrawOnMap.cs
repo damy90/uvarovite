@@ -19,7 +19,7 @@ namespace TrackApp.Logic.Widgets
         protected static GPSData Gps = GPSData.GetData();
 
         /// <summary>
-        /// Ofsets the track by ProjectSettings.GetSettings().TrackPostion to prevent the track from drawing outside of the frame
+        /// Offsets the track by ProjectSettings.GetSettings().TrackPostion to prevent the track from drawing outside of the frame
         /// </summary>
         /// <returns>Offset position</returns>
         protected static PointF GetPosition()
@@ -30,8 +30,8 @@ namespace TrackApp.Logic.Widgets
         }
 
         /// <summary>
-        /// Method for automatic map widget sizing by given heigth.
-        /// Adjusts widget aspect ratio (width) to the widget heigth and resulting width (east most and west most point in the route).
+        /// Method for automatic map widget sizing by given height.
+        /// Adjusts widget aspect ratio (width) to the widget height and resulting width (east most and west most point in the route).
         /// The method may change the widget dimencions in the settings to fit the largest supported size by the google maps api IF the map widget is active.
         /// </summary>
         /// <returns>The size of the map</returns>
@@ -42,9 +42,9 @@ namespace TrackApp.Logic.Widgets
                 GPSBox box = Gps.GetBox();
                 WidgetSize.Height = ProjectSettings.GetSettings().TrackHeight * VideoCompositor.VideoDimensions.Height / 100;
                 int wholeTrackLineWidth = ProjectSettings.GetSettings().WholeTrackLineWidth;
-                double longtitudeCorrectionScale = GPSData.LongtitudeCorrectionScale;
+                double longitudeCorrectionScale = GPSData.longitudeCorrectionScale;
                 double ratio = (WidgetSize.Height - wholeTrackLineWidth) / box.Size.Latitude; // avaiable size is slighly smaller due to line width
-                WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longitude * longtitudeCorrectionScale) + wholeTrackLineWidth);
+                WidgetSize.Width = (int)Math.Ceiling(ratio * (box.Size.Longitude * longitudeCorrectionScale) + wholeTrackLineWidth);
             }
 
             int sizeMax = Math.Max(WidgetSize.Height, WidgetSize.Width);

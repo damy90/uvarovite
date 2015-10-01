@@ -19,6 +19,8 @@ namespace TrackApp.Logic.Widgets
                 this.image = new Bitmap(ProjectSettings.GetSettings().OverlayImageFile);
                 float hratio = Math.Abs((float)(this.image.Height - frameSize.Height) / (float)this.image.Height);
                 float wratio = Math.Abs((float)(this.image.Width - frameSize.Width) / (float)this.image.Width);
+
+                //TODO: use image effects
                 if (hratio > 0.02 || wratio > 0.02)
                 {
                     ////image.SetResolution(frameSize.Width, frameSize.Height);

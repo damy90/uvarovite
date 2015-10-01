@@ -9,11 +9,6 @@ namespace TrackApp.Logic.Widgets
 {
     public class WidgetMap : WidgetDrawOnMap
     {
-        private enum ImageOpreations
-        {
-            Downsample,
-            Upsample
-        }
         // TODO leave some space between the map frame and the track points, the map has to resize according to the track size
         //TODO: use google maps api for drawing, calculating, etc
         private Bitmap map;
@@ -26,53 +21,48 @@ namespace TrackApp.Logic.Widgets
             {
                 GetBoundSize();//TODO: remove this dependancy
                 GPSBox box = Gps.GetBox();
-                //new GPSCoord()
                 var southWest = new GPSCoord(box.Position.Longitude, box.Position.Latitude, 0);
                 var northEast = new GPSCoord(box.Position.Longitude + box.Size.Longitude, box.Position.Latitude + box.Size.Latitude, 0);
                 //var size = new GPSCoord(box.Size.Latitude, box.Size.Longitude, 0);
 
                 int curentZoomLevel = this.GetBoundsZoomLevel(northEast, southWest, WidgetSize);
-                int curentRouteHeigthPixels = UnscaledMapImageHeigth(box.Size.Latitude, curentZoomLevel);
-                double currentRatio = (double)WidgetSize.Height / curentRouteHeigthPixels;
+                int curentRouteHeightPixels = UnscaledMapImageHeight(box.Size.Latitude, curentZoomLevel);
+                double currentRatio = (double)WidgetSize.Height / curentRouteHeightPixels;
 
                 int nextZoomLevel = curentZoomLevel + 1;
-                int nextRouteHeigthPixels = UnscaledMapImageHeigth(box.Size.Latitude, nextZoomLevel);
-                double nextRatio = (double)WidgetSize.Height / nextRouteHeigthPixels;
+                int nextRouteHeightPixels = UnscaledMapImageHeight(box.Size.Latitude, nextZoomLevel);
+                double nextRatio = (double)WidgetSize.Height / nextRouteHeightPixels;
                 var nextRouteWidth = (int)Math.Floor(WidgetSize.Width / nextRatio);
 
                 double minDeltaRatio;
-                ImageOpreations imageoperation;
-                int chosenHeigth;
+                int chosenHeight;
                 int chosenWidth;
-                if (nextRouteHeigthPixels <= 640 && nextRouteWidth <= 640)
+                if (nextRouteHeightPixels <= 640 && nextRouteWidth <= 640)
                 {
                     double currentDelta = Math.Abs(1 - currentRatio);
                     double nextDelta = Math.Abs(1 - nextRatio);
 
                     if (currentDelta < nextDelta)
                     {
-                        imageoperation = ImageOpreations.Upsample;
                         minDeltaRatio = currentRatio;
-                        chosenHeigth = curentRouteHeigthPixels;
+                        chosenHeight = curentRouteHeightPixels;
                         chosenWidth = (int)(WidgetSize.Width / currentRatio);
                     }
                     else
                     {
-                        imageoperation = ImageOpreations.Downsample;
                         minDeltaRatio = nextRatio;
-                        chosenHeigth = nextRouteHeigthPixels;
+                        chosenHeight = nextRouteHeightPixels;
                         chosenWidth = nextRouteWidth;
                     }
                 }
                 else
                 {
-                    imageoperation = ImageOpreations.Upsample;
                     minDeltaRatio = currentRatio;
-                    chosenHeigth = curentRouteHeigthPixels;
+                    chosenHeight = curentRouteHeightPixels;
                     chosenWidth = (int)(WidgetSize.Width / currentRatio);
                 }
 
-                Point chosenSize = new Point(chosenWidth, chosenHeigth);
+                Point chosenSize = new Point(chosenWidth, chosenHeight);
                 var widgetSize = new Point(WidgetSize.Width, WidgetSize.Height);
                 this.map = GetMap(southWest, northEast, chosenSize);
                 //this.map = GetMap(southWest, northEast, widgetSize);
@@ -84,7 +74,7 @@ namespace TrackApp.Logic.Widgets
             grfx.DrawImage(this.map, PecentToPixels(ProjectSettings.GetSettings().TrackPostion));
         }
 
-        private int UnscaledMapImageHeigth(double routeHeigthLat, int zoomLevel)
+        private int UnscaledMapImageHeight(double routeHeightLat, int zoomLevel)
         {
             //m/px
             double[] zoomScales =
@@ -110,8 +100,8 @@ namespace TrackApp.Logic.Widgets
                     0.19
             };
             var origin = new GPSPoint(0, 0, 0, 0);
-            var heigth = new GPSPoint(0, routeHeigthLat, 0, 0);
-            double distance = origin.DistanceFromPoint(heigth);
+            var height = new GPSPoint(0, routeHeightLat, 0, 0);
+            double distance = origin.DistanceFromPoint(height);
             double scale = zoomScales[zoomLevel - 1];
             var result = (int)Math.Round(distance / scale);
 
@@ -129,7 +119,7 @@ namespace TrackApp.Logic.Widgets
             //GPSBox box = Gps.GetBox();
             var webClient = new WebClient();
 
-            string path = @"http://maps.googleapis.com/maps/api/staticmap?size="// TODO max heigth=640, max width=640
+            string path = @"http://maps.googleapis.com/maps/api/staticmap?size="// TODO max height=640, max width=640
                           +
                           imageSize.X + 'x' + imageSize.Y +//+10
                           "&path=color:0x00000000|weight:5|" +

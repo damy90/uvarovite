@@ -21,7 +21,7 @@ namespace TrackApp.Logic.Widgets
         public abstract void Draw(Graphics grfx, float time);
 
         /// <summary>
-        /// Converts percents from video frame dimentions to pixels for position
+        /// Converts percents from video frame dimensions to pixels for position
         /// </summary>
         /// <param name="position">Poind object with x and y in percent</param>
         /// <returns>A point in 2d coordinate system</returns>

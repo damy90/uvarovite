@@ -9,7 +9,7 @@ namespace TrackApp.Logic.Widgets
     public class WidgetDistanceMeter : Widget
     {
         /// <summary>
-        /// Render the distancetraveled as text 
+        /// Render the distance traveled as text 
         /// </summary>
         public override void Draw(Graphics grfx, float time)
         {

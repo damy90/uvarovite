@@ -11,7 +11,7 @@ namespace TrackApp.Logic.Gps
     public sealed class GPSData
     {
         //TODO: use google maps api for drawing, calculating, etc
-        public static double LongtitudeCorrectionScale = 1;
+        public static double longitudeCorrectionScale = 1;
 
         private static GPSData _instance;
 
@@ -43,7 +43,7 @@ namespace TrackApp.Logic.Gps
 
         //TODO: this needs heavy refactoring!
         /// <summary>
-        /// Populates the gpsPoints array and trims the rout, cakculates the bounding box (contains the entire track), magick
+        /// Populates the gpsPoints array and trims the rout, calculates the bounding box (contains the entire track), magick
         /// </summary>
         /// <param name="pts"></param>
         public void Update(List<GPSPoint> pts)
@@ -109,7 +109,7 @@ namespace TrackApp.Logic.Gps
             this.boundingBox = new GPSBox(boundingBoxPosition, boundingBoxSize);
 
             // for drawing maps
-            LongtitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
+            longitudeCorrectionScale = Math.Cos((Math.PI / 180) * (maxLat + minLat) / 2);
 
             // distances from start point
             double distanceSum = 0;
@@ -142,17 +142,17 @@ namespace TrackApp.Logic.Gps
         /// <summary>
         /// Gets the smallest size of a box that fits the track
         /// </summary>
-        /// <returns>The differencebetween max and min latitude, longtitude and elevation</returns>
+        /// <returns>The differencebetween max and min latitude, longitude and elevation</returns>
         public GPSBox GetBox()
         {
             return this.boundingBox;
         }
 
         /// <summary>
-        /// Retyrns the position on a track at a given time
+        /// Returns the position on a track at a given time
         /// </summary>
-        /// <param name="time">time in secconds</param>
-        /// <returns>GPS position (latitude, longtitude and altitude)</returns>
+        /// <param name="time">time in seconds</param>
+        /// <returns>GPS position (latitude, longitude and altitude)</returns>
         public GPSCoord GetPosition(float time)
         {
             int index = this.GetTrackPointIndex(time);
@@ -178,7 +178,7 @@ namespace TrackApp.Logic.Gps
         public Vector[] GetOrientation(float time, double length = 1)
         {
             int index = this.GetTrackPointIndex(time);
-            double longDirection = (this.gpsPoints[index + 1].Longitude - this.gpsPoints[index].Longitude) * LongtitudeCorrectionScale;
+            double longDirection = (this.gpsPoints[index + 1].Longitude - this.gpsPoints[index].Longitude) * longitudeCorrectionScale;
             double latDirection = this.gpsPoints[index + 1].Latitude - this.gpsPoints[index].Latitude;
 
             double lengthVector = Math.Sqrt(longDirection * longDirection + latDirection * latDirection);
@@ -198,7 +198,7 @@ namespace TrackApp.Logic.Gps
         }
 
         /// <summary>
-        /// Returns the distance traveled untill the current time in meters.
+        /// Returns the distance traveled until the current time in meters.
         /// </summary>
         /// <param name="time">Time in seconds</param>
         /// <returns>Distance in meters</returns>
@@ -217,9 +217,9 @@ namespace TrackApp.Logic.Gps
         }
 
         /// <summary>
-        /// Returns the nearest GPS position reccorded at or before a certajn time
+        /// Returns the nearest GPS position recorded at or before a certain time
         /// </summary>
-        /// <param name="time">Time in secconds</param>
+        /// <param name="time">Time in seconds</param>
         /// <returns>GPS position</returns>
         public int GetTrackPointIndex(float time)
         {
@@ -247,13 +247,13 @@ namespace TrackApp.Logic.Gps
         /// </summary>
         /// <param name="GpsPosition">GPS position</param>
         /// <param name="size">Map size in pixels</param>
-        /// <param name="border">Size ofthe objectto be drawn in pixels</param>
+        /// <param name="border">Size of the object to be drawn in pixels</param>
         /// <returns>A PointF structure with floating point X and Y components</returns>
         public PointF ToPixelCoordinate(GPSCoord GpsPosition, SizeF size, int border = 0)
         {
             double ratio = size.Height / this.boundingBox.Size.Latitude;
             return new PointF(
-                (float)((GpsPosition.Longitude - this.boundingBox.Position.Longitude) * ratio * LongtitudeCorrectionScale) + ((float)border) / 2,
+                (float)((GpsPosition.Longitude - this.boundingBox.Position.Longitude) * ratio * longitudeCorrectionScale) + ((float)border) / 2,
                 size.Height - (float)((GpsPosition.Latitude - this.boundingBox.Position.Latitude) * ratio) + ((float)border) / 2);
         }
 
