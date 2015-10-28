@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TrackApp.Logic.Gps.GPSCoord">
+    <Position X="15.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAIAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gps\GPSCoord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Gps.GPSData">
+    <Position X="20" Y="3.75" Width="1.5" />
+    <Members>
+      <Field Name="_instance" Hidden="true" />
+      <Field Name="boundingBox" Hidden="true" />
+      <Method Name="GPSData" Hidden="true" />
+      <Field Name="gpsPoints" Hidden="true" />
+      <Method Name="Interpolate" Hidden="true" />
+      <Field Name="vector" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ACQEAARAECAAQAAAAAAAAAQAIAEQQAAgAEBAAAAAAAE=</HashCode>
+      <FileName>Gps\GPSData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Gps.GPSPoint">
+    <Position X="15.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEAAAAAAAAAAAAAABAAAAAAAAAAQA=</HashCode>
+      <FileName>Gps\GPSPoint.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrackApp.Logic.Gps.GPXFileLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAA=</HashCode>
+      <FileName>Gps\GPXFileLoader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.ImageEffects">
+    <Position X="26.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Widgets\ImageEffects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.Widget">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Widgets\Widget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.WidgetDistanceMeter" Collapsed="true">
+    <Position X="17.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Widgets\WidgetDistanceMeter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.WidgetDrawOnMap">
+    <Position X="24.5" Y="2.5" Width="1.5" />
+    <Members>
+      <Method Name="ShrinkMapToMaxSize" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAAACAAAAAAAAAAAAIAAAAAAAAAAAIABA=</HashCode>
+      <FileName>Widgets\WidgetDrawOnMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.WidgetMap" Collapsed="true">
+    <Position X="22.25" Y="5.5" Width="1.5" />
+    <Members>
+      <Method Name="GetBoundsZoomLevel" Hidden="true" />
+      <Method Name="GetMap" Hidden="true" />
+      <Method Name="LatRad" Hidden="true" />
+      <Field Name="map" Hidden="true" />
+      <Method Name="UnscaledMapImageHeight" Hidden="true" />
+      <Method Name="Zoom" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABAAEAAAAAAAAgAAEAABAAAAAAAAAAAAAEAAAAAAEAA=</HashCode>
+      <FileName>Widgets\WidgetMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.WidgetOverlayImage" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <Members>
+      <Field Name="image" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Widgets\WidgetOverlayImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.WidgetPositionMarker" Collapsed="true">
+    <Position X="24.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Widgets\WidgetPositionMarker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.WidgetSpeedMeter" Collapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Widgets\WidgetSpeedMeter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.Widgets.WidgetTrack">
+    <Position X="26.75" Y="5.5" Width="1.5" />
+    <Members>
+      <Field Name="prevIndex" Hidden="true" />
+      <Field Name="trackBitmap" Hidden="true" />
+      <Field Name="trackPoints" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAgAAAAAAAAAABACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Widgets\WidgetTrack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.EmptyTrackException" Collapsed="true">
+    <Position X="26.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EmptyTrackException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.ProjectSettings" Collapsed="true">
+    <Position X="24.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>yBhEIImAAAAggAAgEAkAQQEAUnhgAgdMIIBAQBUgSAI=</HashCode>
+      <FileName>ProjectSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.SerializableFont" Collapsed="true">
+    <Position X="22.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAgAAAAAAAAAAAAAAAAAAABAAAAAABBAA=</HashCode>
+      <FileName>SerializableFont.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackApp.Logic.VideoCompositor">
+    <Position X="22.5" Y="7.25" Width="1.5" />
+    <Members>
+      <Method Name="GetFrame" Hidden="true" />
+      <Field Name="previewNumber" Hidden="true" />
+      <Field Name="reader" Hidden="true" />
+      <Method Name="RenderFrame" Hidden="true" />
+      <Method Name="UpdateActiveWidgets" Hidden="true" />
+      <Field Name="videoEnd" Hidden="true" />
+      <Field Name="videoStart" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AQAAEAAAAAAAAAAIIMAAAAAAAAAAAAAAAAQEIAAQAAA=</HashCode>
+      <FileName>VideoCompositor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TrackApp.Logic.Gps.GPSBox">
+    <Position X="17.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gps\GPSBox.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="TrackApp.Logic.Gps.IGPSReader">
+    <Position X="17.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Gps\IGPSReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TrackApp.Logic.VideoFormats">
+    <Position X="24.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAACAAAAAAAAAABBAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VideoFormats.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

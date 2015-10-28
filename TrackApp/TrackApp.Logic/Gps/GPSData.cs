@@ -29,7 +29,7 @@ namespace TrackApp.Logic.Gps
             {
                 _instance = new GPSData();
             }
-               
+
             return _instance;
         }
 
@@ -136,6 +136,7 @@ namespace TrackApp.Logic.Gps
 
             double distance = this.gpsPoints[index].DistanceFromPoint(this.gpsPoints[index + 1]);
             float timeSpan = this.gpsPoints[index + 1].Time - this.gpsPoints[index].Time;
+
             return distance / timeSpan;
         }
 
@@ -170,11 +171,11 @@ namespace TrackApp.Logic.Gps
         }
 
         /// <summary>
-        /// Returns the current orientation/direction on the track based on the current and previous positions
+        /// Returns the current orientation/direction on the track based on the current and previous positions as a new coordinate system
         /// </summary>
         /// <param name="time">Time in seconds</param>
         /// <param name="length">The length of the vector</param>
-        /// <returns>A 2D vector with integer X and Y components</returns>
+        /// <returns>Two perpendicular vectors</returns>
         public Vector[] GetOrientation(float time, double length = 1)
         {
             int index = this.GetTrackPointIndex(time);
@@ -182,8 +183,9 @@ namespace TrackApp.Logic.Gps
             double latDirection = this.gpsPoints[index + 1].Latitude - this.gpsPoints[index].Latitude;
 
             double lengthVector = Math.Sqrt(longDirection * longDirection + latDirection * latDirection);
-            if (lengthVector != 0)
+            if (lengthVector != 0) // if false use previous value
             {
+                // Normalizing vector
                 this.vector = new Vector(longDirection, latDirection) * length / lengthVector;
             }
 
@@ -194,6 +196,7 @@ namespace TrackApp.Logic.Gps
                 this.vector,
                 perpVector
             };
+
             return orientation;
         }
 
@@ -211,6 +214,10 @@ namespace TrackApp.Logic.Gps
             return distance += interpolatedPos.DistanceFromPoint(this.gpsPoints[index]);
         }
 
+        /// <summary>
+        /// Method for getting the track
+        /// </summary>
+        /// <returns>The track as an array of type GPSPoint</returns>
         public GPSPoint[] GetTrack()
         {
             return this.gpsPoints;
@@ -239,9 +246,7 @@ namespace TrackApp.Logic.Gps
 
             return index;
         }
-
-        // converts a GPS coordinate to pixel coordinate
-        // size and return value are in pixels
+        
         /// <summary>
         /// Converts a GPS coordinate to pixel position for drawing on a map.
         /// </summary>
@@ -253,8 +258,10 @@ namespace TrackApp.Logic.Gps
         {
             double ratio = size.Height / this.boundingBox.Size.Latitude;
             return new PointF(
-                (float)((GpsPosition.Longitude - this.boundingBox.Position.Longitude) * ratio * longitudeCorrectionScale) + ((float)border) / 2,
-                size.Height - (float)((GpsPosition.Latitude - this.boundingBox.Position.Latitude) * ratio) + ((float)border) / 2);
+                (float)((GpsPosition.Longitude - this.boundingBox.Position.Longitude) * ratio *
+                    longitudeCorrectionScale) + ((float)border) / 2,
+                size.Height - (float)((GpsPosition.Latitude - this.boundingBox.Position.Latitude) * ratio) +
+                    ((float)border) / 2);
         }
 
         //TODO work with GpsPoint
@@ -267,7 +274,7 @@ namespace TrackApp.Logic.Gps
             {
                 throw new DivideByZeroException("Two readings were taken at the same time");
             }
-                
+
             return previousReading + (nextReading - previousReading) * (time - previousTime) / (nextTime - previousTime);
         }
     }

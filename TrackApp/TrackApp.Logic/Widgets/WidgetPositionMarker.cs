@@ -9,36 +9,35 @@ namespace TrackApp.Logic.Widgets
     /// </summary>
     public class WidgetPositionMarker : WidgetDrawOnMap
     {
+        /// <summary>
+        /// Draw position marker
+        /// </summary>
+        /// <param name="grfx">The frame</param>
+        /// <param name="time"></param>
         public override void Draw(Graphics grfx, float time)
         {
+            // TODO: Add custom immage
             GPSData gps = GPSData.GetData();
-            var settings = ProjectSettings.GetSettings();
+            ProjectSettings settings = ProjectSettings.GetSettings();
 
             PointF position = gps.ToPixelCoordinate(gps.GetPosition(time), GetSize(), settings.WholeTrackLineWidth);
-            //position = Widget.PecentToPixels(settings.TrackPostion);
             position.X += GetPosition().X;
             position.Y = GetPosition().Y + position.Y;
             
-            Brush brush = new SolidBrush(settings.PositionMarkerColor);
             float size = settings.PositionMarkerSize;
-            if (settings.ShowOrientation)//
-            {
-                Vector fwd = gps.GetOrientation(time, size)[0];
-                Vector side = gps.GetOrientation(time, size)[1]; // perpendicular
-                PointF[] markerPoints =
-                {
-                    new PointF((float)fwd.X + position.X, -(float)fwd.Y + position.Y),
-                    new PointF((float)side.X / 3 + position.X, -(float)side.Y / 3 + position.Y),
-                    new PointF(-(float)side.X / 3 + position.X, +(float)side.Y / 3 + position.Y)
-                };
-                grfx.FillPolygon(brush, markerPoints);
-            }
-            else
-            {
-                grfx.FillRectangle(brush, position.X, position.Y, 30, 30);
-            }
+            Vector[] coordinateSystem = gps.GetOrientation(time, size);
 
-            // TODO: Add custom immage
+            Vector fwd = coordinateSystem[0];
+            Vector side = coordinateSystem[1]; // perpendicular
+            PointF[] markerPoints =
+            {
+                new PointF((float)fwd.X + position.X, -(float)fwd.Y + position.Y),
+                new PointF((float)side.X / 3 + position.X, -(float)side.Y / 3 + position.Y),
+                new PointF(-(float)side.X / 3 + position.X, +(float)side.Y / 3 + position.Y)
+            };
+
+            Brush brush = new SolidBrush(settings.PositionMarkerColor);
+            grfx.FillPolygon(brush, markerPoints);
         }
     }
 }

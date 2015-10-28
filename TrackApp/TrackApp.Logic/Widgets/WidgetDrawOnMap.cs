@@ -13,13 +13,14 @@ namespace TrackApp.Logic.Widgets
         public WidgetDrawOnMap()
         {
             WidgetSize = new Size(0, 0);
+            Gps = GPSData.GetData();
         }
 
         protected static Size WidgetSize;
-        protected static GPSData Gps = GPSData.GetData();
+        protected static GPSData Gps;
 
         /// <summary>
-        /// Offsets the track by ProjectSettings.GetSettings().TrackPostion to prevent the track from drawing outside of the frame
+        /// Offsets the track by subtracting the line width of the track from ProjectSettings.GetSettings().TrackPostion to prevent the track from drawing outside of the frame
         /// </summary>
         /// <returns>Offset position</returns>
         protected static PointF GetPosition()
@@ -67,7 +68,7 @@ namespace TrackApp.Logic.Widgets
         }
 
         /// <summary>
-        /// Drawing box size for widgets that draw on the map
+        /// Drawing box size for widgets that draw on the map taking into account the line width of the traveled track
         /// </summary>
         /// <returns></returns>
         protected static SizeF GetSize()

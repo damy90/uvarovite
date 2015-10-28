@@ -143,7 +143,7 @@ namespace TrackApp.Logic.Widgets
         }
 
         //source http://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bounds
-        int GetBoundsZoomLevel(GPSCoord northEast, GPSCoord southWest, Size mapDim)
+        private int GetBoundsZoomLevel(GPSCoord northEast, GPSCoord southWest, Size mapDim)
         {
             var worldDim = new Size(256, 256);//{ height: 256, width: 256 };
             int zoomMax = 21;
@@ -168,14 +168,14 @@ namespace TrackApp.Logic.Widgets
             return new[] { latZoom, lngZoom, zoomMax }.Min();//Math.Min();
         }
 
-        double LatRad(double lat)
+        private double LatRad(double lat)
         {
             double sin = Math.Sin(lat * Math.PI / 180);
             double radX2 = Math.Log((1 + sin) / (1 - sin)) / 2;
             return Math.Max(Math.Min(radX2, Math.PI), -Math.PI) / 2;
         }
 
-        int Zoom(double mapPx, double worldPx, double fraction)
+        private int Zoom(double mapPx, double worldPx, double fraction)
         {
             return (int)Math.Floor(Math.Log(mapPx / worldPx / fraction) / Math.Log(2));
         }

@@ -35,6 +35,7 @@ namespace TrackApp.Logic.Widgets
             return position;
         }
 
+        //TODO: remove
         protected static Size PecentToPixels(Size size)
         {
             size.Width = (size.Width * VideoCompositor.VideoDimensions.Width) / 100;

@@ -41,27 +41,28 @@ namespace TrackApp.Logic.Gps
         }
 
         /// <summary>
-        /// The distance from this point to point 2 assuming the earth is perfectly spherical with radius 6367500 (approximately the average radius)
+        /// The distance from this point to point 2 assuming the earth is perfectly spherical with
+        /// radius 6367500 (approximately the average radius)
         /// </summary>
         /// <param name="point2">The next point</param>
         /// <returns>The distance in meters</returns>
         public double DistanceFromPoint(GPSPoint point2)
         {
-            var startLatitudeRadians = this.Latitude * (Math.PI / 180.0);
-            var startLongitudeRadians = this.Longitude * (Math.PI / 180.0);
-            var endLatitudeRadians = point2.Latitude * (Math.PI / 180.0);
-            var endLongitudeRadians = point2.Longitude * (Math.PI / 180.0);
+            double startLatitudeRadians = this.Latitude * (Math.PI / 180.0);
+            double startLongitudeRadians = this.Longitude * (Math.PI / 180.0);
+            double endLatitudeRadians = point2.Latitude * (Math.PI / 180.0);
+            double endLongitudeRadians = point2.Longitude * (Math.PI / 180.0);
 
-            var distanceLongitude = endLongitudeRadians - startLongitudeRadians;
-            var distanceLatitude = endLatitudeRadians - startLatitudeRadians;
-            var distanceElevation = Math.Abs(this.Elevation - point2.Elevation);
+            double distanceLongitude = endLongitudeRadians - startLongitudeRadians;
+            double distanceLatitude = endLatitudeRadians - startLatitudeRadians;
+            //double distanceElevation = Math.Abs(this.Elevation - point2.Elevation);
 
-            var result1 = Math.Sin(distanceLatitude / 2.0) * Math.Sin(distanceLatitude / 2.0) +
+            double result1 = Math.Sin(distanceLatitude / 2.0) * Math.Sin(distanceLatitude / 2.0) +
                           Math.Cos(startLatitudeRadians) * Math.Cos(endLatitudeRadians) *
                           Math.Pow(Math.Sin(distanceLongitude / 2.0), 2.0);
 
             // Using 6367500 as the radius around the earth
-            var result2 = 6367500 * 2.0 *
+            double result2 = 6367500 * 2.0 *
                           Math.Atan2(Math.Sqrt(result1), Math.Sqrt(1.0 - result1));
 
             // TODO use elevation

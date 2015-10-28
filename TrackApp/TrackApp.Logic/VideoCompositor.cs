@@ -142,7 +142,8 @@ namespace TrackApp.Logic
         }
 
         /// <summary>
-        /// Method for reading the next frame from the video input stream. Can skip frames to speed up the resulting video
+        /// Method for reading the next frame from the video input stream. 
+        /// Can skip frames to speed up the resulting video
         /// </summary>
         /// <param name="reader">VideoFileReader object (the video input stream)</param>
         /// <param name="skipFrames">Frames to skip</param>
@@ -150,7 +151,6 @@ namespace TrackApp.Logic
         /// <returns>A frame from the input video stream</returns>
         private static Bitmap GetFrame(VideoFileReader reader, long skipFrames, ref long currentFrame)
         {
-            // skip frames
             for (int i = 0; (i < skipFrames - 1 || currentFrame < videoStart) && currentFrame < videoEnd; i++)
             {
                 reader.ReadVideoFrame().Dispose();
