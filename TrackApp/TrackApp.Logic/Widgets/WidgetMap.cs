@@ -11,7 +11,7 @@ namespace TrackApp.Logic.Widgets
     {
         // TODO leave some space between the map frame and the track points, the map has to resize according to the track size
         //TODO: use google maps api for drawing, calculating, etc
-        private Bitmap map;
+         private Bitmap map;
         /// <summary>
         /// Get map from google maps and  it on a frame
         /// </summary>
@@ -23,7 +23,6 @@ namespace TrackApp.Logic.Widgets
                 GPSBox box = Gps.GetBox();
                 var southWest = new GPSCoord(box.Position.Longitude, box.Position.Latitude, 0);
                 var northEast = new GPSCoord(box.Position.Longitude + box.Size.Longitude, box.Position.Latitude + box.Size.Latitude, 0);
-                //var size = new GPSCoord(box.Size.Latitude, box.Size.Longitude, 0);
 
                 int curentZoomLevel = this.GetBoundsZoomLevel(northEast, southWest, WidgetSize);
                 int curentRouteHeightPixels = UnscaledMapImageHeight(box.Size.Latitude, curentZoomLevel);
@@ -35,8 +34,7 @@ namespace TrackApp.Logic.Widgets
                 var nextRouteWidth = (int)Math.Floor(WidgetSize.Width / nextRatio);
 
                 double minDeltaRatio;
-                int chosenHeight;
-                int chosenWidth;
+                int chosenHeight, chosenWidth;
                 if (nextRouteHeightPixels <= 640 && nextRouteWidth <= 640)
                 {
                     double currentDelta = Math.Abs(1 - currentRatio);
@@ -62,10 +60,9 @@ namespace TrackApp.Logic.Widgets
                     chosenWidth = (int)(WidgetSize.Width / currentRatio);
                 }
 
-                Point chosenSize = new Point(chosenWidth, chosenHeight);
+                var chosenSize = new Point(chosenWidth, chosenHeight);
                 var widgetSize = new Point(WidgetSize.Width, WidgetSize.Height);
                 this.map = GetMap(southWest, northEast, chosenSize);
-                //this.map = GetMap(southWest, northEast, widgetSize);
 
                 this.map = ImageEffects.ResizeImage(this.map, WidgetSize.Width, WidgetSize.Height);
                 this.map = ImageEffects.ChangeOpacity(this.map, ProjectSettings.GetSettings().MapOpacity);
@@ -111,7 +108,7 @@ namespace TrackApp.Logic.Widgets
             quickDemoHack.Add(13, 29);
             quickDemoHack.Add(14, 75);
 
-            return result - quickDemoHack[zoomLevel];
+            return result;// - quickDemoHack[zoomLevel];
         }
 
         private Bitmap GetMap(GPSCoord southWest, GPSCoord northEast, Point imageSize)
@@ -128,8 +125,6 @@ namespace TrackApp.Logic.Widgets
                           (northEast.Latitude).ToString() + ',' +
                           (northEast.Longitude).ToString() +
                           "+%20&sensor=false";
-            ////MessageBox.Show(path);
-            // TODO use a variable instead of file
             try
             {
                 this.map = new Bitmap(webClient.OpenRead(path));
@@ -145,21 +140,12 @@ namespace TrackApp.Logic.Widgets
         //source http://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bounds
         private int GetBoundsZoomLevel(GPSCoord northEast, GPSCoord southWest, Size mapDim)
         {
-            var worldDim = new Size(256, 256);//{ height: 256, width: 256 };
+            var worldDim = new Size(256, 256);
             int zoomMax = 21;
 
-            //var ne = bounds.getNorthEast();
-            //var sw = bounds.getSouthWest();
+            double latFraction = (LatRad(northEast.Latitude) - LatRad(southWest.Latitude)) / Math.PI;
 
-            //GPSCoord ne = new GPSCoord(northEast.Y, northEast.X, 0);
-            //GPSCoord sw = new GPSCoord(southWest.Y, southWest.X, 0);
-
-            GPSCoord ne = northEast;
-            GPSCoord sw = southWest;
-
-            double latFraction = (LatRad(ne.Latitude) - LatRad(sw.Latitude)) / Math.PI;
-
-            double lngDiff = ne.Longitude - sw.Longitude;
+            double lngDiff = northEast.Longitude - southWest.Longitude;
             double lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
 
             int latZoom = Zoom(mapDim.Height, worldDim.Height, latFraction);

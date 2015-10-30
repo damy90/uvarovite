@@ -71,14 +71,6 @@
   </Class>
   <Class Name="TrackApp.Logic.Widgets.WidgetMap" Collapsed="true">
     <Position X="22.25" Y="5.5" Width="1.5" />
-    <Members>
-      <Method Name="GetBoundsZoomLevel" Hidden="true" />
-      <Method Name="GetMap" Hidden="true" />
-      <Method Name="LatRad" Hidden="true" />
-      <Field Name="map" Hidden="true" />
-      <Method Name="UnscaledMapImageHeight" Hidden="true" />
-      <Method Name="Zoom" Hidden="true" />
-    </Members>
     <TypeIdentifier>
       <HashCode>ABAAEAAAAAAAAgAAEAABAAAAAAAAAAAAAEAAAAAAEAA=</HashCode>
       <FileName>Widgets\WidgetMap.cs</FileName>
@@ -86,9 +78,6 @@
   </Class>
   <Class Name="TrackApp.Logic.Widgets.WidgetOverlayImage" Collapsed="true">
     <Position X="15.5" Y="2.5" Width="1.5" />
-    <Members>
-      <Field Name="image" Hidden="true" />
-    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Widgets\WidgetOverlayImage.cs</FileName>
@@ -145,7 +134,6 @@
     <Position X="22.5" Y="7.25" Width="1.5" />
     <Members>
       <Method Name="GetFrame" Hidden="true" />
-      <Field Name="previewNumber" Hidden="true" />
       <Field Name="reader" Hidden="true" />
       <Method Name="RenderFrame" Hidden="true" />
       <Method Name="UpdateActiveWidgets" Hidden="true" />
@@ -153,7 +141,7 @@
       <Field Name="videoStart" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AQAAEAAAAAAAAAAIIMAAAAAAAAAAAAAAAAQEIAAQAAA=</HashCode>
+      <HashCode>AQAAEAAAAAAAAAAAIMAAAAAAAAAAAAAAAAQEIAAQAAA=</HashCode>
       <FileName>VideoCompositor.cs</FileName>
     </TypeIdentifier>
   </Class>

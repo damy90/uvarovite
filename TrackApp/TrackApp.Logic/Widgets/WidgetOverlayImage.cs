@@ -9,7 +9,7 @@ namespace TrackApp.Logic.Widgets
         private Bitmap image;
 
         /// <summary>
-        /// Draw any image on top of the video 
+        /// Draw any image on top of the video. Supports transparency.
         /// </summary>
         public override void Draw(Graphics grfx, float time)
         {
@@ -20,6 +20,7 @@ namespace TrackApp.Logic.Widgets
                 float hratio = Math.Abs((float)(this.image.Height - frameSize.Height) / (float)this.image.Height);
                 float wratio = Math.Abs((float)(this.image.Width - frameSize.Width) / (float)this.image.Width);
 
+                // don't resize if the difference is small
                 if (hratio > 0.02 || wratio > 0.02)
                 {
                     this.image = ImageEffects.ResizeImage(image, frameSize.Width, frameSize.Height);

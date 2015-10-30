@@ -21,10 +21,8 @@ namespace TrackApp.Logic.Widgets
         {
             // whole track
             // TODO check If there is only 1 point
-            var settings = ProjectSettings.GetSettings();
-            int wholeTrackLineWidth = settings.WholeTrackLineWidth;
-            Pen wholeTrackPen = new Pen(settings.WholeTrackColor, wholeTrackLineWidth);
-
+            ProjectSettings settings = ProjectSettings.GetSettings();
+            
             if (this.trackBitmap == null)
             {
                 GPSPoint[] trackData = Gps.GetTrack();
@@ -36,11 +34,14 @@ namespace TrackApp.Logic.Widgets
                 SizeF trackSize = GetSize();
                 using (Graphics drawTrack = Graphics.FromImage(this.trackBitmap))
                 {
+                    int wholeTrackLineWidth = settings.WholeTrackLineWidth;
+
                     for (int i = 0; i < trackData.Length; i++)
                     {
                         this.trackPoints[i] = Gps.ToPixelCoordinate(trackData[i], trackSize, wholeTrackLineWidth);
                     }
                         
+                    var wholeTrackPen = new Pen(settings.WholeTrackColor, wholeTrackLineWidth);
                     drawTrack.DrawLines(wholeTrackPen, this.trackPoints);
                 }
             }
@@ -52,11 +53,11 @@ namespace TrackApp.Logic.Widgets
                 int index = Gps.GetTrackPointIndex(time);
                 if (index != this.prevIndex)
                 {
-                    PointF[] subTrackPoints = new PointF[index - this.prevIndex + 1];
-                    Array.Copy(this.trackPoints, this.prevIndex, subTrackPoints, 0, index - this.prevIndex + 1); // index - prevIndex + 1 = 2
+                    var subTrackPoints = new PointF[index - this.prevIndex + 1];
+                    Array.Copy(this.trackPoints, this.prevIndex, subTrackPoints, 0, 2); // index - prevIndex + 1 = 2
 
                     int traveledTrackLineWidth = settings.TraveledTrackLineWidth;
-                    Pen traveledTrackPen = new Pen(settings.TraveledTrackColor, traveledTrackLineWidth);
+                    var traveledTrackPen = new Pen(settings.TraveledTrackColor, traveledTrackLineWidth);
 
                     using (Graphics drawTrack = Graphics.FromImage(this.trackBitmap))
                     {

@@ -15,7 +15,7 @@ namespace TrackApp.Logic
     {
         private static readonly VideoFileReader reader = new VideoFileReader();
         //private static List<Widget> activeWidgets;
-        private static int previewNumber = 0;
+        //private static readonly int previewNumber = 0;
         private static long videoEnd;
         private static long videoStart;
 
