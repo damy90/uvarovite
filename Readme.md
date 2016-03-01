@@ -1,7 +1,9 @@
 # TrackTour Video Editing Application
 Today everyone has a smartphone with a camera and GPS. Sometimes with integrated fitness trackers, accelerometers and other sensors. Dedicated sports trackers and video streaming  cameras are also very popular among extreme athletes. People tagg some of the information they record during a video recording, such as place and time but most of that information lives in different services, has a separate purpose and is uploaded in different places. The video goes in social media, the track goes to a site for uploading tracks and the fitness tracking data goes to a health monitoring app. Even with specialized equipment, such as connected cameras it is still hard to find the right tools to combine all the data they record with an amateur grade tool. The equipment and software with such integrated functionality is still rare and expensive. And even then - the users are locked in a single platform.
-This project aims to create a free, user friendly and flexible tool for displaying information like speed, orientation, timing and map inside a video. The input data may originate from different incompatible devices and platforms, such as a map service, GPS tracker, phone video camera, etc.
 
+This project aims to create a free, user friendly and flexible tool for displaying information like speed, orientation, timing and map inside a video. The input data may originate from different incompatible devices and platforms, such as a map service, GPS tracker, phone video camera, etc.
+## Demo
+[Demo vedeo](https://drive.google.com/file/d/0B9-BhHxB4VqLNERDRnk2Smt0UGM/view?usp=sharing)
 ## User guide
 ### Getting started
 You must choose a video file, a GPS track file in GPX format and provide a save location
